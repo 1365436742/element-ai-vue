@@ -7,7 +7,7 @@ const markers: { [key: string]: string } = {
   '^': 'sup',
 }
 
-export const remarkCustomSubSuper: Plugin<[], Root> = () => {
+export const remarkSubSuper: Plugin<[], Root> = () => {
   return (tree) => {
     visit(tree, 'text', (node, index, parent) => {
       const { value } = node

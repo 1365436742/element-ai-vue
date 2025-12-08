@@ -1,2 +1,2 @@
 export * from './remarkATargetBlank'
-export * from './remarkCustomSubSuper'
+export * from './remarkSubSuper'
