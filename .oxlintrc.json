@@ -1,0 +1,10 @@
+{
+  "rules": {
+    "no-unused-vars": "error",
+    "eqeqeq": "warn",
+    "no-console": "off"
+  },
+  "options": {
+    "ignorePatterns": [".gitignore"]
+  }
+}

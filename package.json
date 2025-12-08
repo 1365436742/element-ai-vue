@@ -7,7 +7,9 @@
   "scripts": {
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
-    "docs:preview": "vitepress preview docs"
+    "docs:preview": "vitepress preview docs",
+    "lint": "oxlint .",
+    "lint:fix": "oxlint . --fix"
   },
   "peerDependencies": {
     "vue": "^3.4.0"
@@ -22,6 +24,7 @@
     "@element-ai/utils": "workspace:*",
     "@types/mdast": "^4.0.4",
     "mdast-util-to-hast": "^13.2.1",
+    "oxlint": "^1.31.0",
     "unplugin-vue-macros": "^2.14.5",
     "vitepress": "2.0.0-alpha.15"
   },
