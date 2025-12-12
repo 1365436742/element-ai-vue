@@ -1,4 +1,34 @@
+@use 'sass:map';
 @use '../mixins/config' as *;
+
+$types: primary, success, warning, danger, error, info;
+
+$colors: () !default;
+$colors: map.deep-merge(
+  (
+    'white': #ffffff,
+    'black': #000000,
+    'primary': (
+      'base': #409eff,
+    ),
+    'success': (
+      'base': #67c23a,
+    ),
+    'warning': (
+      'base': #e6a23c,
+    ),
+    'danger': (
+      'base': #f56c6c,
+    ),
+    'error': (
+      'base': #f56c6c,
+    ),
+    'info': (
+      'base': #909399,
+    ),
+  ),
+  $colors
+);
 
 :root {
   --#{$namespace}-color-primary: #409eff;

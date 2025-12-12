@@ -1,1 +1,1 @@
-export const test1 = 'xxxx'
+export const hooks = 'xxxx'

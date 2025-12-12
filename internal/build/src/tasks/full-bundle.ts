@@ -101,6 +101,7 @@ async function buildFullEntry(minify: boolean) {
       },
       sourcemap: minify,
       banner,
+      inlineDynamicImports: true,
     },
     {
       format: 'esm',
@@ -111,6 +112,7 @@ async function buildFullEntry(minify: boolean) {
       ),
       sourcemap: minify,
       banner,
+      inlineDynamicImports: true,
     },
   ])
 }

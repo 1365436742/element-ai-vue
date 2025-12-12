@@ -1,4 +1,5 @@
+import { withInstall } from '@element-ai/utils'
 import Markdown from './index.vue'
 
-export const ElMarkdown = Markdown
-export default Markdown
+export const ElMarkdown = withInstall(Markdown)
+export default ElMarkdown

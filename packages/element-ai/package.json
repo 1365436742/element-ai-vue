@@ -72,6 +72,17 @@
     "vue": "^3.2.0"
   },
   "dependencies": {
+    "dompurify": "^3.3.0",
+    "rehype-katex": "^7.0.1",
+    "rehype-stringify": "^10.0.1",
+    "remark-breaks": "^4.0.0",
+    "remark-gfm": "^4.0.1",
+    "remark-math": "^6.0.0",
+    "remark-parse": "^11.0.0",
+    "remark-rehype": "^11.1.2",
+    "shiki": "^3.19.0",
+    "unified": "^11.0.5",
+    "unist-util-visit": "^5.0.0",
     "@types/lodash-es": "^4.17.12",
     "@vueuse/core": "^9.1.0",
     "async-validator": "^4.2.5",
