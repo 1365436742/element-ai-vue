@@ -1,10 +1,10 @@
 {
-  "name": "@element-ai/build-utils",
+  "name": "@element-ai-vue/build-utils",
   "version": "0.0.1",
   "private": true,
   "description": "Build utils for Element Plus",
   "keywords": [
-    "element-ai"
+    "element-ai-vue"
   ],
   "license": "MIT",
   "main": "./dist/index.cjs",

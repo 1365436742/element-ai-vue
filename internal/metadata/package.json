@@ -1,9 +1,9 @@
 {
-  "name": "@element-ai/metadata",
+  "name": "@element-ai-vue/metadata",
   "version": "1.1.1",
   "description": "Metadata for Element AI",
   "keywords": [
-    "element-ai"
+    "element-ai-vue"
   ],
   "license": "MIT",
   "files": [
@@ -18,9 +18,9 @@
     "dev": "cross-env DEV=1 pnpm run build"
   },
   "devDependencies": {
-    "@element-ai/build": "workspace:*",
-    "@element-ai/build-constants": "workspace:*",
-    "@element-ai/build-utils": "workspace:*",
+    "@element-ai-vue/build": "workspace:*",
+    "@element-ai-vue/build-constants": "workspace:*",
+    "@element-ai-vue/build-utils": "workspace:*",
     "@types/lodash-es": "^4.17.12",
     "chalk": "^5.3.0",
     "consola": "^2.15.3",

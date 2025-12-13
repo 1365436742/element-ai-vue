@@ -1,10 +1,10 @@
 {
-  "name": "@element-ai/theme-chalk",
+  "name": "@element-ai-vue/theme-chalk",
   "version": "0.1.0",
   "description": "Element component chalk theme.",
   "keywords": [
     "vue-components",
-    "element-ai",
+    "element-ai-vue",
     "theme-chalk",
     "theme-light"
   ],

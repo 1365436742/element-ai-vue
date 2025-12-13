@@ -48,7 +48,7 @@ import {
   MiddlewarePluginItem,
   defaultCustomPlugins,
   createBaseProcessor,
-} from '@element-ai/utils'
+} from '@element-ai-vue/utils'
 import { mergeWith } from 'lodash-es'
 import { watch, ref, computed } from 'vue'
 import CodeHighlight from '../code-highlight/index.vue'

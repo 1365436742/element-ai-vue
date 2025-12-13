@@ -9,7 +9,7 @@ import rename from 'gulp-rename'
 import consola from 'consola'
 import postcss from 'postcss'
 import cssnano from 'cssnano'
-import { epOutput } from '@element-ai/build-utils'
+import { epOutput } from '@element-ai-vue/build-utils'
 
 import type { TaskFunction } from 'gulp'
 import type Vinly from 'vinyl'

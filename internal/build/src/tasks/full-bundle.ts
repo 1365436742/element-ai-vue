@@ -14,10 +14,10 @@ import {
   PKG_BRAND_NAME,
   PKG_CAMELCASE_LOCAL_NAME,
   PKG_CAMELCASE_NAME,
-} from '@element-ai/build-constants'
-import { epOutput, epRoot, localeRoot } from '@element-ai/build-utils'
-import { version } from '../../../../packages/element-ai/version'
-import { ElementAiAlias } from '../plugins/element-ai-alias'
+} from '@element-ai-vue/build-constants'
+import { epOutput, epRoot, localeRoot } from '@element-ai-vue/build-utils'
+import { version } from '../../../../packages/element-ai-vue/version'
+import { ElementAiAlias } from '../plugins/element-ai-vue-alias'
 import {
   formatBundleFilename,
   generateExternal,

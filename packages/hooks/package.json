@@ -1,5 +1,5 @@
 {
-  "name": "@element-ai/hooks",
+  "name": "@element-ai-vue/hooks",
   "version": "0.0.5",
   "description": "Element AI composables",
   "license": "MIT",

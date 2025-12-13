@@ -6,8 +6,8 @@
 defineOptions({
   name: 'ElACodeHighlight',
 })
-import { commonLangs } from '@element-ai/constants'
-import { getHighlighter, HighlighterType } from '@element-ai/utils'
+import { commonLangs } from '@element-ai-vue/constants'
+import { getHighlighter, HighlighterType } from '@element-ai-vue/utils'
 import { onMounted, ref, watch } from 'vue'
 import { codeHighlightProps } from './props'
 

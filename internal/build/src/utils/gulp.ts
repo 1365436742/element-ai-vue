@@ -1,4 +1,4 @@
-import { buildRoot } from '@element-ai/build-utils'
+import { buildRoot } from '@element-ai-vue/build-utils'
 import { run } from './process'
 
 import type { TaskFunction } from 'gulp'

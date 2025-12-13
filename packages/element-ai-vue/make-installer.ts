@@ -1,4 +1,4 @@
-import { INSTALLED_KEY } from '@element-ai/constants'
+import { INSTALLED_KEY } from '@element-ai-vue/constants'
 import { version } from './version'
 
 import type { App, Plugin } from 'vue'

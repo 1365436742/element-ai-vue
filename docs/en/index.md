@@ -3,7 +3,7 @@
 layout: home
 
 hero:
-  name: 'element-ai'
+  name: 'element-ai-vue'
   text: 'Vue3 Component Library for the AI Era'
   tagline: My great project tagline
   actions:

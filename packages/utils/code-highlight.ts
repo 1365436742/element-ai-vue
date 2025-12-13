@@ -1,4 +1,4 @@
-import { commonLangs, commonThemes } from '@element-ai/constants'
+import { commonLangs, commonThemes } from '@element-ai-vue/constants'
 import { merge, uniq } from 'lodash-es'
 import {
   BundledLanguage,

@@ -16,4 +16,4 @@ coverage
 *.local
 .eslintcache
 docs/.vitepress/cache
-packages/element-ai/version.ts
+packages/element-ai-vue/version.ts

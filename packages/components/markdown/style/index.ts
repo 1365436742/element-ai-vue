@@ -1,2 +1,2 @@
-import '@element-ai/theme-chalks/index.scss'
-import '@element-ai/theme-chalk/src/markdown/index.scss'
+import '@element-ai-vue/theme-chalks/index.scss'
+import '@element-ai-vue/theme-chalk/src/markdown/index.scss'

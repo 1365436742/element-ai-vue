@@ -7,7 +7,7 @@ import remarkMath from 'remark-math'
 import remarkRehype from 'remark-rehype'
 import rehypeKatex from 'rehype-katex'
 import DOMPurify from 'dompurify'
-import { katexConfig } from '@element-ai/constants'
+import { katexConfig } from '@element-ai-vue/constants'
 import {
   remarkAbbr,
   remarkATargetBlank,

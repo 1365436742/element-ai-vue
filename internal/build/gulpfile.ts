@@ -7,7 +7,7 @@ import {
   epOutput,
   epPackage,
   projRoot,
-} from '@element-ai/build-utils'
+} from '@element-ai-vue/build-utils'
 import { buildConfig, run, runTask, withTaskName } from './src'
 
 import type { TaskFunction } from 'gulp'

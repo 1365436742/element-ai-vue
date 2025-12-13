@@ -10,8 +10,12 @@ import {
   errorAndExit,
   projRoot,
   writeJson,
-} from '@element-ai/build-utils'
-import { REPO_BRANCH, REPO_NAME, REPO_OWNER } from '@element-ai/build-constants'
+} from '@element-ai-vue/build-utils'
+import {
+  REPO_BRANCH,
+  REPO_NAME,
+  REPO_OWNER,
+} from '@element-ai-vue/build-constants'
 
 interface FetchOption {
   key: string

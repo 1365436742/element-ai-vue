@@ -14,6 +14,16 @@ Markdown 组件。
 
 :::
 
+:::demo  `offset` attribute to change the offset top，the default 
+
+```vue
+<template>
+  <DemoComponent />
+</template>
+```
+
+:::
+
 <demo-block>
    <DemoComponent />
 </demo-block>

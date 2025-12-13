@@ -1,6 +1,6 @@
 import path from 'path'
-import { PKG_NAME } from '@element-ai/build-constants'
-import { epOutput } from '@element-ai/build-utils'
+import { PKG_NAME } from '@element-ai-vue/build-constants'
+import { epOutput } from '@element-ai-vue/build-utils'
 
 import type { ModuleFormat } from 'rollup'
 
@@ -13,12 +13,12 @@ export interface BuildInfo {
   output: {
     /** e.g: `es` */
     name: string
-    /** e.g: `dist/element-ai/es` */
+    /** e.g: `dist/element-ai-vue/es` */
     path: string
   }
 
   bundle: {
-    /** e.g: `element-ai/es` */
+    /** e.g: `element-ai-vue/es` */
     path: string
   }
 }

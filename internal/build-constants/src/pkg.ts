@@ -1,5 +1,5 @@
-export const PKG_PREFIX = '@element-ai'
-export const PKG_NAME = 'element-ai'
+export const PKG_PREFIX = '@element-ai-vue'
+export const PKG_NAME = 'element-ai-vue'
 export const PKG_CAMELCASE_NAME = 'ElementPlus'
 export const PKG_CAMELCASE_LOCAL_NAME = 'ElementPlusLocale'
 export const PKG_BRAND_NAME = 'Element Plus'

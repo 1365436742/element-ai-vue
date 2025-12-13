@@ -12,8 +12,8 @@
     "docs/.vitepress/**/*.mts",
     "docs/.vitepress/**/*.ts",
     "packages/theme-chalk/*",
-    "packages/element-ai/version.ts",
-    "packages/element-ai/package.json"
+    "packages/element-ai-vue/version.ts",
+    "packages/element-ai-vue/package.json"
   ],
   "exclude": [
     "docs/.vitepress/theme/**/*.ts",

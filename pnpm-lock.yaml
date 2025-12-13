@@ -80,28 +80,28 @@ importers:
       '@commitlint/config-conventional':
         specifier: ^20.2.0
         version: 20.2.0
-      '@element-ai/build-utils':
+      '@element-ai-vue/build-utils':
         specifier: workspace:*
         version: link:internal/build-utils
-      '@element-ai/components':
+      '@element-ai-vue/components':
         specifier: workspace:*
         version: link:packages/components
-      '@element-ai/constants':
+      '@element-ai-vue/constants':
         specifier: workspace:*
         version: link:packages/constants
-      '@element-ai/directives':
+      '@element-ai-vue/directives':
         specifier: workspace:*
         version: link:packages/directives
-      '@element-ai/hooks':
+      '@element-ai-vue/hooks':
         specifier: workspace:*
         version: link:packages/hooks
-      '@element-ai/locale':
+      '@element-ai-vue/locale':
         specifier: workspace:*
         version: link:packages/locale
-      '@element-ai/theme-chalk':
+      '@element-ai-vue/theme-chalk':
         specifier: workspace:*
         version: link:packages/theme-chalk
-      '@element-ai/utils':
+      '@element-ai-vue/utils':
         specifier: workspace:*
         version: link:packages/utils
       '@pnpm/find-workspace-packages':
@@ -209,7 +209,7 @@ importers:
 
   internal/build:
     dependencies:
-      '@element-ai/build-constants':
+      '@element-ai-vue/build-constants':
         specifier: workspace:*
         version: link:../build-constants
       '@pnpm/find-workspace-packages':
@@ -304,13 +304,13 @@ importers:
 
   internal/metadata:
     devDependencies:
-      '@element-ai/build':
+      '@element-ai-vue/build':
         specifier: workspace:*
         version: link:../build
-      '@element-ai/build-constants':
+      '@element-ai-vue/build-constants':
         specifier: workspace:*
         version: link:../build-constants
-      '@element-ai/build-utils':
+      '@element-ai-vue/build-utils':
         specifier: workspace:*
         version: link:../build-utils
       '@types/lodash-es':
@@ -340,16 +340,16 @@ importers:
       '@ctrl/tinycolor':
         specifier: 'catalog:'
         version: 3.6.1
-      '@element-ai/constants':
+      '@element-ai-vue/constants':
         specifier: workspace:^
         version: link:../constants
-      '@element-ai/directives':
+      '@element-ai-vue/directives':
         specifier: workspace:^
         version: link:../directives
-      '@element-ai/hooks':
+      '@element-ai-vue/hooks':
         specifier: workspace:^
         version: link:../hooks
-      '@element-ai/utils':
+      '@element-ai-vue/utils':
         specifier: workspace:^
         version: link:../utils
       '@vueuse/core':
@@ -373,10 +373,10 @@ importers:
 
   packages/directives:
     dependencies:
-      '@element-ai/constants':
+      '@element-ai-vue/constants':
         specifier: workspace:^
         version: link:../constants
-      '@element-ai/utils':
+      '@element-ai-vue/utils':
         specifier: workspace:^
         version: link:../utils
     devDependencies:
@@ -387,7 +387,7 @@ importers:
         specifier: 'catalog:'
         version: 3.5.25(typescript@5.9.3)
 
-  packages/element-ai:
+  packages/element-ai-vue:
     dependencies:
       '@types/lodash-es':
         specifier: ^4.17.12
@@ -470,7 +470,7 @@ importers:
 
   packages/utils:
     dependencies:
-      '@element-ai/constants':
+      '@element-ai-vue/constants':
         specifier: workspace:^
         version: link:../constants
       '@vueuse/core':

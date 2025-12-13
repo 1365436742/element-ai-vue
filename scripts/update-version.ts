@@ -1,6 +1,6 @@
 import consola from 'consola'
 import chalk from 'chalk'
-import { errorAndExit, getWorkspacePackages } from '@element-ai/build-utils'
+import { errorAndExit, getWorkspacePackages } from '@element-ai-vue/build-utils'
 
 import type { Project } from '@pnpm/find-workspace-packages'
 
@@ -19,13 +19,13 @@ async function main() {
   consola.log(chalk.cyan(`$TAG_VERSION: ${tagVersion}`))
   consola.log(chalk.cyan(`$GIT_HEAD: ${gitHead}`))
 
-  consola.debug(chalk.yellow(`Updating package.json for element-ai`))
+  consola.debug(chalk.yellow(`Updating package.json for element-ai-vue`))
 
   const pkgs = Object.fromEntries(
     (await getWorkspacePackages()).map((pkg) => [pkg.manifest.name!, pkg])
   )
-  const elementAi = pkgs['element-ai']
-  const metadata = pkgs['@element-ai/metadata']
+  const elementAi = pkgs['element-ai-vue']
+  const metadata = pkgs['@element-ai-vue/metadata']
 
   const writeVersion = async (project: Project) => {
     await project.writeProjectManifest({

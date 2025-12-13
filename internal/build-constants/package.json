@@ -1,9 +1,9 @@
 {
-  "name": "@element-ai/build-constants",
+  "name": "@element-ai-vue/build-constants",
   "version": "0.0.1",
   "description": "Build constants for Element AI",
   "keywords": [
-    "element-ai"
+    "element-ai-vue"
   ],
   "license": "MIT",
   "main": "./dist/index.cjs",

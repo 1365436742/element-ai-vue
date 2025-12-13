@@ -9,7 +9,7 @@ import { enNav, zhNav } from './nav'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: 'element-ai',
+  title: 'element-ai-vue',
 
   description: '企业级 AI 交互组件库',
   markdown: {
@@ -25,7 +25,7 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     logo: { src: '/logo.svg', width: 30, height: 30 },
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/1365436742/element-ai' },
+      { icon: 'github', link: 'https://github.com/1365436742/element-ai-vue' },
     ],
   },
   head: [

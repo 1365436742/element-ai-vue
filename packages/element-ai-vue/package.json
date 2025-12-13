@@ -1,9 +1,9 @@
 {
-  "name": "element-ai",
+  "name": "element-ai-vue",
   "version": "1.1.1",
   "description": "A AI Component Library for Vue 3",
   "keywords": [
-    "element-ai",
+    "element-ai-vue",
     "element",
     "component library",
     "ui framework",

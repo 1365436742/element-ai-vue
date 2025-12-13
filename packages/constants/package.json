@@ -1,5 +1,5 @@
 {
-  "name": "@element-ai/constants",
+  "name": "@element-ai-vue/constants",
   "private": true,
   "license": "MIT",
   "main": "index.ts"

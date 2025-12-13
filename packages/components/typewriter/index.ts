@@ -1,4 +1,4 @@
-import { withInstall } from '@element-ai/utils'
+import { withInstall } from '@element-ai-vue/utils'
 import Typewriter from './index.vue'
 
 export const ElATypewriter = withInstall(Typewriter)

@@ -1,5 +1,5 @@
 {
-  "name": "@element-ai/components",
+  "name": "@element-ai-vue/components",
   "version": "0.0.5",
   "description": "all components are settled here",
   "main": "index.ts",
@@ -11,10 +11,10 @@
   },
   "dependencies": {
     "@ctrl/tinycolor": "catalog:",
-    "@element-ai/constants": "workspace:^",
-    "@element-ai/directives": "workspace:^",
-    "@element-ai/hooks": "workspace:^",
-    "@element-ai/utils": "workspace:^",
+    "@element-ai-vue/constants": "workspace:^",
+    "@element-ai-vue/directives": "workspace:^",
+    "@element-ai-vue/hooks": "workspace:^",
+    "@element-ai-vue/utils": "workspace:^",
     "@vueuse/core": "catalog:",
     "csstype": "catalog:",
     "lodash-unified": "catalog:"

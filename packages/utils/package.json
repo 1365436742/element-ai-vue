@@ -1,5 +1,5 @@
 {
-  "name": "@element-ai/utils",
+  "name": "@element-ai-vue/utils",
   "private": true,
   "license": "MIT",
   "main": "index.ts",
@@ -8,7 +8,7 @@
     "vue": "catalog:"
   },
   "dependencies": {
-    "@element-ai/constants": "workspace:^",
+    "@element-ai-vue/constants": "workspace:^",
     "@vueuse/core": "catalog:",
     "lodash-unified": "catalog:"
   },

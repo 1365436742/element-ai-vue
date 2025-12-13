@@ -1,9 +1,9 @@
 import installer from './defaults'
 
-export * from '@element-ai/components'
-export * from '@element-ai/constants'
-export * from '@element-ai/directives'
-export * from '@element-ai/hooks'
+export * from '@element-ai-vue/components'
+export * from '@element-ai-vue/constants'
+export * from '@element-ai-vue/directives'
+export * from '@element-ai-vue/hooks'
 
 export const install = installer.install
 export const version = installer.version

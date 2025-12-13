@@ -1,5 +1,5 @@
 {
-  "name": "@element-ai/directives",
+  "name": "@element-ai-vue/directives",
   "version": "0.0.5",
   "description": "Element AI directives",
   "license": "MIT",
@@ -11,8 +11,8 @@
     "vue": "catalog:"
   },
   "dependencies": {
-    "@element-ai/constants": "workspace:^",
-    "@element-ai/utils": "workspace:^"
+    "@element-ai-vue/constants": "workspace:^",
+    "@element-ai-vue/utils": "workspace:^"
   },
   "devDependencies": {
     "@vue/test-utils": "catalog:",

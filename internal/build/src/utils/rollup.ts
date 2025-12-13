@@ -1,4 +1,4 @@
-import { epPackage, getPackageDependencies } from '@element-ai/build-utils'
+import { epPackage, getPackageDependencies } from '@element-ai-vue/build-utils'
 
 import type { OutputOptions, RollupBuild } from 'rollup'
 

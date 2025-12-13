@@ -1,7 +1,7 @@
 import { spawn } from 'child_process'
 import chalk from 'chalk'
 import consola from 'consola'
-import { projRoot } from '@element-ai/build-utils'
+import { projRoot } from '@element-ai-vue/build-utils'
 
 export const run = async (command: string, cwd: string = projRoot) =>
   new Promise<void>((resolve, reject) => {

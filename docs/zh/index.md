@@ -3,7 +3,7 @@
 layout: home
 
 hero:
-  name: 'element-ai'
+  name: 'element-ai-vue'
   text: '企业级 AI 交互组件库'
   image: '/logo.svg'
   actions:
@@ -18,15 +18,15 @@ hero:
 ::: code-group
 
 ```sh [npm]
-$ npm install element-ai
+$ npm install element-ai-vue
 ```
 
 ```sh [pnpm]
-$ pnpm install element-ai
+$ pnpm install element-ai-vue
 ```
 
 ```sh [yarn]
-$ yarn add element-ai
+$ yarn add element-ai-vue
 ```
 
 :::

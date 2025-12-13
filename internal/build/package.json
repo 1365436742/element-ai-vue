@@ -1,5 +1,5 @@
 {
-  "name": "@element-ai/build",
+  "name": "@element-ai-vue/build",
   "version": "0.0.1",
   "private": true,
   "description": "Build Toolchain for Element AI",
@@ -12,7 +12,7 @@
     "vue": "^3.2.25"
   },
   "dependencies": {
-    "@element-ai/build-constants": "workspace:*",
+    "@element-ai-vue/build-constants": "workspace:*",
     "@pnpm/find-workspace-packages": "^4.0.16",
     "@pnpm/logger": "^4.0.0",
     "@rollup/plugin-commonjs": "^22.0.1",

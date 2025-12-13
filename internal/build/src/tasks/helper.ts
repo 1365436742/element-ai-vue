@@ -13,7 +13,7 @@ import {
   getPackageManifest,
   normalizePath,
   projRoot,
-} from '@element-ai/build-utils'
+} from '@element-ai-vue/build-utils'
 
 import type { TaskFunction } from 'gulp'
 import type {
@@ -37,7 +37,7 @@ const reComponentName: ReComponentName = (title) => {
 }
 
 const reDocUrl: ReDocUrl = (fileName, header) => {
-  const docs = 'https://element-ai.org/en-US/component/'
+  const docs = 'https://element-ai-vue.org/en-US/component/'
   const _header = header
     ? removeTag(header).replaceAll(/\s+/g, '-').toLowerCase()
     : ''

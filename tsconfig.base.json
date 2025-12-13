@@ -16,16 +16,16 @@
     "rootDir": ".",
     "types": [],
     "paths": {
-      "@element-ai/components": ["packages/components"],
-      "@element-ai/components/*": ["packages/components/*"],
-      "@element-ai/utils": ["packages/utils"],
-      "@element-ai/utils/*": ["packages/utils/*"],
-      "@element-ai/hooks": ["packages/hooks"],
-      "@element-ai/directives": ["packages/directives"],
-      "@element-ai/constants": ["packages/constants"],
-      "@element-ai/locale": ["packages/locale"],
-      "@element-ai/locale/*": ["packages/locale/*"],
-      "element-ai": ["packages/element-ai"]
+      "@element-ai-vue/components": ["packages/components"],
+      "@element-ai-vue/components/*": ["packages/components/*"],
+      "@element-ai-vue/utils": ["packages/utils"],
+      "@element-ai-vue/utils/*": ["packages/utils/*"],
+      "@element-ai-vue/hooks": ["packages/hooks"],
+      "@element-ai-vue/directives": ["packages/directives"],
+      "@element-ai-vue/constants": ["packages/constants"],
+      "@element-ai-vue/locale": ["packages/locale"],
+      "@element-ai-vue/locale/*": ["packages/locale/*"],
+      "element-ai-vue": ["packages/element-ai-vue"]
     }
   }
 }

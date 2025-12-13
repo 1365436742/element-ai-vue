@@ -1,4 +1,4 @@
-import { withInstall } from '@element-ai/utils'
+import { withInstall } from '@element-ai-vue/utils'
 import Ppt from './index.vue'
 
 export const ElAPpt = withInstall(Ppt)
