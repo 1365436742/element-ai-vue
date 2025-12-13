@@ -63,4 +63,66 @@ export const zhSidebar: DefaultTheme.Sidebar = [
     items: [{ text: 'ppt 编辑', link: '/zh/base/ppt' }],
   },
 ]
-export const enSidebar = []
+export const enSidebar: DefaultTheme.Sidebar = [
+  {
+    text: '',
+    items: [
+      { text: 'Quick Start', link: '/en/start' },
+      { text: 'Introduction', link: '/en/intro' },
+    ],
+  },
+  {
+    text: 'Common Components',
+    items: [
+      { text: 'Markdown', link: '/en/base/markdown' },
+      { text: 'Sender', link: '/en/base/sender' },
+      { text: 'BubbleList', link: '/en/base/bubble-list' },
+    ],
+  },
+  {
+    text: 'Basic Components',
+    items: [
+      {
+        text: 'Markdown',
+        items: [
+          { text: 'CodeHighlight', link: '/en/base/code-highlight' },
+          { text: 'CodeMermaid', link: '/en/base/code-mermaid' },
+          { text: 'CodeEcharts', link: '/en/base/code-echarts' },
+        ],
+      },
+      {
+        text: 'BubbleList',
+        items: [
+          { text: 'Bubble', link: '/en/base/bubble' },
+          { text: 'Loading', link: '/en/base/loading' },
+          {
+            text: 'ImageGeneration',
+            link: '/en/base/image-generation',
+          },
+          {
+            text: 'VideoGeneration',
+            link: '/en/base/video-generation',
+          },
+          { text: 'Thinking', link: '/en/base/thinking' },
+          { text: 'ThoughtChain', link: '/en/base/thought-chain' },
+        ],
+      },
+    ],
+  },
+  {
+    text: 'File Components',
+    items: [
+      { text: 'FilesUpload', link: '/en/base/files-upload' },
+      { text: 'DragUpload', link: '/en/base/drag' },
+      { text: 'FilesCard', link: '/en/base/files-card' },
+    ],
+  },
+  {
+    text: 'Tools',
+    items: [{ text: 'Typewriter', link: '/en/base/typewriter' }],
+  },
+  {
+    text: 'Laboratory',
+    items: [{ text: 'PPT Editor', link: '/en/base/ppt' }],
+  },
+]

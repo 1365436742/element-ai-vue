@@ -1,10 +1,11 @@
 import { defineConfig } from 'vitepress'
-import { zhSidebar } from './sidebar'
+import { enSidebar, zhSidebar } from './sidebar'
 import {
   groupIconMdPlugin,
   groupIconVitePlugin,
 } from 'vitepress-plugin-group-icons'
 import { demoblockPlugin, demoblockVitePlugin } from 'vitepress-theme-demoblock'
+import { enNav, zhNav } from './nav'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -36,7 +37,7 @@ export default defineConfig({
       lang: 'zh-CN',
       link: '/zh/',
       themeConfig: {
-        nav: [{ text: '首页', link: '/zh' }],
+        nav: zhNav,
         sidebar: zhSidebar,
       },
     },
@@ -45,16 +46,8 @@ export default defineConfig({
       lang: 'en-US',
       link: '/en/',
       themeConfig: {
-        nav: [{ text: 'Home', link: '/en/' }],
-        sidebar: [
-          {
-            text: 'Examples',
-            items: [
-              { text: 'Markdown Examples', link: '/en/markdown-examples' },
-              { text: 'Runtime API Examples', link: '/en/api-examples' },
-            ],
-          },
-        ],
+        nav: enNav,
+        sidebar: enSidebar,
       },
     },
   },
