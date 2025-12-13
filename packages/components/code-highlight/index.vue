@@ -1,5 +1,13 @@
 <template>
-  <div v-html="htmlContent"></div>
+  <div class="code-highlight">
+    <slot name="header">
+      <div class="code-highlight-header">
+        <div class="language">{{ language }}</div>
+      </div>
+    </slot>
+    <span class="element-ai-vue-iconfont icon-fuzhi"></span>
+    <div v-html="htmlContent"></div>
+  </div>
 </template>
 
 <script setup lang="ts">

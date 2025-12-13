@@ -7,7 +7,7 @@ Markdown 组件。
 :::demo DemoComponent
 
 ```vue
-<!-- @include: ../../components/DemoComponent.vue -->
+<!-- @include: ../../examples/DemoComponent.vue -->
 ```
 
 :::

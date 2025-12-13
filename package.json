@@ -14,7 +14,7 @@
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs",
     "lint": "oxlint .",
-    "lint:fix": "oxlint . --fix",
+    "lint:fix": "oxlint --fix --ignore-path .oxlintignore",
     "format": "prettier --write --experimental-cli .",
     "prepare": "husky",
     "stub": "pnpm run -r --parallel stub",

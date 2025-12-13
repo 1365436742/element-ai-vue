@@ -5,6 +5,6 @@
     "no-console": "error"
   },
   "options": {
-    "ignorePatterns": [".gitignore"]
+    "ignorePatterns": [".gitignore", ".oxlintignore"]
   }
 }

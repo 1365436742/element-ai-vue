@@ -1,0 +1,55 @@
+@font-face {
+  font-family: "element-ai-vue-iconfont"; /* Project id 5088023 */
+  src: url('iconfont.woff2?t=1765624577383') format('woff2'),
+       url('iconfont.woff?t=1765624577383') format('woff'),
+       url('iconfont.ttf?t=1765624577383') format('truetype');
+}
+
+.element-ai-vue-iconfont {
+  font-family: "element-ai-vue-iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-suoxiao:before {
+  content: "\ec13";
+}
+
+.icon-fangda:before {
+  content: "\ec14";
+}
+
+.icon-xiazai:before {
+  content: "\e606";
+}
+
+.icon-quanping:before {
+  content: "\e63f";
+}
+
+.icon-yulan:before {
+  content: "\e649";
+}
+
+.icon-guanbi:before {
+  content: "\e639";
+}
+
+.icon-icon-mianxing_fuzhi_guanbi:before {
+  content: "\e60a";
+}
+
+.icon-zhongxinshengcheng:before {
+  content: "\e615";
+}
+
+.icon-shiyingyemian:before {
+  content: "\e64e";
+}
+
+.icon-fuzhi:before {
+  content: "\e8b0";
+}
+
