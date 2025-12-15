@@ -6,6 +6,10 @@ export const codeMermaidtProps = {
     type: String as PropType<'web' | 'page'>,
     default: 'page',
   },
+  disabledWheelZoom: {
+    type: Boolean,
+    default: false,
+  },
   mermaidConfig: {
     type: Object as PropType<MermaidConfig>,
     default: () => ({}),

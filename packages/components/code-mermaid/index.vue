@@ -84,8 +84,8 @@
       v-show="!isCodeView"
       ref="previewRef"
       :class="ns.e('preview')"
-      @wheel.prevent="onWheel"
-      @mousedown="onMouseDown"
+      @wheel.prevent="props.disabledWheelZoom ? undefined : onWheel"
+      @mousedown="props.disabledWheelZoom ? undefined : onMouseDown"
     >
       <div
         :style="{

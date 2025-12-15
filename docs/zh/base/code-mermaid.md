@@ -140,20 +140,15 @@ const content = ref(`flowchart TD
 
 ## props
 
-| 属性名         | 类型            | 必填 | 默认值 | 描述                                                                                           |
-| :------------- | :-------------- | :--- | :----- | :--------------------------------------------------------------------------------------------- |
-| content        | `string`        | 是   | —      | Mermaid 语法内容                                                                               |
-| theme          | `string`        | 否   | `base` | Mermaid 主题，支持 `default`, `forest`, `dark`, `neutral`, `base`                              |
-| fullscreenMode | `string`        | 否   | `page` | 全屏模式，支持 `web` (网页全屏) 和 `page` (页面全屏)                                           |
-| mermaidConfig  | `MermaidConfig` | 否   | `{}`   | Mermaid 配置对象，详见 [Mermaid Config](https://mermaid.js.org/config/schema-docs/config.html) |
+| 属性名            | 类型            | 必填 | 默认值 | 描述                                                                                           |
+| :---------------- | :-------------- | :--- | :----- | :--------------------------------------------------------------------------------------------- |
+| content           | `string`        | 是   | —      | Mermaid 语法内容                                                                               |
+| disabledWheelZoom | `boolean`       | 否   | false  | 禁用鼠标滚轮缩放                                                                               |
+| theme             | `string`        | 否   | `base` | Mermaid 主题，支持 `default`, `forest`, `dark`, `neutral`, `base`                              |
+| fullscreenMode    | `string`        | 否   | `page` | 全屏模式，支持 `web` (网页全屏) 和 `page` (页面全屏)                                           |
+| mermaidConfig     | `MermaidConfig` | 否   | `{}`   | Mermaid 配置对象，详见 [Mermaid Config](https://mermaid.js.org/config/schema-docs/config.html) |
 
 ## slot
-
-zoomIn,
-zoomOut,
-resetZoom,
-toggleFullscreen,
-downloadPng,
 
 | 插槽名             | 说明       | 插槽参数                                                                                                                                                                                                                                                                                                                   |
 | :----------------- | :--------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
