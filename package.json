@@ -80,8 +80,10 @@
     "node": ">= 20"
   },
   "dependencies": {
+    "copy-to-clipboard": "^3.3.3",
     "dompurify": "^3.3.0",
     "lodash-es": "^4.17.21",
+    "mermaid": "^11.12.2",
     "rehype-katex": "^7.0.1",
     "rehype-stringify": "^10.0.1",
     "remark-breaks": "^4.0.0",

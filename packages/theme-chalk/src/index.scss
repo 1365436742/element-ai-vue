@@ -1,5 +1,6 @@
 @use 'markdown/index.scss' as markdown;
 @use 'code-highlight/index.scss' as code-highlight;
+@use 'code-mermaid/index.scss' as code-mermaid;
 @use 'dark/var.scss' as dark-var;
 @use 'dark/css-vars.scss' as dark-css-vars;
 @import url('./font/iconfont.css');

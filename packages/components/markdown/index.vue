@@ -17,10 +17,10 @@
       :content="part.content"
       :language="part.language"
     >
-      <CodeHighlight
+      <CodeMermaid
         :content="part.content"
-        :language="part.language"
-      ></CodeHighlight>
+        v-bind="codeMermaidProps"
+      ></CodeMermaid>
     </slot>
     <slot
       v-else-if="part.type === 'code'"
@@ -29,9 +29,9 @@
       :language="part.language"
     >
       <CodeHighlight
-        v-bind="props"
         :content="part.content"
         :language="part.language"
+        v-bind="codeHighlightProps"
       ></CodeHighlight>
     </slot>
     <div class="markdown-body" v-else v-html="part.content"></div>
@@ -50,9 +50,11 @@ import {
   createBaseProcessor,
 } from '@element-ai-vue/utils'
 import { mergeWith } from 'lodash-es'
-import { watch, ref, computed } from 'vue'
+import { watch, ref, computed, PropType } from 'vue'
 import CodeHighlight from '../code-highlight/index.vue'
-import { codeHighlightProps } from '../code-highlight/props'
+import CodeMermaid from '../code-mermaid/index.vue'
+import { CodeHighlightPropsType } from '../code-highlight/props'
+import { CodeMermaidPropsType } from '../code-mermaid/props'
 
 const props = defineProps({
   content: {
@@ -60,10 +62,17 @@ const props = defineProps({
     default: '',
   },
   remarkPlugins: {
-    type: Array as () => MiddlewarePluginItem[],
+    type: Array as PropType<MiddlewarePluginItem[]>,
     default: () => [],
   },
-  ...codeHighlightProps,
+  codeHighlightProps: {
+    type: Object as CodeHighlightPropsType,
+    default: () => ({}),
+  },
+  codeMermaidProps: {
+    type: Object as CodeMermaidPropsType,
+    default: () => ({}),
+  },
 })
 const parts = ref<MarkdownPart[]>([])
 

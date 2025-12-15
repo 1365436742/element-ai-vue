@@ -1,19 +1,11 @@
 // CSS3 var
 @use './var' as *;
+@use '../common/var.scss' as *;
 @use '../mixins/mixins.scss' as *;
 @use '../mixins/config.scss' as *;
 
-@mixin dark-style {
-  --#{$namespace}-header-bg-color: rgba(255, 255, 255, 0.12);
-  --#{$namespace}-content-bg-color: rgb(48, 48, 48);
-  --#{$namespace}-color-border-secondary: #303133;
-  --#{$namespace}-copy-bg-color: rgba(255, 255, 255, 0.12);
-}
-
 html.dark {
-  @include b(code-highlight) {
-    @include dark-style;
-  }
+  @include dark-style;
 }
 
 @include b(code-highlight) {

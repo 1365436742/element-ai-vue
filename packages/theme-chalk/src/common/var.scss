@@ -1,39 +1,21 @@
 @use 'sass:map';
 @use '../mixins/config' as *;
 
-$types: primary, success, warning, danger, error, info;
-
-$colors: () !default;
-$colors: map.deep-merge(
-  (
-    'white': #ffffff,
-    'black': #000000,
-    'primary': (
-      'base': #409eff,
-    ),
-    'success': (
-      'base': #67c23a,
-    ),
-    'warning': (
-      'base': #e6a23c,
-    ),
-    'danger': (
-      'base': #f56c6c,
-    ),
-    'error': (
-      'base': #f56c6c,
-    ),
-    'info': (
-      'base': #909399,
-    ),
-  ),
-  $colors
-);
+@mixin dark-style {
+  --#{$namespace}-header-bg-color: rgba(255, 255, 255, 0.12);
+  --#{$namespace}-content-bg-color: rgb(48, 48, 48);
+  --#{$namespace}-color-border-secondary: #303133;
+  --#{$namespace}-copy-bg-color: rgba(255, 255, 255, 0.12);
+  --#{$namespace}-toolbar-bg-color: rgb(34, 34, 34);
+}
 
 :root {
-  --#{$namespace}-color-primary: #409eff;
-  --#{$namespace}-color-success: #67c23a;
-  --#{$namespace}-color-warning: #e6a23c;
-  --#{$namespace}-color-danger: #f56c6c;
-  --#{$namespace}-color-info: #909399;
+  --#{$namespace}-border-radius-base: 6px;
+  --#{$namespace}-border-radius-btn: 4px;
+
+  --#{$namespace}-header-bg-color: rgba(0, 0, 0, 0.06);
+  --#{$namespace}-content-bg-color: rgb(250, 250, 250);
+  --#{$namespace}-color-border-secondary: #f0f0f0;
+  --#{$namespace}-copy-bg-color: rgba(0, 0, 0, 0.1);
+  --#{$namespace}-toolbar-bg-color: #fff;
 }

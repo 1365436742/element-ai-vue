@@ -1,5 +1,5 @@
 import { BundledLanguage, BundledTheme } from 'shiki'
-import { PropType } from 'vue'
+import { ExtractPropTypes, PropType } from 'vue'
 
 export const codeHighlightProps = {
   extendLanguages: {
@@ -10,8 +10,8 @@ export const codeHighlightProps = {
     type: Array as PropType<BundledTheme[]>,
     default: () => [],
   },
-  theme: {
-    type: String,
-    default: 'github-light',
-  },
 }
+
+export type CodeHighlightPropsType = PropType<
+  ExtractPropTypes<typeof codeHighlightProps>
+>

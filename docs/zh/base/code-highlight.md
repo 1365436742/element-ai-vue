@@ -43,13 +43,65 @@ console.log(getRandomInt(1, 10)); // 输出：1~10 之间的随机数`)
 
 :::
 
-## API
+## 插槽-自定义头部
+
+支持插槽定义，自定义头部后，头部主题需要自己做主题色适配
+
+:::demo CodeHighlightSlotExampls
+
+```vue
+<template>
+  <ElACodeHighlight language="javascript" :content="content">
+    <template #header="{ content, language, isCopied, onCopy }">
+      <div class="header">
+        <div>{{ language }}</div>
+        <button @click="onCopy">{{ isCopied ? '已复制' : '复制' }}</button>
+      </div>
+    </template>
+  </ElACodeHighlight>
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+import { ElACodeHighlight } from 'element-ai-vue'
+
+const content = ref(`/**
+ * 生成指定区间 [min, max] 的随机整数（包含 min 和 max）
+ * @param {number} min - 最小值（整数）
+ * @param {number} max - 最大值（整数）
+ * @returns {number} 随机整数
+ */
+function getRandomInt(min, max) {
+  // 先取整避免非整数参数问题，再计算区间
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  // Math.random() 生成 [0,1)，计算后得到 [min, max]
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+// 示例：生成 1 到 10 之间的随机整数（包含1和10）
+console.log(getRandomInt(1, 10)); // 输出：1~10 之间的随机数`)
+</script>
+
+<style scoped lang="scss">
+.header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: #000;
+  padding: 8px;
+  color: #fff;
+}
+</style>
+```
+
+:::
 
 ::: tip
 默认支持,language: `javascript`, `typescript`, `vue`, `html`, `css`,`json`, `bash`, `shell`, `yaml`, `markdown`,`python`, `java`, `go`, `sql`, `rust`
 :::
 
-### Attributes
+## props
 
 | 属性名          | 类型                | 必填 | 默认值         | 描述                                                                          |
 | :-------------- | :------------------ | :--- | :------------- | :---------------------------------------------------------------------------- |
@@ -58,3 +110,9 @@ console.log(getRandomInt(1, 10)); // 输出：1~10 之间的随机数`)
 | theme           | `string`            | 否   | `github-light` | 高亮主题，默认支持 `github-light`, `github-dark`                              |
 | extendLanguages | `BundledLanguage[]` | 否   | `[]`           | 需要额外加载的语言列表，详见 [Shiki Languages](https://shiki.style/languages) |
 | extendThemes    | `BundledTheme[]`    | 否   | `[]`           | 需要额外加载的主题列表，详见 [Shiki Themes](https://shiki.style/themes)       |
+
+## slot
+
+| 插槽名 | 说明           | 插槽参数                                                                                                                                    |
+| :----- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------ |
+| header | 自定义头部内容 | `content`: 代码内容<br>`language`: 语言<br>`isCopied`: 表示已经复制，避免它连续复制会有1s的间隔时间让他复制下一次<br>`onCopy`: 复制代码函数 |
