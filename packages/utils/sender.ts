@@ -1,4 +1,4 @@
-import { EditorView } from '@tiptap/pm/view'
+import type { EditorView } from 'prosemirror-view'
 
 export const handleSenderPasteLogic = (
   view: EditorView,

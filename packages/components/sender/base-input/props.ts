@@ -1,5 +1,5 @@
 import { Extensions } from '@tiptap/vue-3'
-import { EditorView } from '@tiptap/pm/view'
+import type { EditorView } from 'prosemirror-view'
 import { ExtractPropTypes, PropType } from 'vue'
 
 export const baseInputProps = {

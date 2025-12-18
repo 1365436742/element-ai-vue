@@ -29,7 +29,7 @@ import Text from '@tiptap/extension-text'
 import HardBreak from '@tiptap/extension-hard-break'
 import History from '@tiptap/extension-history'
 import Placeholder from '@tiptap/extension-placeholder'
-import { EditorView } from '@tiptap/pm/view'
+import type { EditorView } from 'prosemirror-view'
 import {
   handleSenderPasteLogic,
   getParseFile,

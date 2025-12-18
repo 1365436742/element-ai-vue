@@ -97,6 +97,7 @@
     "json5": "^2.2.3",
     "lodash-es": "^4.17.21",
     "mermaid": "^11.12.2",
+    "prosemirror-view": "^1.41.4",
     "rehype-katex": "^7.0.1",
     "rehype-stringify": "^10.0.1",
     "remark-breaks": "^4.0.0",

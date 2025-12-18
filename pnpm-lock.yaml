@@ -83,6 +83,9 @@ importers:
       mermaid:
         specifier: ^11.12.2
         version: 11.12.2
+      prosemirror-view:
+        specifier: ^1.41.4
+        version: 1.41.4
       rehype-katex:
         specifier: ^7.0.1
         version: 7.0.1
