@@ -26,3 +26,23 @@ onMounted(() => {
 <template>
   <Layout />
 </template>
+
+<style lang="scss">
+.switch-btn {
+  margin-bottom: 20px;
+  padding: 4px 16px;
+  background-color: #0057ff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: opacity 0.3s;
+  & + .switch-btn {
+    margin-left: 8px;
+  }
+}
+
+.switch-btn:hover {
+  opacity: 0.8;
+}
+</style>

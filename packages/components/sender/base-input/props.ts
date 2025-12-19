@@ -15,7 +15,7 @@ export const baseInputProps = {
     type: Array as PropType<Extensions>,
     default: () => [],
   },
-  iputTagPrefixValue: {
+  inputTagPrefixValue: {
     type: String,
     default: '',
   },

@@ -12,7 +12,6 @@ import { ElAPpt } from '@element-ai-vue/components/ppt'
 import { ElASender } from '@element-ai-vue/components/sender'
 import { ElAThinking } from '@element-ai-vue/components/thinking'
 import { ElAThoughtChain } from '@element-ai-vue/components/thought-chain'
-import { ElATypewriter } from '@element-ai-vue/components/typewriter'
 import { ElAVideoGeneration } from '@element-ai-vue/components/video-generation'
 
 import type { Plugin } from 'vue'
@@ -32,6 +31,5 @@ export default [
   ElASender,
   ElAThinking,
   ElAThoughtChain,
-  ElATypewriter,
   ElAVideoGeneration,
 ] as Plugin[]

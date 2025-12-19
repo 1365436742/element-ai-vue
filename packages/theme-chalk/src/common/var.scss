@@ -3,6 +3,7 @@
 @use '../mixins/mixins' as *;
 
 @mixin dark-style {
+  --#{$namespace}-base-color: #000;
   --#{$namespace}-header-bg-color: rgba(255, 255, 255, 0.12);
   --#{$namespace}-content-bg-color: rgb(48, 48, 48);
   --#{$namespace}-color-border-secondary: #303133;
@@ -10,12 +11,19 @@
   --#{$namespace}-toolbar-bg-color: rgb(34, 34, 34);
   --#{$namespace}-input-tag-prefix-bg-color: #333333;
   --#{$namespace}-primary-default-color: #e0e0e0;
+  --#{$namespace}-primary-traansparent-1-color: #383838;
   --#{$namespace}-close-icon-color: #adadad;
+  --#{$namespace}-send-btn-bg-color: #fff;
+
+  --el-ai-tooltip-bg-color: #303133;
+  --el-ai-tooltip-text-color: #fff;
+  --el-ai-tooltip-border-color: #303133;
   color: #fff;
   background-color: #000;
 }
 
 :root {
+  --#{$namespace}-base-color: #fff;
   --#{$namespace}-border-radius-base: 6px;
   --#{$namespace}-border-radius-btn: 4px;
   --#{$namespace}-header-bg-color: rgba(0, 0, 0, 0.06);
@@ -25,7 +33,15 @@
   --#{$namespace}-toolbar-bg-color: #fff;
   --#{$namespace}-input-tag-prefix-bg-color: rgba(0, 87, 255, 0.1);
   --#{$namespace}-primary-default-color: #0057ff;
+  --#{$namespace}-primary-traansparent-1-color: rgba(0, 87, 255, 0.06);
   --#{$namespace}-close-icon-color: #0a0a0a;
+
+  --#{$namespace}-send-btn-bg-color: rgba(17, 17, 17, 1);
+  --#{$namespace}-send-btn-bg-disabled-color: rgba(17, 17, 17, 0.1);
+
+  --#{$namespace}-tooltip-bg-color: #1d1e1f;
+  --#{$namespace}-tooltip-text-color: #e5eaf3;
+  --#{$namespace}-tooltip-border-color: #3d3d3d;
 }
 
 @mixin dark-markdown {

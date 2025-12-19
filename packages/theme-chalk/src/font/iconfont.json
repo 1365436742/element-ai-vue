@@ -6,6 +6,27 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "10933419",
+      "name": "终止",
+      "font_class": "zhongzhi",
+      "unicode": "e60c",
+      "unicode_decimal": 58892
+    },
+    {
+      "icon_id": "14690109",
+      "name": "指标卡-上升",
+      "font_class": "zhibiaoka-shangsheng",
+      "unicode": "e66b",
+      "unicode_decimal": 58987
+    },
+    {
+      "icon_id": "18311493",
+      "name": "下 拉 ",
+      "font_class": "xiala1",
+      "unicode": "e647",
+      "unicode_decimal": 58951
+    },
+    {
       "icon_id": "29657598",
       "name": "correct",
       "font_class": "duihao1",

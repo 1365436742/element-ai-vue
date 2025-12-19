@@ -25,3 +25,11 @@ html.dark {
     @include dark-markdown;
   }
 }
+
+@include b(tooltip) {
+  .#{$namespace}-tooltip__popper {
+    &:not(.is-dark) {
+      @include dark-style;
+    }
+  }
+}

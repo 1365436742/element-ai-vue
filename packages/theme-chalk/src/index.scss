@@ -4,4 +4,5 @@
 @use 'code-mermaid/index.scss' as code-mermaid;
 @use 'dark/css-vars.scss' as dark-css-vars;
 @use 'sender/index.scss' as sender;
+@use 'tooltip/index.scss' as tooltip;
 @import url('./font/iconfont.css');

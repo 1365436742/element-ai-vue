@@ -18,57 +18,52 @@
           </div>
         </div>
         <div :class="ns.em('fullscreen', 'action-other')">
-          <span
-            class="element-ai-vue-iconfont icon-suoxiao"
-            :class="ns.em('toolbar', 'item')"
-            @click="zoomOut"
-          ></span>
-          <span
-            class="element-ai-vue-iconfont icon-fangda"
-            :class="ns.em('toolbar', 'item')"
-            @click="zoomIn"
-          ></span>
-          <span
-            class="element-ai-vue-iconfont icon-shiyingyemian"
-            :class="ns.em('toolbar', 'item')"
-            @click="resetZoom"
-          ></span>
-          <span
-            class="element-ai-vue-iconfont icon-guanbi"
-            :class="ns.em('toolbar', 'item')"
-            @click="toggleFullscreen"
-          ></span>
+          <Tooltip content="缩小">
+            <span
+              class="element-ai-vue-iconfont icon-suoxiao"
+              :class="ns.em('toolbar', 'item')"
+              @click="zoomOut"
+            ></span>
+          </Tooltip>
+          <Tooltip content="放大">
+            <span
+              class="element-ai-vue-iconfont icon-fangda"
+              :class="ns.em('toolbar', 'item')"
+              @click="zoomIn"
+            ></span>
+          </Tooltip>
+          <Tooltip content="适应页面">
+            <span
+              class="element-ai-vue-iconfont icon-shiyingyemian"
+              :class="ns.em('toolbar', 'item')"
+              @click="resetZoom"
+            ></span>
+          </Tooltip>
+          <Tooltip content="关闭">
+            <span
+              class="element-ai-vue-iconfont icon-guanbi"
+              :class="ns.em('toolbar', 'item')"
+              @click="toggleFullscreen"
+            ></span>
+          </Tooltip>
         </div>
       </div>
     </slot>
     <slot v-else name="toolbar" v-bind="slotParams">
       <div :class="ns.e('toolbar')">
         <template v-if="!isCodeView">
-          <span
-            class="element-ai-vue-iconfont icon-xiazai"
-            :class="ns.em('toolbar', 'item')"
-            @click="downloadPng"
-          ></span>
-          <span
-            class="element-ai-vue-iconfont icon-suoxiao"
-            :class="ns.em('toolbar', 'item')"
-            @click="zoomOut"
-          ></span>
-          <span
-            class="element-ai-vue-iconfont icon-fangda"
-            :class="ns.em('toolbar', 'item')"
-            @click="zoomIn"
-          ></span>
-          <span
-            class="element-ai-vue-iconfont icon-shiyingyemian"
-            :class="ns.em('toolbar', 'item')"
-            @click="resetZoom"
-          ></span>
-          <span
-            class="element-ai-vue-iconfont icon-quanping"
-            :class="ns.em('toolbar', 'item')"
-            @click="toggleFullscreen"
-          ></span>
+          <Tooltip
+            v-for="toolItem in toolList"
+            :teleport-to="tooltipRef!"
+            placement="top"
+            :content="toolItem.name"
+          >
+            <span
+              class="element-ai-vue-iconfont"
+              :class="[ns.em('toolbar', 'item'), toolItem.icon]"
+              @click="toolItem.action"
+            ></span>
+          </Tooltip>
           <div :class="ns.em('toolbar', 'item')" @click="toggleView">
             查看代码
           </div>
@@ -113,6 +108,7 @@
         </template>
       </ElACodeHighlight>
     </div>
+    <div ref="tooltipRef"></div>
   </div>
 </template>
 
@@ -131,6 +127,7 @@ import { useFullscreen } from '@vueuse/core'
 import { useCopy, useNamespace, useWheelZoom } from '@element-ai-vue/hooks'
 import { downloadPngBySvgElement } from '@element-ai-vue/utils'
 import { debounce } from 'lodash-es'
+import Tooltip from '../tooltip/index.vue'
 import ElACodeHighlight from '../code-highlight/index.vue'
 import { codeMermaidtProps } from './props'
 
@@ -149,6 +146,7 @@ defineOptions({
   name: 'ElACodeMermaid',
 })
 
+const tooltipRef = useTemplateRef('tooltipRef')
 const ns = useNamespace('code-mermaid')
 const previewRef = useTemplateRef<HTMLElement>('previewRef')
 const { isCopied, onCopy: copyContent } = useCopy()
@@ -183,6 +181,7 @@ const config = computed(() => {
     theme: props.theme,
   }
 })
+
 onMounted(() => {
   render()
 })
@@ -248,6 +247,34 @@ watch(isFullscreen, (val) => {
 watch([() => props.content, () => props.theme], () => {
   render()
 })
+
+const toolList = [
+  {
+    name: '下载图片',
+    icon: 'icon-xiazai',
+    action: downloadPng,
+  },
+  {
+    name: '缩小',
+    icon: 'icon-suoxiao',
+    action: zoomOut,
+  },
+  {
+    name: '放大',
+    icon: 'icon-fangda',
+    action: zoomIn,
+  },
+  {
+    name: '适应页面',
+    icon: 'icon-shiyingyemian',
+    action: resetZoom,
+  },
+  {
+    name: '全屏查看',
+    icon: 'icon-quanping',
+    action: toggleFullscreen,
+  },
+]
 
 defineExpose({
   toggleView,

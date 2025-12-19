@@ -8,8 +8,8 @@
   >
     <slot name="input-tag-prefix">
       <InputTagPrefix
-        v-if="showInputTagPrefix && iputTagPrefixValue"
-        :value="iputTagPrefixValue"
+        v-if="showInputTagPrefix && inputTagPrefixValue"
+        :value="inputTagPrefixValue"
         @remove="closeInputTagPrefix"
       ></InputTagPrefix>
     </slot>
@@ -30,13 +30,12 @@ import HardBreak from '@tiptap/extension-hard-break'
 import History from '@tiptap/extension-history'
 import Placeholder from '@tiptap/extension-placeholder'
 import type { EditorView } from 'prosemirror-view'
-import {
-  handleSenderPasteLogic,
-  getParseFile,
-} from '@element-ai-vue/utils/sender'
-import InputTagPrefix from './input-tag-prefix.vue'
-import { BaseInputEmitsType, baseInputProps } from './props'
+import { handlePasteLogic, getParseFile } from '@element-ai-vue/utils'
 import { useNamespace } from '@element-ai-vue/hooks'
+import InputTagPrefix from './input-tag-prefix.vue'
+import InputSlot from '../input-slot/index'
+import SelectSlot from '../select-slot/index'
+import { BaseInputEmitsType, baseInputProps } from './props'
 
 const ns = useNamespace('base-sender-input')
 
@@ -53,7 +52,7 @@ const handleKeyDown = (view: EditorView, event: KeyboardEvent) => {
   // 如果是退格键，判断内容是否为空
   if (event.key === 'Backspace') {
     // 如果内容为空或仅包含空白字符，阻止删除操作
-    if (editor.value?.isEmpty && props.iputTagPrefixValue) {
+    if (editor.value?.isEmpty && props.inputTagPrefixValue) {
       emits('update:showInputTagPrefix', false)
     }
   }
@@ -80,6 +79,8 @@ const editor = useEditor({
     Text,
     HardBreak,
     History,
+    InputSlot,
+    SelectSlot,
     Placeholder.configure({
       placeholder: () => props.placeholder,
       showOnlyWhenEditable: false,
@@ -88,7 +89,7 @@ const editor = useEditor({
   ],
   editorProps: {
     handleKeyDown,
-    handlePaste: handleSenderPasteLogic,
+    handlePaste: handlePasteLogic,
     attributes: {
       class: ns.e('editor'),
     },

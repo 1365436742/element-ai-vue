@@ -11,14 +11,16 @@
         <div :class="ns.e('language')">{{ language }}</div>
       </div>
       <div :class="ns.e('action')">
-        <div :class="ns.e('icon')" @click="onCopy">
-          <span
-            :class="[
-              'element-ai-vue-iconfont',
-              isCopied ? 'icon-duihao1' : 'icon-fuzhi',
-            ]"
-          ></span>
-        </div>
+        <Tooltip content="复制代码">
+          <div :class="ns.e('icon')" @click="onCopy">
+            <span
+              :class="[
+                'element-ai-vue-iconfont',
+                isCopied ? 'icon-duihao1' : 'icon-fuzhi',
+              ]"
+            ></span>
+          </div>
+        </Tooltip>
       </div>
     </slot>
     <div :class="ns.e('content')" v-html="htmlContent"></div>
@@ -33,6 +35,7 @@ import { CodeHighlightThemeMap, commonLangs } from '@element-ai-vue/constants'
 import { useCopy, useNamespace } from '@element-ai-vue/hooks'
 import { getHighlighter, HighlighterType } from '@element-ai-vue/utils'
 import { onMounted, ref, watch } from 'vue'
+import Tooltip from '../tooltip/index.vue'
 import { codeHighlightProps } from './props'
 
 const ns = useNamespace('code-highlight')

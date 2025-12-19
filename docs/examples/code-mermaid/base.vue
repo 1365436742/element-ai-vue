@@ -1,8 +1,10 @@
 <template>
-  <ElACodeMermaid
-    :content="content"
-    :theme="isDark ? 'dark' : 'default'"
-  ></ElACodeMermaid>
+  <div style="margin-top: 5px">
+    <ElACodeMermaid
+      :content="content"
+      :theme="isDark ? 'dark' : 'default'"
+    ></ElACodeMermaid>
+  </div>
 </template>
 
 <script setup lang="ts">
