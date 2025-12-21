@@ -1,17 +1,18 @@
+import { Language } from '@element-ai-vue/locale'
+import { ExtractPublicPropTypes, PropType } from 'vue'
+
 export const configProviderProps = {
   /**
-   * @description Controlling if the users want a11y features
+   * @description Locale Object
    */
-  a11y: {
-    type: Boolean,
-    default: true,
+  locale: {
+    type: Object as PropType<Language>,
   },
-  message: {
-    type: String,
-    default: '',
-  },
-  value: {
-    type: Object,
-    default: () => ({}),
+  theme: {
+    type: String as PropType<'light' | 'dark'>,
   },
 }
+
+export type ConfigProviderProps = Partial<
+  ExtractPublicPropTypes<typeof configProviderProps>
+>

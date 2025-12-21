@@ -1,3 +1,5 @@
 export * from './use-namespace'
 export * from './use-wheel-zoom'
 export * from './use-copy'
+export * from './use-theme'
+export * from './use-locale'
