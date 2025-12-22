@@ -3,7 +3,7 @@ import { ElACodeHighlight } from '@element-ai-vue/components/code-highlight'
 import { ElABubbleList } from '@element-ai-vue/components/bubble-list'
 import { ElABubble } from '@element-ai-vue/components/bubble'
 import { ElACodeMermaid } from '@element-ai-vue/components/code-mermaid'
-import { ElADrag } from '@element-ai-vue/components/drag'
+import { ElADragUpload } from '@element-ai-vue/components/drag-upload'
 import { ElAFilesCard } from '@element-ai-vue/components/files-card'
 import { ElAFilesUpload } from '@element-ai-vue/components/files-upload'
 import { ElALoading } from '@element-ai-vue/components/loading'
@@ -20,7 +20,7 @@ export default [
   ElABubbleList,
   ElABubble,
   ElACodeMermaid,
-  ElADrag,
+  ElADragUpload,
   ElAFilesCard,
   ElAFilesUpload,
   ElALoading,

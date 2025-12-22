@@ -37,8 +37,12 @@ onMounted(() => {
   border-radius: 4px;
   cursor: pointer;
   transition: opacity 0.3s;
+  white-space: nowrap;
   & + .switch-btn {
     margin-left: 8px;
+  }
+  &.no-margin {
+    margin: 0;
   }
 }
 

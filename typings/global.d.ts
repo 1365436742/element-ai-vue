@@ -6,7 +6,7 @@ declare module 'vue' {
     ElABubbleList: (typeof import('element-ai-vue'))['ElABubbleList']
     ElABubble: (typeof import('element-ai-vue'))['ElABubble']
     ElACodeMermaid: (typeof import('element-ai-vue'))['ElACodeMermaid']
-    ElADrag: (typeof import('element-ai-vue'))['ElADrag']
+    ElADragUpload: (typeof import('element-ai-vue'))['ElADragUpload']
     ElAFilesCard: (typeof import('element-ai-vue'))['ElAFilesCard']
     ElAFilesUpload: (typeof import('element-ai-vue'))['ElAFilesUpload']
     ElALoading: (typeof import('element-ai-vue'))['ElALoading']

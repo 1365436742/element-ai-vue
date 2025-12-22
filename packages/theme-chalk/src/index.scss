@@ -6,4 +6,6 @@
 @use 'sender/index.scss' as sender;
 @use 'tooltip/index.scss' as tooltip;
 @use 'popover/index.scss' as popover;
+@use 'files-upload/index.scss' as files-upload;
+@use 'drag-upload/index.scss' as drag-upload;
 @import url('./font/iconfont.css');

@@ -1,23 +1,23 @@
-# FilesUpload 文件上传
+# DragUpload 拖拽上传
 
-FilesUpload 是一个功能完善的文件上传组件，支持多文件选择、文件类型限制、大小校验。适用于表单文件上传，和其他组件库相比，他更符合高度自定义的业务场景。
+DragUpload 拖拽上传组件,他的入参和FilesUpload一样，他们可以搭配使用。
 
 ## 基础用法
 
-:::demo FilesUploadBase
+:::demo DragUploadBase
 
 ```vue
-<!-- @include: ../../examples/files-upload/base.vue -->
+<!-- @include: ../../examples/drag-upload/base.vue -->
 ```
 
 :::
 
-## 文件限制
+## 自定义文件悬浮样式
 
-:::demo FilesUploadAccept
+:::demo DragUploadSlot
 
 ```vue
-<!-- @include: ../../examples/files-upload/accept.vue -->
+<!-- @include: ../../examples/drag-upload/slot.vue -->
 ```
 
 :::
@@ -44,9 +44,10 @@ FilesUpload 是一个功能完善的文件上传组件，支持多文件选择�
 
 ## Slots
 
-| 插槽名  | 说明                   |
-| ------- | ---------------------- |
-| default | 自定义上传触发区域内容 |
+| 插槽名       | 说明                               |
+| ------------ | ---------------------------------- |
+| default      | 自定义上传触发区域内容             |
+| mark-content | 拖拽文件到拖拽区域的自定义样式插槽 |
 
 ## 类型定义
 

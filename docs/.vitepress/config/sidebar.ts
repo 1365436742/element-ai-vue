@@ -41,7 +41,7 @@ export const zhSidebar: DefaultTheme.Sidebar = [
     text: '文件组件',
     items: [
       { text: 'FilesUpload 文件上传', link: '/zh/base/files-upload' },
-      { text: 'DragUpload 拖拽上传', link: '/zh/base/drag' },
+      { text: 'DragUpload 拖拽上传', link: '/zh/base/drag-upload' },
       { text: 'FilesCard 文件卡片', link: '/zh/base/files-card' },
     ],
   },
@@ -95,7 +95,7 @@ export const enSidebar: DefaultTheme.Sidebar = [
     text: 'File Components',
     items: [
       { text: 'FilesUpload', link: '/en/base/files-upload' },
-      { text: 'DragUpload', link: '/en/base/drag' },
+      { text: 'DragUpload', link: '/en/base/drag-upload' },
       { text: 'FilesCard', link: '/en/base/files-card' },
     ],
   },

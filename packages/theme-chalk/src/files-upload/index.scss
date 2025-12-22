@@ -1,0 +1,7 @@
+@use '../mixins/mixins' as *;
+@use '../mixins/config' as *;
+@use '../common/var' as *;
+
+@include b(files-upload) {
+  width: min-content;
+}
