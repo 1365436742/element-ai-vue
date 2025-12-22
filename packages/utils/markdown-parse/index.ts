@@ -82,7 +82,7 @@ export interface MarkdownPart {
   type: 'html' | 'code'
   content: string
   language?: string
-  isClosed?: boolean
+  loading?: boolean
 }
 
 export type ProcessorType = ReturnType<typeof createBaseProcessor>
@@ -138,9 +138,9 @@ export const processMarkdownToParts = async (
           .map((c: any) => c.value || '')
           .join('')
 
-        const isClosed = !!codeNode.properties?.isClosed
+        const loading = !!codeNode.properties?.loading
 
-        parts.push({ type: 'code', content: codeContent, language, isClosed })
+        parts.push({ type: 'code', content: codeContent, language, loading })
       } else {
         currentHtmlNodes.push(node)
       }

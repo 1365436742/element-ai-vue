@@ -15,7 +15,7 @@ export const remarkCodeBlockStatus: Plugin<[], Root> = () => {
       // We need to be careful about bounds
       if (end && end >= 3) {
         const last3 = src.slice(end - 3, end)
-        const isClosed = last3 === '```'
+        const loading = last3 !== '```'
 
         node.data = node.data || {}
         node.data.hProperties = node.data.hProperties || {}
@@ -25,7 +25,7 @@ export const remarkCodeBlockStatus: Plugin<[], Root> = () => {
         // remark-rehype will pass 'dataClosed' to properties as 'dataClosed' (or 'data-closed' if configured?)
         // By default, data properties are passed.
         // Let's use a specific property name that we can look for.
-        ;(node.data.hProperties as any).isClosed = isClosed
+        ;(node.data.hProperties as any).loading = loading
       }
     })
   }
