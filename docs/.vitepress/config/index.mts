@@ -57,6 +57,9 @@ export default defineConfig({
         ),
       },
     },
+    server: {
+      host: '0.0.0.0',
+    },
   },
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config

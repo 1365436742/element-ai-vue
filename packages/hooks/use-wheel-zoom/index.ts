@@ -88,6 +88,89 @@ export const useWheelZoom = (
     }
   }
 
+  const onTouchStart = (e: TouchEvent) => {
+    if (isDisabledOp.value) return
+
+    if (e.touches.length === 1) {
+      e.preventDefault()
+      const touch = e.touches[0]
+      const startX = touch.clientX
+      const startY = touch.clientY
+      const initialTranslateX = translateX.value
+      const initialTranslateY = translateY.value
+
+      const onTouchMove = (moveEvent: TouchEvent) => {
+        if (moveEvent.touches.length !== 1) return
+        const moveTouch = moveEvent.touches[0]
+        translateX.value = initialTranslateX + (moveTouch.clientX - startX)
+        translateY.value = initialTranslateY + (moveTouch.clientY - startY)
+      }
+
+      const stopDrag = () => {
+        window.removeEventListener('touchmove', onTouchMove)
+        window.removeEventListener('touchend', stopDrag)
+      }
+
+      window.addEventListener('touchmove', onTouchMove)
+      window.addEventListener('touchend', stopDrag)
+    } else if (e.touches.length === 2) {
+      e.preventDefault()
+
+      const getDistance = (t1: Touch, t2: Touch) => {
+        const dx = t1.clientX - t2.clientX
+        const dy = t1.clientY - t2.clientY
+        return Math.hypot(dx, dy)
+      }
+
+      let lastDistance = getDistance(e.touches[0], e.touches[1])
+
+      const onTouchMove = (moveEvent: TouchEvent) => {
+        if (moveEvent.touches.length !== 2) return
+        moveEvent.preventDefault()
+
+        const newDistance = getDistance(
+          moveEvent.touches[0],
+          moveEvent.touches[1]
+        )
+        const distanceRatio = newDistance / lastDistance
+        const newScale = Math.max(
+          MIN_SCALE,
+          Math.min(MAX_SCALE, scale.value * distanceRatio)
+        )
+
+        if (previewRef.value) {
+          const rect = previewRef.value.getBoundingClientRect()
+          const center = {
+            x:
+              (moveEvent.touches[0].clientX + moveEvent.touches[1].clientX) / 2,
+            y:
+              (moveEvent.touches[0].clientY + moveEvent.touches[1].clientY) / 2,
+          }
+          const mouseX = center.x - rect.left
+          const mouseY = center.y - rect.top
+
+          const effectiveRatio = newScale / scale.value
+          const centerX = rect.width / 2 + translateX.value
+          const centerY = rect.height / 2 + translateY.value
+
+          translateX.value += (mouseX - centerX) * (1 - effectiveRatio)
+          translateY.value += (mouseY - centerY) * (1 - effectiveRatio)
+        }
+
+        scale.value = newScale
+        lastDistance = newDistance
+      }
+
+      const stopZoom = () => {
+        window.removeEventListener('touchmove', onTouchMove)
+        window.removeEventListener('touchend', stopZoom)
+      }
+
+      window.addEventListener('touchmove', onTouchMove, { passive: false })
+      window.addEventListener('touchend', stopZoom)
+    }
+  }
+
   return {
     scale,
     translateX,
@@ -98,5 +181,6 @@ export const useWheelZoom = (
     resetZoom,
     onWheel,
     onMouseDown,
+    onTouchStart,
   }
 }

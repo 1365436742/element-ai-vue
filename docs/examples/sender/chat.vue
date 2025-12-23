@@ -10,6 +10,7 @@
         </div>
         <ShadowBox>
           <ElASender
+            class="sender"
             v-model="content"
             placeholder="请输入聊天内容"
             :variant
@@ -68,7 +69,7 @@ const { isDark } = useData()
 const fileList = ref<FilesUploadItem[]>([])
 
 const content = ref(``)
-const variant = ref<'default' | 'updown'>('default')
+const variant = ref<'default' | 'updown'>('updown')
 const focusClass = ref(false)
 
 const mockUpload = (onProgress: (progress: number) => void) => {
@@ -133,6 +134,28 @@ html.dark {
   border-radius: 4px;
 }
 
+.sender {
+  .el-ai-sender__content {
+    max-height: 200px;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    &::-webkit-scrollbar-thumb {
+      border-radius: 6px;
+      background-color: rgba(144, 147, 153, 0.3);
+      &:hover {
+        background-color: rgba(144, 147, 153, 0.5);
+      }
+    }
+    &::-webkit-scrollbar-track {
+      background-color: transparent;
+    }
+  }
+}
+
 .wapper {
   width: 100%;
   border-radius: 8px;
@@ -145,6 +168,7 @@ html.dark {
     border-color: rgba(17, 25, 37, 0.45);
   }
 }
+
 .upload-area {
   width: 100%;
   height: 400px;

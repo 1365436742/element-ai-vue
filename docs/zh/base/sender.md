@@ -271,6 +271,10 @@ const changeContent = (key: string) => {
 
 ## 高级聊天输入框
 
+- 通过 CSS 设置输入框最大高度。
+- 搭配 `ElADragUpload`、`useFileOperation`、`ElAFilesUpload` 实现拖拽、Ctrl+V 粘贴、点击上传文件。
+- 使用 `ElAFilesCard` 实现文件上传回显。
+
 :::demo SenderChat
 
 ```vue
@@ -287,6 +291,7 @@ const changeContent = (key: string) => {
         <ElASender
           v-model="content"
           placeholder="请输入聊天内容"
+          class="sender"
           :variant
           @focus="focusClass = true"
           @blur="focusClass = false"
@@ -399,6 +404,28 @@ const { handleFileUpload } = useFileOperation(commonProps, fileList)
 .upload-area {
   width: 100%;
   height: 400px;
+}
+
+.sender {
+  .el-ai-sender__content {
+    max-height: 200px;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    &::-webkit-scrollbar-thumb {
+      border-radius: 6px;
+      background-color: rgba(144, 147, 153, 0.3);
+      &:hover {
+        background-color: rgba(144, 147, 153, 0.5);
+      }
+    }
+    &::-webkit-scrollbar-track {
+      background-color: transparent;
+    }
+  }
 }
 
 .area {

@@ -71,3 +71,24 @@
     border-color: #409eff;
   }
 }
+
+.sender {
+  .el-ai-sender__content {
+    max-height: 200px;
+    overflow-y: auto;
+    &::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    &::-webkit-scrollbar-thumb {
+      border-radius: 6px;
+      background-color: rgba(144, 147, 153, 0.3);
+      &:hover {
+        background-color: rgba(144, 147, 153, 0.5);
+      }
+    }
+    &::-webkit-scrollbar-track {
+      background-color: transparent;
+    }
+  }
+}
