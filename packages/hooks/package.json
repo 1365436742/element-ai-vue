@@ -13,6 +13,8 @@
   },
   "dependencies": {
     "@vueuse/core": "catalog:",
+    "d3-selection": "^3.0.0",
+    "d3-zoom": "^3.0.0",
     "lodash-unified": "catalog:"
   },
   "devDependencies": {

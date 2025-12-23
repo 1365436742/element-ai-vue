@@ -87,13 +87,13 @@
       v-show="!isCodeView"
       ref="previewRef"
       :class="ns.e('preview')"
-      @wheel="onWheel"
-      @mousedown="onMouseDown"
+      style="touch-action: none"
     >
       <div
         :style="{
           transform: `translate(${translateX}px, ${translateY}px) scale(${scale})`,
-          transformOrigin: 'center center',
+          transformOrigin: '0 0',
+          width: 'fit-content',
         }"
         :class="[ns.em('preview', 'mermaid-svg-container')]"
         v-html="htmlContent"
@@ -128,9 +128,9 @@ import {
 import { useFullscreen } from '@vueuse/core'
 import {
   useCopy,
+  useD3Zoom,
   useLocale,
   useNamespace,
-  useWheelZoom,
 } from '@element-ai-vue/hooks'
 import { downloadPngBySvgElement } from '@element-ai-vue/utils'
 import { debounce } from 'lodash-es'
@@ -171,16 +171,9 @@ const isFullscreen = computed(() => {
     return pageIsFullscreen.value
   }
 })
-const {
-  scale,
-  translateX,
-  translateY,
-  zoomIn,
-  zoomOut,
-  resetZoom,
-  onWheel,
-  onMouseDown,
-} = useWheelZoom(previewRef, props, isFullscreen)
+
+const { scale, translateX, translateY, initZoom, zoomIn, zoomOut, resetZoom } =
+  useD3Zoom(previewRef)
 
 const config = computed(() => {
   return {
@@ -191,6 +184,7 @@ const config = computed(() => {
 })
 
 onMounted(() => {
+  initZoom()
   render()
 })
 const render = async () => {
