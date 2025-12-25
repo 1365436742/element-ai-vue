@@ -2,8 +2,13 @@
   <ElAThinking v-model="expanded">
     <template #title>
       <div class="title">
-        <img :src="'/logo.svg'" alt="" />
-        {{ title }}
+        <!-- 注意这里的icon-box图片要包上盒子给上宽度。不然图片会有加载时间无法第一时间拿到图片宽度，导致收缩显示会有问题 -->
+        <div class="icon-box">
+          <img :src="'/logo.svg'" alt="" />
+        </div>
+        <span>
+          {{ title }}
+        </span>
       </div>
     </template>
     <template #action>
@@ -51,10 +56,13 @@ __这也是粗体文本__   _这也是斜体文本_
   height: 52px;
   display: flex;
   align-items: center;
-  img {
+  .icon-box {
     width: 24px;
     height: 24px;
     margin-right: 8px;
+    img {
+      width: 100%;
+    }
   }
 }
 .action {
