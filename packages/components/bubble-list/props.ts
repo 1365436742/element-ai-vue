@@ -3,7 +3,7 @@ import { ExtractPropTypes, PropType } from 'vue'
 export const thinkingProps = {
   modelValue: {
     type: Boolean,
-    default: undefined,
+    default: false,
   },
   title: {
     type: String,

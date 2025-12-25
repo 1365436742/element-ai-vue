@@ -31,6 +31,11 @@ export const useTyperwriter = (initProps?: Partial<TypewriterProps>) => {
     getStatus()
   }
 
+  const done = () => {
+    typewriter.done()
+    getStatus()
+  }
+
   onBeforeUnmount(() => {
     typewriter.destory()
   })
@@ -39,6 +44,7 @@ export const useTyperwriter = (initProps?: Partial<TypewriterProps>) => {
     start,
     paused,
     stop,
+    done,
     status,
     content,
   }

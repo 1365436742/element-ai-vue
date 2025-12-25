@@ -9,12 +9,17 @@ export interface TypewriterProps {
    * 默认 50ms
    */
   interval: number
+  /**
+   * 静态文字，文字到最后一个之后自动结束
+   */
+  staticText?: boolean
 }
 
 export const createTypewriter = (initProps: Partial<TypewriterProps> = {}) => {
   let config: TypewriterProps = {
     typingSpeed: 2,
     interval: 50,
+    staticText: false,
     ...initProps,
   }
 
@@ -37,6 +42,10 @@ export const createTypewriter = (initProps: Partial<TypewriterProps> = {}) => {
         if (nextIndex !== currentIndex) {
           onType(str)
         }
+        if (nextIndex === fullText.length && config?.staticText) {
+          stop()
+          return
+        }
         currentIndex = nextIndex
       }
       timerInterval(onType)
@@ -56,21 +65,28 @@ export const createTypewriter = (initProps: Partial<TypewriterProps> = {}) => {
   const paused = () => {
     status = 'paused'
   }
+
   const stop = () => {
     status = 'stopped'
+  }
+
+  const done = () => {
+    status = 'stopped'
+    currentIndex = fullText.length
   }
 
   return {
     start,
     paused,
     stop,
+    done,
     getInfo: () => ({
       status,
       currentIndex,
       fullText,
       config,
     }),
-    setConfig: (newConfig: TypewriterProps) => {
+    setConfig: (newConfig: Partial<TypewriterProps>) => {
       config = {
         ...config,
         ...newConfig,

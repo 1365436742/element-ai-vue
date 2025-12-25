@@ -4,25 +4,22 @@
     <div ref="thinkingRef" :class="ns.b()">
       <div
         ref="minWidthRef"
-        :class="[ns.e('top'), ns.is('expanded', !modelValue)]"
+        :class="[ns.e('top'), ns.is('expanded', !expanded)]"
       >
         <div :class="ns.em('top', 'title')" ref="titleRef">
           <slot name="title">{{ title }}</slot>
         </div>
 
         <slot name="action">
-          <div
-            :class="ns.em('top', 'action')"
-            @click="emit('update:modelValue', !modelValue)"
-          >
+          <div :class="ns.em('top', 'action')" @click="expanded = !expanded">
             <span
               class="element-ai-vue-iconfont"
-              :class="modelValue ? 'icon-out-screen' : 'icon-full-screen'"
+              :class="expanded ? 'icon-out-screen' : 'icon-full-screen'"
             ></span>
           </div>
         </slot>
       </div>
-      <TransitionHeight :show="modelValue">
+      <TransitionHeight :show="expanded ?? false">
         <div :class="ns.e('content')" :style="{ width: maxWidth || 'auto' }">
           <slot></slot>
         </div>
@@ -34,7 +31,7 @@
 <script setup lang="ts">
 import { useNamespace } from '@element-ai-vue/hooks'
 import { useElementSize, useMutationObserver } from '@vueuse/core'
-import { computed, onMounted, useTemplateRef, watch } from 'vue'
+import { computed, onMounted, ref, useTemplateRef, watch } from 'vue'
 import { ThinkingEmitsType, thinkingProps } from './props'
 import TransitionHeight from './transition-height.vue'
 
@@ -45,6 +42,24 @@ const props = defineProps({
   ...thinkingProps,
 })
 const emit = defineEmits<ThinkingEmitsType>()
+
+// 内部状态，当没有传 v-model 时使用
+const internalValue = ref(props.modelValue)
+
+// 判断是否使用外部传入的 modelValue
+const isControlled = computed(() => props.modelValue !== undefined)
+
+// 实际使用的展开状态值
+const expanded = computed({
+  get: () => (isControlled.value ? props.modelValue : internalValue.value),
+  set: (val) => {
+    if (isControlled.value) {
+      emit('update:modelValue', val ?? false)
+    } else {
+      internalValue.value = val
+    }
+  },
+})
 const ns = useNamespace('thinking')
 const thinkingRef = useTemplateRef('thinkingRef')
 const maxWidthRef = useTemplateRef('maxWidthRef')
@@ -55,7 +70,7 @@ const { width: maxWidthVal } = useElementSize(maxWidthRef)
 const maxWidth = computed(() => {
   const el = thinkingRef.value
   if (el?.clientWidth !== maxWidthVal.value && el) {
-    if (!props.modelValue) {
+    if (!expanded.value) {
       el.style.width = getMinWidth()
     } else {
       el.style.width = maxWidthVal.value + 'px'
@@ -74,7 +89,7 @@ const getMinWidth = () => {
 }
 
 const handleTitleChange = () => {
-  if (!props.modelValue) {
+  if (!expanded.value) {
     const el = thinkingRef.value
     if (el) {
       el.style.width = getMinWidth()
@@ -95,7 +110,7 @@ useMutationObserver(
 )
 
 watch(
-  () => props.modelValue,
+  () => expanded.value,
   (newVal) => {
     const el = thinkingRef.value
     if (!el) return
@@ -113,7 +128,7 @@ watch(
 onMounted(() => {
   const el = thinkingRef.value
   if (!el) return
-  if (!props.modelValue) {
+  if (!expanded.value) {
     el.style.width = getMinWidth()
   }
 })

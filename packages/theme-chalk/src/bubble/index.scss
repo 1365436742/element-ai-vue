@@ -1,0 +1,104 @@
+@use '../mixins/mixins' as *;
+@use '../mixins/config' as *;
+@use '../common/var' as *;
+
+@include b(bubble) {
+  display: flex;
+  gap: 12px;
+  @include e(header) {
+    padding-bottom: 12px;
+  }
+  @include e(content-wrapper) {
+    flex: 1;
+  }
+
+  @include e(content) {
+    display: flex;
+    @include m(text) {
+      font-size: 14px;
+      border-radius: 6px;
+      padding: 12px 16px;
+      background-color: var(--#{$namespace}-bubble-content-bg);
+    }
+    @include m(outlined) {
+      background-color: transparent;
+      border: 1px solid var(--#{$namespace}-thinking-border-color);
+    }
+    @include m(shadow) {
+      background-color: transparent;
+      box-shadow: var(--#{$namespace}-bubble-content-shadow);
+    }
+    @include m(borderless) {
+      background-color: transparent;
+      padding: 0;
+      flex: 1;
+    }
+    @include m(round) {
+      border-radius: 50px;
+    }
+    .#{$namespace}-markdown {
+      padding: 0;
+    }
+  }
+  @include e(footer) {
+    padding-top: 12px;
+  }
+
+  @include e(loading) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    @include m(dot) {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background-color: var(
+        --#{$namespace}-loading-dot-color,
+        var(--#{$namespace}-color-primary, #409eff)
+      );
+      animation: loading-bounce 1.3s ease-in-out infinite both;
+
+      &:nth-child(1) {
+        animation-delay: -0.32s;
+      }
+
+      &:nth-child(2) {
+        animation-delay: -0.16s;
+      }
+
+      &:nth-child(3) {
+        animation-delay: 0s;
+      }
+    }
+  }
+  &.#{$namespace}-bubble-start {
+    .#{$namespace}-bubble__content--corner {
+      border-top-left-radius: 0;
+    }
+  }
+  &.#{$namespace}-bubble-end {
+    flex-direction: row-reverse;
+    justify-self: flex-end;
+    .#{$namespace}-bubble__content {
+      justify-content: flex-end;
+    }
+    .#{$namespace}-bubble__content--corner {
+      border-top-right-radius: 0;
+    }
+  }
+}
+
+@keyframes loading-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  20% {
+    transform: translateY(-6px);
+  }
+  40% {
+    transform: translateY(0);
+  }
+}
