@@ -1,6 +1,6 @@
 # Introduction
 
-**Element AI** is an AI chat component library based on Vue 3, designed for rapidly building intelligent conversation interfaces. Whether for enterprise applications or personal projects, Element AI helps you easily create professional AI interaction experiences. All content is open source with no closed-source sub-packages.
+**Element AI Vue** is an AI chat component library based on Vue 3, designed for rapidly building intelligent conversation interfaces. Whether for enterprise applications or personal projects, Element AI Vue helps you easily create professional AI interaction experiences. All content is open source with no closed-source sub-packages.
 
 ## ✨ Features
 
@@ -58,4 +58,4 @@
 
 ---
 
-Start using Element AI to quickly build your AI chat application!
+Start using Element AI Vue to quickly build your AI chat application!
