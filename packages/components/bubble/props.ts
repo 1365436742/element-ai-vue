@@ -4,7 +4,7 @@ import { MarkdownPropsType } from '../markdown/props'
 export const bubbleProps = {
   theme: {
     type: String as PropType<'light' | 'dark'>,
-    default: 'light',
+    default: '',
   },
   placement: {
     type: String as PropType<'start' | 'end'>,

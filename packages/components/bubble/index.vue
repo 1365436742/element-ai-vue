@@ -41,7 +41,7 @@
 </template>
 
 <script setup lang="ts">
-import { useNamespace, useTyperwriter } from '@element-ai-vue/hooks'
+import { useNamespace, useTheme, useTyperwriter } from '@element-ai-vue/hooks'
 import ElAMarkdown from '../markdown/index.vue'
 import { bubbleProps } from './props'
 import { computed, watch, useSlots } from 'vue'
@@ -58,6 +58,8 @@ const props = defineProps({
   ...bubbleProps,
 })
 const ns = useNamespace('bubble')
+const themeRef = computed(() => props.theme)
+const { theme } = useTheme(themeRef)
 
 const {
   content: typerwriterContent,
