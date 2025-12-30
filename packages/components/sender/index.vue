@@ -25,7 +25,12 @@
       <div :class="ns.em('action', 'other')">
         <slot name="action-list"></slot>
       </div>
-      <slot name="send-btn" :disabled="isEmpty">
+      <slot v-if="loading" name="send-btn-loading">
+        <div :class="ns.e('loading')" @click="emits('update:loading', false)">
+          <span class="element-ai-vue-iconfont icon-stop-chat"></span>
+        </div>
+      </slot>
+      <slot v-else name="send-btn" :disabled="isEmpty">
         <div
           :class="[
             ns.e('send-btn'),

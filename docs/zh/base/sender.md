@@ -10,84 +10,18 @@
 <template>
   <button class="switch-btn" @click="variant = 'updown'">垂直</button>
   <button class="switch-btn" @click="variant = 'default'">水平</button>
-  <div class="wapper" :class="{ 'focus-class': focusClass }">
-    <ElASender
-      v-model="content"
-      :placeholder
-      :variant
-      @focus="focusClass = true"
-      @blur="focusClass = false"
-    ></ElASender>
-  </div>
-</template>
+  <button class="switch-btn" @click="loading = true">加载中</button>
+  <button class="switch-btn" @click="inputRef?.focus()">自动聚焦</button>
+  <button class="switch-btn" @click="getTextContent()">获取输入框text</button>
+  <button class="switch-btn" @click="getJSONContent()">获取输入框json</button>
 
-<script setup lang="ts">
-import { ElASender } from 'element-ai-vue'
-import { ref } from 'vue'
-
-const content = ref(``)
-const variant = ref<'default' | 'updown'>('default')
-const focusClass = ref(false)
-const placeholder = ref(`请输入聊天内容`)
-</script>
-
-<style scoped lang="scss">
-html.dark {
-  .wapper {
-    border-color: rgba(121, 121, 121, 0.6);
-
-    &.focus-class {
-      border-color: rgba($color: #fff, $alpha: 0.6);
-    }
-  }
-}
-
-.wapper {
-  width: 600px;
-  border-radius: 8px;
-  padding: 8px 7px;
-  border: 1px solid rgba(17, 25, 37, 0.15);
-
-  &.focus-class {
-    border-color: rgba(17, 25, 37, 0.45);
-  }
-}
-</style>
-```
-
-:::
-
-## 插入html
-
-:::demo SenderBaseHtml
-
-```vue
-<template>
-  <div>
-    <button class="switch-btn" @click="variant = 'updown'">垂直</button>
-    <button class="switch-btn" @click="variant = 'default'">水平</button>
-  </div>
-
-  <div>
-    <button class="switch-btn" @click="showInputTagPrefix = true">
-      前置标签开启
-    </button>
-    <button class="switch-btn" @click="showInputTagPrefix = false">
-      前置标签关闭
-    </button>
-    <button class="switch-btn" @click="changeContent('input-slot')">
-      input-slot
-    </button>
-    <button class="switch-btn" @click="changeContent('select-slot')">
-      select-slot
-    </button>
-  </div>
+  <div class="input-content" v-if="inputContent">{{ inputContent }}</div>
 
   <div class="wapper" :class="{ 'focus-class': focusClass }">
     <ElASender
+      ref="inputRef"
       v-model="content"
-      v-model:show-input-tag-prefix="showInputTagPrefix"
-      inputTagPrefixValue="技能：翻译"
+      v-model:loading="loading"
       :placeholder
       :variant
       @focus="focusClass = true"
@@ -99,29 +33,22 @@ html.dark {
 
 <script setup lang="ts">
 import { ElASender } from 'element-ai-vue'
-import { ref } from 'vue'
+import { ref, useTemplateRef } from 'vue'
 
 const content = ref(``)
 const variant = ref<'default' | 'updown'>('default')
 const focusClass = ref(false)
-
 const placeholder = ref(`请输入聊天内容`)
-const showInputTagPrefix = ref(false)
+const inputRef = useTemplateRef('inputRef')
+const loading = ref(false)
 
-const options = ref([
-  { label: '前端开发', value: '1' },
-  { label: '设计视觉', value: '2' },
-  { label: 'java开发', value: '3' },
-])
-const temp: Record<string, string> = {
-  'input-slot':
-    '我是一个<input-slot placeholder="[职业你好我试试]"></input-slot>',
-  'select-slot': `我是<select-slot value="3" options='${JSON.stringify(
-    options.value
-  )}'></select-slot>，帮我完成...`,
+const inputContent = ref('')
+
+const getTextContent = () => {
+  inputContent.value = inputRef.value?.editor()?.getText() || ''
 }
-const changeContent = (key: string) => {
-  content.value = temp[key]
+const getJSONContent = () => {
+  inputContent.value = JSON.stringify(inputRef.value?.editor()?.getJSON()) || ''
 }
 </script>
 
@@ -134,6 +61,12 @@ html.dark {
       border-color: rgba($color: #fff, $alpha: 0.6);
     }
   }
+}
+.input-content {
+  margin: 10px 0;
+  border: 1px solid #eee;
+  padding: 8px;
+  border-radius: 4px;
 }
 
 .wapper {
@@ -455,6 +388,7 @@ const { handleFileUpload } = useFileOperation(commonProps, fileList)
 | ----------------------------- | --------------------------------------------------------------------- | -------------------------------------------------- | ----------- |
 | v-model                       | 输入框的html                                                          | `string`                                           | `''`        |
 | v-model:show-input-tag-prefix | 是否显示输入框前置标签                                                | `boolean`                                          | `false`     |
+| v-model:loading               | 发送中、可以通过slot自定义样式                                        | `boolean`                                          | `false`     |
 | theme                         | 主题                                                                  | `'light' \| 'dark'`                                | `'light'`   |
 | placeholder                   | 占位文本                                                              | `string`                                           | `''`        |
 | disabled                      | 是否禁用                                                              | `boolean`                                          | `false`     |
@@ -466,13 +400,14 @@ const { handleFileUpload } = useFileOperation(commonProps, fileList)
 
 ## slots
 
-| 插槽名              | 说明                     | 作用域参数                          |
-| ------------------- | ------------------------ | ----------------------------------- |
-| prefix              | 前置内容插槽             | -                                   |
-| input-tag-prefix    | 输入框前置标签自定义内容 | -                                   |
-| action-list         | 操作栏列表插槽           | -                                   |
-| send-btn            | 发送按钮插槽             | `{ disabled: boolean }`             |
-| select-slot-content | select-slot 点击弹窗插槽 | `{ options: SenderSelectOption[] }` |
+| 插槽名              | 说明                                 | 作用域参数                          |
+| ------------------- | ------------------------------------ | ----------------------------------- |
+| prefix              | 前置内容插槽                         | -                                   |
+| input-tag-prefix    | 输入框前置标签自定义内容             | -                                   |
+| action-list         | 操作栏列表插槽                       | -                                   |
+| send-btn            | 发送按钮插槽                         | `{ disabled: boolean }`             |
+| send-btn-loading    | loading为true的时候，显示loading按钮 | -                                   |
+| select-slot-content | select-slot 点击弹窗插槽             | `{ options: SenderSelectOption[] }` |
 
 ## events
 

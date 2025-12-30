@@ -118,6 +118,19 @@
     }
   }
 
+  @include e(loading) {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    & > span {
+      animation: rotate 1.5s linear infinite;
+      font-size: 32px;
+      cursor: pointer;
+    }
+  }
   // 使用 &-updown 生成 el-ai-sender-updown
   &-updown {
     flex-direction: column;
