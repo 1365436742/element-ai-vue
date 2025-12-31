@@ -6,4 +6,3 @@ Oxc、Prettier - Code formatter
 
 2. 编写demo
 3. demo 看一下图标不能点击放大的原因
-
