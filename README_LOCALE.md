@@ -6,4 +6,4 @@ Oxc、Prettier - Code formatter
 
 3. 增加代码块收起能力。
 4. 编写文档
-4. 发布一个新版本
+5. 发布一个新版本

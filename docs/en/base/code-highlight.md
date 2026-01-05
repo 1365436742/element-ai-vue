@@ -57,12 +57,13 @@ Default supported languages: `javascript`, `typescript`, `vue`, `html`, `css`, `
 
 ## Slots
 
-| Slot Name | Description           | Slot Parameters                                                                                                                          |
-| :-------- | :-------------------- | :--------------------------------------------------------------------------------------------------------------------------------------- |
-| header    | Custom header content | `content`: Code content<br>`language`: Language<br>`isCopied`: Copy status, 1s interval before next copy<br>`onCopy`: Copy code function |
+| Slot Name | Description           | Slot Parameters                                                                                                                                                         |
+| :-------- | :-------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| header    | Custom header content | `content`: Code content<br>`language`: Language<br>`isCopied`: Copy status, 1s interval before next copy<br>`onCopy`: Copy code function<br>`toggleExpanded`: Fold code |
 
 ## Ref
 
-| Method Name | Description | Parameters |
-| :---------- | :---------- | :--------- |
-| onCopy      | Copy code   | -          |
+| Method Name    | Description | Parameters |
+| :------------- | :---------- | :--------- |
+| onCopy         | Copy code   | -          |
+| toggleExpanded | Fold code   | -          |
