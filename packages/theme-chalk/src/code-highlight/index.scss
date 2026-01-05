@@ -17,7 +17,26 @@
     padding: 0 14px;
     background-color: var(--#{$namespace}-header-bg-color);
     font-size: 14px;
+    @include e(select) {
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 5px;
+      margin-top: 3px;
+      cursor: pointer;
 
+      & > span {
+        display: flex;
+        font-size: 12px;
+        transform: rotate(-90deg);
+        transition: all 0.2s ease;
+      }
+      &.is-expanded > span {
+        transform: rotate(0);
+      }
+    }
     @include e(language) {
       font-weight: bold;
     }

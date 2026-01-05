@@ -4,5 +4,6 @@ Oxc、Prettier - Code formatter
 
 # TODO
 
-3. demo 数学公式英文版尝试一下
+3. 增加代码块收起能力。
+4. 编写文档
 4. 发布一个新版本

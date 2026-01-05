@@ -6,10 +6,18 @@
       :language="language"
       :isCopied="isCopied"
       :onCopy="onCopy"
+      :toggleExpanded="toggleExpanded"
     >
       <div :class="ns.e('header')">
-        <div @click="toggleExpanded">sss</div>
-        <div :class="ns.e('language')">{{ language }}</div>
+        <div
+          @click="toggleExpanded"
+          :class="[ns.e('select'), ns.is('expanded', computedExpanded)]"
+        >
+          <span class="element-ai-vue-iconfont icon-expanded"></span>
+        </div>
+        <div :class="ns.e('language')" @click="toggleExpanded">
+          {{ language }}
+        </div>
       </div>
       <div :class="ns.e('action')">
         <Tooltip :content="t('el.codeHighlight.copy', '复制代码')">
@@ -24,7 +32,7 @@
         </Tooltip>
       </div>
     </slot>
-    <TransitionHeight :show="expanded ?? curExpanded">
+    <TransitionHeight :show="computedExpanded">
       <div :class="ns.e('content')" v-html="htmlContent"></div>
     </TransitionHeight>
   </div>
@@ -50,6 +58,7 @@ import TransitionHeight from '../transition-height/index.vue'
 const { t } = useLocale()
 const ns = useNamespace('code-highlight')
 const curExpanded = ref(true)
+const computedExpanded = computed(() => props.expanded ?? curExpanded.value)
 const emits = defineEmits<CodeHighlightEmitsType>()
 const props = defineProps({
   content: {
@@ -91,6 +100,7 @@ onMounted(async () => {
 
 defineExpose({
   onCopy,
+  toggleExpanded,
 })
 
 watch(
