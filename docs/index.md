@@ -1,9 +1,13 @@
+---
+layout: false
+---
+
 <script setup>
-import { onMounted } from 'vue'
+import { onBeforeMount } from 'vue'
 import { useRouter } from 'vitepress'
 
 const router = useRouter()
-onMounted(() => {
+onBeforeMount(() => {
   router.go('/zh/')
 })
 </script>
