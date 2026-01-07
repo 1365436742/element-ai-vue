@@ -18,14 +18,14 @@
 
 ## Quick Links
 
-| Resource Type | Link |
-| --------------------- | -------------------------------------------------------------------- |
-| **Documentation** | [Documentation](https://element-ai-vue.com) |
-| **Repository** | [GitHub](https://github.com/1365436742/element-ai-vue) |
-| **NPM Package** | [npm](https://www.npmjs.com/package/element-ai-vue) |
-| **Issues** | [Report Bug](https://github.com/1365436742/element-ai-vue-demo/issues) |
-| **Base Demo Preview** | [Live Preview](https://element-ai-vue.com/base-demo/) |
-| **Base Demo Source** | [GitHub](https://github.com/1365436742/element-ai-vue-demo) |
+| Resource Type         | Link                                                                   |
+| --------------------- | ---------------------------------------------------------------------- |
+| **Documentation**     | [Documentation](https://element-ai-vue.com)                            |
+| **Repository**        | [GitHub](https://github.com/1365436742/element-ai-vue)                 |
+| **NPM Package**       | [npm](https://www.npmjs.com/package/element-ai-vue)                    |
+| **Issues**            | [Report Bug](https://github.com/1365436742/element-ai-vue-demo/issues) |
+| **Base Demo Preview** | [Live Preview](https://element-ai-vue.com/base-demo/)                  |
+| **Base Demo Source**  | [GitHub](https://github.com/1365436742/element-ai-vue-demo)            |
 
 ## Installation
 
