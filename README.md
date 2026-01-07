@@ -16,16 +16,16 @@
 
 </div>&emsp;
 
-## 📢 快速链接
+## 快速链接
 
-| 资源类型          | <div style="width: 300px;" >链接</div>                               |
-| ----------------- | -------------------------------------------------------------------- |
-| **文档**          | [开发文档](https://element-ai-vue.com)                               |
-| **代码仓库**      | [GitHub](https://github.com/1365436742/element-ai-vue)               |
-| **NPM 包**        | [npm](https://www.npmjs.com/package/element-ai-vue)                  |
-| **问题反馈**      | [提交 Bug](https://github.com/1365436742/element-ai-vue-demo/issues) |
-| **模版项目 预览** | [在线预览](https://element-ai-vue.com/base-demo/)                    |
-| **模版项目 源码** | [GitHub](https://github.com/1365436742/element-ai-vue-demo)          |
+| 资源类型              | 链接                                                                 |
+| --------------------- | -------------------------------------------------------------------- |
+| **文档**              | [开发文档](https://element-ai-vue.com)                               |
+| **代码仓库**          | [GitHub](https://github.com/1365436742/element-ai-vue)               |
+| **NPM 包**            | [npm](https://www.npmjs.com/package/element-ai-vue)                  |
+| **问题反馈**          | [提交 Bug](https://github.com/1365436742/element-ai-vue-demo/issues) |
+| **基础模版项目 预览** | [在线预览](https://element-ai-vue.com/base-demo/)                    |
+| **基础模版项目 源码** | [GitHub](https://github.com/1365436742/element-ai-vue-demo)          |
 
 ## 安装
 
