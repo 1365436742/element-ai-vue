@@ -50,7 +50,7 @@ Let's work together to build a better AI component library ecosystem.
 Welcome to add the author's WeChat to join the technical exchange group for discussion and co-construction (please note: element-ai-vue):
 
 <div align="center">
-  <img src="https://github.com/1365436742/element-ai-vue/blob/main/md-resource/wx.png?raw=true" width="200" alt="WeChat" style="pointer-events: none" />
+  <img src="https://element-ai-vue.com/cdn/public/wx.png" width="300" alt="WeChat"  />
 </div>
 
 ## ❤️ Sponsorship
@@ -58,3 +58,8 @@ Welcome to add the author's WeChat to join the technical exchange group for disc
 Maintaining an open-source project requires continuous effort.
 If you find this project helpful for your work, or wish to support the long-term development of the project, you are welcome to buy the author a coffee ☕️.
 Friends who are interested can give support, your encouragement is our biggest motivation to keep moving forward!
+
+<div align="center">
+  <img src="https://element-ai-vue.com/cdn/public/wx-pay.png" width="300" alt="WeChat"  />
+  <img src="https://element-ai-vue.com/cdn/public/zfb-pay.jpg" width="300" alt="WeChat"  />
+</div>
