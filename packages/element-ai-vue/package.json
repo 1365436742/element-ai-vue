@@ -1,6 +1,6 @@
 {
   "name": "element-ai-vue",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "A AI Component Library for Vue 3",
   "keywords": [
     "element-ai-vue",
@@ -84,8 +84,8 @@
     "@tiptap/starter-kit": "^3.13.0",
     "@tiptap/vue-3": "^3.13.0",
     "copy-to-clipboard": "^3.3.3",
-    "hast-util-to-html": "^9.0.5",
     "dompurify": "^3.3.0",
+    "hast-util-to-html": "^9.0.5",
     "json5": "^2.2.3",
     "lodash-es": "^4.17.21",
     "mermaid": "^11.12.2",
