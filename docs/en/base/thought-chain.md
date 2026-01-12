@@ -94,28 +94,32 @@ const list = ref<ThoughtChainItem[]>([
     key: 2,
     title: 'Step 2: Design Architecture',
     extended: true,
-    description: 'Develop system architecture, select technology stack and tools.',
+    description:
+      'Develop system architecture, select technology stack and tools.',
     icon: `/assets/book-icon.png`,
   },
   {
     key: 3,
     title: 'Step 3: Implementation',
     extended: true,
-    description: 'Code according to design documents, complete various functions.',
+    description:
+      'Code according to design documents, complete various functions.',
     icon: `/assets/search-icon.png`,
   },
   {
     key: 4,
     title: 'Step 4: Testing & Debugging',
     extended: false,
-    description: 'Conduct unit testing and integration testing, fix discovered issues.',
+    description:
+      'Conduct unit testing and integration testing, fix discovered issues.',
     icon: `/assets/book-icon.png`,
   },
   {
     key: 5,
     title: 'Step 5: Deployment',
     extended: false,
-    description: 'Deploy the system to the production environment, ensure stable operation.',
+    description:
+      'Deploy the system to the production environment, ensure stable operation.',
     icon: `/assets/search-icon.png`,
   },
   {
