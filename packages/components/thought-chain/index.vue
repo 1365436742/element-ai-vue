@@ -9,7 +9,12 @@
         :class="[ns.e('status'), ns.is('last-item', index === list.length - 1)]"
       >
         <slot name="icon" :item="item">
-          <img :class="ns.em('status', 'icon')" :src="item.icon" alt="" />
+          <img
+            v-if="item.icon"
+            :class="ns.em('status', 'icon')"
+            :src="item.icon"
+            alt=""
+          />
         </slot>
       </div>
       <div :class="ns.e('content')">

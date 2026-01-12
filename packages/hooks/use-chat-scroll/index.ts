@@ -1,4 +1,5 @@
 import { useScroll, useEventListener, useMutationObserver } from '@vueuse/core'
+import { throttle } from 'lodash-es'
 import { nextTick, ref, Ref, watch } from 'vue'
 
 interface ChatScrollOptions {
@@ -89,13 +90,20 @@ export const useChatScroll = (
   )
   useMutationObserver(
     resizeContentRef,
-    () => {
-      nextTick(() => {
-        updateIsScrollToBottom()
-      })
-      if (stopAutoScroll.value) return
-      autoScrollToBottom()
-    },
+    throttle(
+      () => {
+        nextTick(() => {
+          updateIsScrollToBottom()
+        })
+        if (stopAutoScroll.value) return
+        autoScrollToBottom()
+      },
+      80,
+      {
+        trailing: true,
+        leading: true,
+      }
+    ),
     {
       attributes: true,
       childList: true,

@@ -8,7 +8,7 @@
         v-for="item in list"
         v-bind="item"
         footer-trigger="hover"
-        :markdown-props="{ codeMermaidProps: { disabledWheelZoom: true } }"
+        :markdown-props="{ codeMermaidProps: { disabledZoom: ['wheel'] } }"
       >
         <template #header v-if="item.placement === 'start'">
           <ElAThinking title="今日话题 AI时代">

@@ -1,11 +1,29 @@
-import { computed, ref, type Ref, onUnmounted } from 'vue'
+import { ref, type Ref, onUnmounted } from 'vue'
 import { zoom, zoomIdentity, type ZoomBehavior } from 'd3-zoom'
 import { select, type Selection } from 'd3-selection'
 import { MAX_SCALE, MIN_SCALE } from '@element-ai-vue/constants'
 
+/**
+ * 禁止缩放类型
+ * wheel: 禁止滚轮缩放
+ * fullscreenWheel: 全屏状态下禁止滚轮缩放
+ * clickMove: 禁止点击拖拽缩放
+ * fullscreenClickMove: 全屏状态下禁止点击拖拽缩放
+ * all: 全部禁止
+ */
+export type DisabledZoom = (
+  | 'wheel'
+  | 'fullscreenWheel'
+  | 'clickMove'
+  | 'fullscreenClickMove'
+  | 'all'
+)[]
+
 export const useD3Zoom = (
   previewRef: Ref<HTMLElement | null>,
-  props: { disabledWheelZoom?: boolean; disabledFullscreenWheelZoom?: boolean },
+  props: {
+    disabledZoom?: DisabledZoom
+  },
   isFullscreen: Ref<boolean>
 ) => {
   const scale = ref(1)
@@ -16,16 +34,6 @@ export const useD3Zoom = (
   let d3Selection: Selection<HTMLElement, unknown, null, undefined> | null =
     null
 
-  const disabledZoom = computed(() => {
-    if (props.disabledWheelZoom && !isFullscreen.value) {
-      return true
-    }
-    if (props.disabledFullscreenWheelZoom && isFullscreen.value) {
-      return true
-    }
-    return false
-  })
-
   const initZoom = () => {
     if (!previewRef.value) return
 
@@ -33,7 +41,31 @@ export const useD3Zoom = (
     d3Zoom = zoom<HTMLElement, unknown>()
       .scaleExtent([MIN_SCALE, MAX_SCALE])
       .filter((event: any) => {
-        if (disabledZoom.value) return false
+        if (props.disabledZoom?.includes('all')) return false
+        if (
+          props.disabledZoom?.includes('fullscreenWheel') &&
+          isFullscreen.value &&
+          event.type === 'wheel'
+        )
+          return false
+        if (
+          props.disabledZoom?.includes('wheel') &&
+          !isFullscreen.value &&
+          event.type === 'wheel'
+        )
+          return false
+        if (
+          props.disabledZoom?.includes('fullscreenClickMove') &&
+          isFullscreen.value &&
+          (event.type === 'mousedown' || event.type === 'touchstart')
+        )
+          return false
+        if (
+          props.disabledZoom?.includes('clickMove') &&
+          !isFullscreen.value &&
+          (event.type === 'mousedown' || event.type === 'touchstart')
+        )
+          return false
         return !event.ctrlKey && !event.button
       })
       .touchable(true)

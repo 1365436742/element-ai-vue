@@ -1,7 +1,7 @@
 <template>
   <ElAMarkdown
     :content="content"
-    :code-mermaid-props="{ disabledWheelZoom: true }"
+    :code-mermaid-props="{ disabledZoom: ['wheel'] }"
   >
     <template #code-highlight-header="{ content, language, isCopied, onCopy }">
       <div class="header">

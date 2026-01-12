@@ -1,123 +1,129 @@
 <template>
-  <div
-    :class="[
-      ns.b(),
-      theme === 'dark' ? ns.m('dark') : '',
-      isFullscreen ? ns.e('fullscreen') : '',
-    ]"
-  >
-    <slot v-if="isFullscreen" name="fullscreen-toolbar" v-bind="slotParams">
-      <div :class="ns.em('fullscreen', 'toolbar')">
-        <div :class="ns.em('fullscreen', 'action-group')">
-          <div
-            :class="ns.em('fullscreen', 'action-download')"
-            @click="downloadPng"
-          >
-            <span class="element-ai-vue-iconfont icon-download"></span>
-            <span>{{ t('el.codeMermaid.download', '下载图片') }}</span>
-          </div>
-        </div>
-        <div
-          :class="[
-            ns.em('fullscreen', 'action-other'),
-            ns.is('mobile-width', isMobileWidth),
-          ]"
-        >
-          <div :class="ns.em('fullscreen', 'left-action')">
-            <Tooltip :content="t('el.codeMermaid.zoomOut', '缩小')">
-              <span
-                class="element-ai-vue-iconfont icon-zoom-out"
-                :class="ns.em('toolbar', 'item')"
-                @click="zoomOut"
-              ></span>
-            </Tooltip>
-            <Tooltip :content="t('el.codeMermaid.zoomIn', '放大')">
-              <span
-                class="element-ai-vue-iconfont icon-zoom-in"
-                :class="ns.em('toolbar', 'item')"
-                @click="zoomIn"
-              ></span>
-            </Tooltip>
-          </div>
-          <div :class="ns.em('fullscreen', 'right-action')">
-            <Tooltip :content="t('el.codeMermaid.resetZoom', '适应页面')">
-              <span
-                class="element-ai-vue-iconfont icon-adapt-page"
-                :class="ns.em('toolbar', 'item')"
-                @click="resetZoom"
-              ></span>
-            </Tooltip>
-            <Tooltip :content="t('el.codeMermaid.close', '关闭')">
-              <span
-                class="element-ai-vue-iconfont icon-close"
-                :class="ns.em('toolbar', 'item')"
-                @click="toggleFullscreen"
-              ></span>
-            </Tooltip>
-          </div>
-        </div>
-      </div>
-    </slot>
-    <slot v-else name="toolbar" v-bind="slotParams">
-      <div :class="ns.e('toolbar')">
-        <template v-if="!isCodeView">
-          <Tooltip
-            v-for="toolItem in toolList"
-            :key="toolItem.name"
-            :teleport-to="tooltipRef!"
-            placement="top"
-            :content="toolItem.name"
-          >
-            <span
-              class="element-ai-vue-iconfont"
-              :class="[ns.em('toolbar', 'item'), toolItem.icon]"
-              @click="toolItem.action"
-            ></span>
-          </Tooltip>
-          <div :class="ns.em('toolbar', 'item')" @click="toggleView">
-            {{ t('el.codeMermaid.viewCode', '查看代码') }}
-          </div>
-        </template>
-        <template v-else>
-          <span
-            :class="[
-              'element-ai-vue-iconfont',
-              ns.em('toolbar', 'item'),
-              isCopied ? 'icon-correct' : 'icon-copy',
-            ]"
-            @click="onCopy"
-          ></span>
-          <div :class="ns.em('toolbar', 'item')" @click="toggleView">
-            {{ t('el.codeMermaid.preview', '预览') }}
-          </div>
-        </template>
-      </div>
-    </slot>
+  <Teleport to="body" :disabled="!isFullscreen">
     <div
-      v-show="!isCodeView"
-      ref="previewRef"
-      :class="ns.e('preview')"
-      style="touch-action: none"
+      :class="[
+        ns.b(),
+        theme === 'dark' ? ns.m('dark') : '',
+        isFullscreen ? ns.e('fullscreen') : '',
+      ]"
     >
+      <slot v-if="isFullscreen" name="fullscreen-toolbar" v-bind="slotParams">
+        <div :class="ns.em('fullscreen', 'toolbar')">
+          <div :class="ns.em('fullscreen', 'action-group')">
+            <div
+              v-if="toolMap.download"
+              :class="ns.em('fullscreen', 'action-download')"
+              @click="toolMap.download.action"
+            >
+              <span
+                class="element-ai-vue-iconfont"
+                :class="toolMap.download.icon"
+              ></span>
+              <span>{{ toolMap.download.name }}</span>
+            </div>
+          </div>
+          <div
+            :class="[
+              ns.em('fullscreen', 'action-other'),
+              ns.is('mobile-width', isMobileWidth),
+            ]"
+          >
+            <div :class="ns.em('fullscreen', 'left-action')">
+              <Tooltip :content="toolMap.zoomOut.name">
+                <span
+                  class="element-ai-vue-iconfont"
+                  :class="[ns.em('toolbar', 'item'), toolMap.zoomOut.icon]"
+                  @click="toolMap.zoomOut.action"
+                ></span>
+              </Tooltip>
+              <Tooltip :content="toolMap.zoomIn.name">
+                <span
+                  class="element-ai-vue-iconfont"
+                  :class="[ns.em('toolbar', 'item'), toolMap.zoomIn.icon]"
+                  @click="toolMap.zoomIn.action"
+                ></span>
+              </Tooltip>
+            </div>
+            <div :class="ns.em('fullscreen', 'right-action')">
+              <Tooltip :content="toolMap.resetZoom.name">
+                <span
+                  class="element-ai-vue-iconfont"
+                  :class="[ns.em('toolbar', 'item'), toolMap.resetZoom.icon]"
+                  @click="toolMap.resetZoom.action"
+                ></span>
+              </Tooltip>
+              <Tooltip :content="t('el.codeMermaid.close', '关闭')">
+                <span
+                  class="element-ai-vue-iconfont icon-close"
+                  :class="ns.em('toolbar', 'item')"
+                  @click="toggleFullscreen"
+                ></span>
+              </Tooltip>
+            </div>
+          </div>
+        </div>
+      </slot>
+      <slot v-else name="toolbar" v-bind="slotParams">
+        <div :class="ns.e('toolbar')">
+          <template v-if="!isCodeView">
+            <Tooltip
+              v-for="toolItem in Object.values(toolMap)"
+              :key="toolItem.name"
+              :teleport-to="tooltipRef!"
+              placement="top"
+              :content="toolItem.name"
+            >
+              <span
+                class="element-ai-vue-iconfont"
+                :class="[ns.em('toolbar', 'item'), toolItem.icon]"
+                @click="toolItem.action"
+              ></span>
+            </Tooltip>
+            <div :class="ns.em('toolbar', 'item')" @click="toggleView">
+              {{ t('el.codeMermaid.viewCode', '查看代码') }}
+            </div>
+          </template>
+          <template v-else>
+            <span
+              :class="[
+                'element-ai-vue-iconfont',
+                ns.em('toolbar', 'item'),
+                isCopied ? 'icon-correct' : 'icon-copy',
+              ]"
+              @click="onCopy"
+            ></span>
+            <div :class="ns.em('toolbar', 'item')" @click="toggleView">
+              {{ t('el.codeMermaid.preview', '预览') }}
+            </div>
+          </template>
+        </div>
+      </slot>
       <div
-        :style="{
-          transform: `translate(${translateX}px, ${translateY}px) scale(${scale})`,
-          transformOrigin: '0 0',
-          width: 'fit-content',
-        }"
-        :class="[ns.em('preview', 'mermaid-svg-container')]"
-        v-html="htmlContent"
-      ></div>
+        v-show="!isCodeView"
+        ref="previewRef"
+        :class="ns.e('preview')"
+        style="touch-action: none"
+      >
+        <div
+          :style="{
+            transform: `translate(${translateX}px, ${translateY}px) scale(${scale})`,
+            transformOrigin: '0 0',
+            width: 'fit-content',
+          }"
+          :class="[ns.em('preview', 'mermaid-svg-container')]"
+          v-html="htmlContent"
+        ></div>
+      </div>
+      <div v-show="isCodeView" :class="ns.e('code')">
+        <ElACodeHighlight :content="content" language="mermaid" :theme>
+          <template #header>
+            <div></div>
+          </template>
+        </ElACodeHighlight>
+      </div>
+      <div ref="tooltipRef"></div>
     </div>
-    <div v-show="isCodeView" :class="ns.e('code')">
-      <ElACodeHighlight :content="content" language="mermaid" :theme>
-        <template #header>
-          <div></div>
-        </template>
-      </ElACodeHighlight>
-    </div>
-    <div ref="tooltipRef"></div>
-  </div>
+  </Teleport>
 </template>
 
 <script setup lang="ts">
@@ -257,10 +263,6 @@ watch(isFullscreen, (val) => {
   if (val) {
     document.body.style.overflow = 'hidden'
   } else {
-    /** 如果进入全屏移动之后，退出全屏因为不能操作所以重置一下 */
-    if (props.disabledWheelZoom && !props.disabledFullscreenWheelZoom) {
-      resetZoom()
-    }
     document.body.style.overflow = ''
   }
 })
@@ -269,33 +271,33 @@ watch([() => props.content, () => props.theme], () => {
   render()
 })
 
-const toolList = [
-  {
+const toolMap = {
+  download: {
     name: t('el.codeMermaid.download', '下载图片'),
     icon: 'icon-download',
     action: downloadPng,
   },
-  {
+  zoomOut: {
     name: t('el.codeMermaid.zoomOut', '缩小'),
     icon: 'icon-zoom-out',
     action: zoomOut,
   },
-  {
+  zoomIn: {
     name: t('el.codeMermaid.zoomIn', '放大'),
     icon: 'icon-zoom-in',
     action: zoomIn,
   },
-  {
+  resetZoom: {
     name: t('el.codeMermaid.resetZoom', '适应页面'),
     icon: 'icon-adapt-page',
     action: resetZoom,
   },
-  {
+  fullscreen: {
     name: t('el.codeMermaid.fullscreen', '全屏查看'),
     icon: 'icon-full-screen',
     action: toggleFullscreen,
   },
-]
+}
 
 defineExpose({
   toggleView,
