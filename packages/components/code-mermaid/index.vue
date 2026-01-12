@@ -63,6 +63,7 @@
         <template v-if="!isCodeView">
           <Tooltip
             v-for="toolItem in toolList"
+            :key="toolItem.name"
             :teleport-to="tooltipRef!"
             placement="top"
             :content="toolItem.name"
