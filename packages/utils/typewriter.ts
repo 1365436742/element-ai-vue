@@ -27,9 +27,11 @@ export const createTypewriter = (initProps: Partial<TypewriterProps> = {}) => {
   let currentIndex = 0
   let fullText = ''
   let dateTime = 0
+  let _onType: ((chunk: string) => void) | null = null
 
   const timerInterval = (onType: (chunk: string) => void) => {
     if (status !== 'typing') return
+    _onType = onType
     requestAnimationFrame(() => {
       const currentDateTime = Date.now()
       if (currentDateTime - dateTime >= config.interval) {
@@ -73,6 +75,7 @@ export const createTypewriter = (initProps: Partial<TypewriterProps> = {}) => {
   const done = () => {
     status = 'stopped'
     currentIndex = fullText.length
+    _onType?.(fullText)
   }
 
   return {
@@ -103,6 +106,7 @@ export const createTypewriter = (initProps: Partial<TypewriterProps> = {}) => {
       fullText = ''
       currentIndex = 0
       config = null as any
+      _onType = null
     },
   }
 }

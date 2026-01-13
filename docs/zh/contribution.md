@@ -17,8 +17,6 @@ Hi! 诚挚感谢您选择使用 **Element Ai Vue**。
 
 - **仅限 Bug 与 Feature**：Issue 追踪系统仅用于提交 Bug 反馈、新功能建议（Feature Request）以及设计相关讨论。其他类型的咨询可能会被直接关闭。
 
-- **社区互助**：如果您在使用过程中遇到疑问或需要一般性帮助，请移步至 Slack 或 [Discord](https://discord.com/invite/gXK9XNzW3X) 社区进行咨询。
-
 - **避免重复**：在提交 Issue 之前，请先检索历史 Issue，确认相关内容是否已被提出。
 - **提供详细信息**：
   - 请务必注明 **Element Ai Vue** 和 Vue 的具体版本号。

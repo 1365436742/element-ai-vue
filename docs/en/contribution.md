@@ -17,8 +17,6 @@ To ensure the efficiency of issue handling, please follow these rules:
 
 - **Bug and Feature Only**: The issue tracking system is exclusively for submitting bug reports, feature requests, and design-related discussions. Other types of inquiries may be closed directly.
 
-- **Community Support**: If you encounter questions or need general help during use, please turn to the Slack or [Discord](https://discord.com/invite/gXK9XNzW3X) community for consultation.
-
 - **Avoid Duplicates**: Before submitting an issue, please search the historical issues to confirm whether the relevant content has already been raised.
 - **Provide Detailed Information**:
   - Please be sure to specify the exact version numbers of **Element Ai Vue** and Vue.

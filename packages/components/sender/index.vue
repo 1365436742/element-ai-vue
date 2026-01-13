@@ -5,7 +5,9 @@
       <BaseInput
         v-bind="props"
         ref="baseInputRef"
-        @update:modelValue="(val) => emits('update:modelValue', val)"
+        @update:modelValue="
+          (val) => !loading && emits('update:modelValue', val)
+        "
         @update:showInputTagPrefix="
           (val) => emits('update:showInputTagPrefix', val)
         "
@@ -75,11 +77,12 @@ const isEmpty = computed(() => {
   return baseInputRef.value?.editor?.isEmpty
 })
 const onEnterPressed = () => {
+  if (props.loading) return
   emits('enterPressed')
   onSend()
 }
 const onSend = () => {
-  if (isEmpty.value) return
+  if (isEmpty.value || props.loading) return
   emits('send', baseInputRef.value?.editor?.getText() || '')
 }
 defineExpose({

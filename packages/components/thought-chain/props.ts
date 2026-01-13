@@ -2,8 +2,10 @@ import { ExtractPropTypes, PropType } from 'vue'
 export interface ThoughtChainItem {
   key?: string | number
   title: string
-  icon: string
+  icon?: string
   description?: string
+  extended?: boolean
+  hiddenLine?: boolean
   [key: string]: any
 }
 

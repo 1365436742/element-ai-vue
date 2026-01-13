@@ -53,8 +53,8 @@ async function main() {
 
   consola.log('Select version update type:')
   consola.log('1. Patch (小版本) - e.g. 1.1.1 -> 1.1.2')
-  consola.log('2. Minor (中版本) - e.g. 1.1.1 -> 1.2.1')
-  consola.log('3. Major (大版本) - e.g. 1.1.1 -> 2.1.1')
+  consola.log('2. Minor (中版本) - e.g. 1.1.1 -> 1.2.0')
+  consola.log('3. Major (大版本) - e.g. 1.1.1 -> 2.0.0')
 
   let choice = await askQuestion('Enter choice (1/2/3): ')
   while (!['1', '2', '3'].includes(choice.trim())) {
@@ -73,8 +73,11 @@ async function main() {
     parts[2]++
   } else if (choice.trim() === '2') {
     parts[1]++
+    parts[2] = 0
   } else if (choice.trim() === '3') {
     parts[0]++
+    parts[1] = 0
+    parts[2] = 0
   }
   const newVersion = parts.join('.')
 

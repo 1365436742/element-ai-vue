@@ -10,6 +10,9 @@
   .#{$namespace}-code-highlight,
   .#{$namespace}-code-mermaid {
     margin: 16px 0;
+    &.#{$namespace}-code-mermaid__fullscreen {
+      margin: 0;
+    }
   }
 
   .katex {

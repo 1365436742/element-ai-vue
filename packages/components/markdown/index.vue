@@ -37,12 +37,11 @@
           </template>
         </CodeHighlight>
       </slot>
-      <div
-        :class="[ns.e('markdown-body'), 'markdown-body']"
-        data-theme="dark"
+      <VNodeRenderer
         v-else
-        v-html="part.content"
-      ></div>
+        :class="[ns.e('markdown-body'), 'markdown-body']"
+        :content="part.content"
+      />
     </template>
   </div>
 </template>
@@ -70,6 +69,11 @@ const ns = useNamespace('markdown')
 const props = defineProps({
   ...markdownProps,
 })
+
+const VNodeRenderer = (vnodeParams: { content: any }) => {
+  return vnodeParams.content
+}
+
 const parts = ref<MarkdownPart[]>([])
 const themeRef = computed(() => props.theme)
 const { theme } = useTheme(themeRef)

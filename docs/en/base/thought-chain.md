@@ -58,6 +58,82 @@ const list = ref<ThoughtChainItem[]>([
 
 :::
 
+## Simple Mode
+
+:::demo ThoughtChainBaseSimple
+
+```vue
+<!-- @include: ../../examples/thought-chain/base-simple.vue -->
+```
+
+:::
+
+## Expand/Collapse
+
+:::demo ThoughtChainBaseExtend
+
+```vue
+<template>
+  <ElAThoughtChain :list="list"></ElAThoughtChain>
+</template>
+
+<script setup lang="ts">
+import { ElAThoughtChain, ThoughtChainItem } from 'element-ai-vue'
+import { ref } from 'vue'
+
+const list = ref<ThoughtChainItem[]>([
+  {
+    key: 1,
+    title: 'Step 1: Understand Requirements',
+    extended: true,
+    description:
+      'Analyze user requirements, clarify goals and functions. Analyze user requirements, clarify goals and functions. Analyze user requirements, clarify goals and functions. Analyze user requirements, clarify goals and functions. Analyze user requirements, clarify goals and functions. Analyze user requirements, clarify goals and functions. Analyze user requirements, clarify goals and functions.',
+    icon: `/assets/book-icon.png`,
+  },
+  {
+    key: 2,
+    title: 'Step 2: Design Architecture',
+    extended: true,
+    description:
+      'Develop system architecture, select technology stack and tools.',
+    icon: `/assets/book-icon.png`,
+  },
+  {
+    key: 3,
+    title: 'Step 3: Implementation',
+    extended: true,
+    description:
+      'Code according to design documents, complete various functions.',
+    icon: `/assets/search-icon.png`,
+  },
+  {
+    key: 4,
+    title: 'Step 4: Testing & Debugging',
+    extended: false,
+    description:
+      'Conduct unit testing and integration testing, fix discovered issues.',
+    icon: `/assets/book-icon.png`,
+  },
+  {
+    key: 5,
+    title: 'Step 5: Deployment',
+    extended: false,
+    description:
+      'Deploy the system to the production environment, ensure stable operation.',
+    icon: `/assets/search-icon.png`,
+  },
+  {
+    key: 6,
+    title: 'Step 6: Completion',
+    extended: undefined,
+    icon: `/assets/search-icon.png`,
+  },
+])
+</script>
+```
+
+:::
+
 ## Custom Slots
 
 :::demo ThoughtChainSlot
@@ -234,8 +310,19 @@ import { ThoughtChainItem } from 'element-ai-vue'
 interface ThoughtChainItem {
   key?: string | number
   title: string
-  icon: string
+  /** Whether to show image */
+  icon?: string
+  /** Description information, supports slots */
   description?: string
+  /**
+   * true, false will show arrow to control collapse and expand
+   * undefined will not show
+   */
+  extended?: boolean
+  /**
+   * Hide left border line
+   */
+  hiddenLine?: boolean
   [key: string]: any
 }
 ```

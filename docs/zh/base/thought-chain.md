@@ -58,6 +58,78 @@ const list = ref<ThoughtChainItem[]>([
 
 :::
 
+## 简单模式
+
+:::demo ThoughtChainBaseSimple
+
+```vue
+<!-- @include: ../../examples/thought-chain/base-simple.vue -->
+```
+
+:::
+
+## 展开收起
+
+:::demo ThoughtChainBaseExtend
+
+```vue
+<template>
+  <ElAThoughtChain :list="list"></ElAThoughtChain>
+</template>
+
+<script setup lang="ts">
+import { ElAThoughtChain, ThoughtChainItem } from 'element-ai-vue'
+import { ref } from 'vue'
+
+const list = ref<ThoughtChainItem[]>([
+  {
+    key: 1,
+    title: '第一步：理解需求',
+    extended: true,
+    description:
+      '分析用户需求，明确目标和功能。分析用户需求，明确目标和功能。分析用户需求，明确目标和功能。分析用户需求，明确目标和功能。分析用户需求，明确目标和功能。分析用户需求，明确目标和功能。分析用户需求，明确目标和功能。分析用户需求，明确目标和功能。',
+    icon: `/assets/book-icon.png`,
+  },
+  {
+    key: 2,
+    title: '第二步：设计架构',
+    extended: true,
+    description: '制定系统架构，选择技术栈和工具。',
+    icon: `/assets/book-icon.png`,
+  },
+  {
+    key: 3,
+    title: '第三步：编码实现',
+    extended: true,
+    description: '根据设计文档进行编码，完成各项功能。',
+    icon: `/assets/search-icon.png`,
+  },
+  {
+    key: 4,
+    title: '第四步：测试调试',
+    extended: false,
+    description: '进行单元测试和集成测试，修复发现的问题。',
+    icon: `/assets/book-icon.png`,
+  },
+  {
+    key: 5,
+    title: '第五步：部署上线',
+    extended: false,
+    description: '将系统部署到生产环境，确保稳定运行。',
+    icon: `/assets/search-icon.png`,
+  },
+  {
+    key: 6,
+    title: '第五步：部署上线',
+    extended: undefined,
+    icon: `/assets/search-icon.png`,
+  },
+])
+</script>
+```
+
+:::
+
 ## 插槽自定义
 
 :::demo ThoughtChainSlot
@@ -234,8 +306,19 @@ import { ThoughtChainItem } from 'element-ai-vue'
 interface ThoughtChainItem {
   key?: string | number
   title: string
-  icon: string
+  /** 是否显示图片 */
+  icon?: string
+  /** 描述信息，支持插槽 */
   description?: string
+  /**
+   * true、false 会显示箭头控制收起和展开
+   * undfined 不会显示
+   */
+  extended?: boolean
+  /**
+   * 隐藏左侧边线
+   */
+  hiddenLine?: boolean
   [key: string]: any
 }
 ```

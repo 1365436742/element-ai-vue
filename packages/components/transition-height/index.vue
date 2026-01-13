@@ -7,7 +7,7 @@
     @leave="leave"
     @after-leave="afterLeave"
   >
-    <div v-show="show">
+    <div v-show="show" :class="className">
       <slot></slot>
     </div>
   </Transition>
@@ -22,12 +22,16 @@ defineProps({
     type: Boolean,
     required: true,
   },
+  className: {
+    type: String,
+    default: '',
+  },
 })
 const beforeEnter = (el: Element) => {
   const element = el as HTMLElement
   element.style.height = '0'
   element.style.overflow = 'hidden'
-  element.style.transition = 'height 0.3s ease-in-out'
+  element.style.transition = 'height 0.2s linear'
 }
 
 const enter = (el: Element) => {
@@ -50,7 +54,7 @@ const beforeLeave = (el: Element) => {
   const element = el as HTMLElement
   element.style.height = `${element.scrollHeight}px`
   element.style.overflow = 'hidden'
-  element.style.transition = 'height 0.3s ease-in-out'
+  element.style.transition = 'height 0.2s linear'
 }
 
 const leave = (el: Element) => {

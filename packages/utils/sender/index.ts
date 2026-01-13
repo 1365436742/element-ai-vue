@@ -59,8 +59,6 @@ export function handlePasteLogic(view: EditorView, event: ClipboardEvent) {
   // If there is rich text content, let tiptap handle it by default
   const types = event.clipboardData?.types || []
   const html = event.clipboardData?.getData('text/html')
-  // 如果包含 html 内容，并且 html 内容中包含 input-slot, select-slot, skill-slot 节点，则不阻断
-  // todo：增加用户扩展 slot 的判断
   if (
     (types.includes('text/html') &&
       ['<input-slot', '<select-slot', '<skill-slot'].some((slot) =>
@@ -85,28 +83,39 @@ export function handlePasteLogic(view: EditorView, event: ClipboardEvent) {
 
     /* Use tr to continue the subsequent pasting logic and solve the problem of unsuccessful line wrapping of content 
             pasted from certain web pages, such as the code of Feishu Documents */
-    const lines = text.split('\n')
+    const lines = text.replace(/\r/g, '').split('\n')
+    // 去除末尾的空行，防止全选粘贴时产生多余换行
+    while (lines.length > 1 && lines[lines.length - 1] === '') {
+      lines.pop()
+    }
     let finalCursorPos = null
     if (lines.length === 1) {
       // Insert the first line directly
-      // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
       tr = tr.insertText(lines[0]!, insertPosFrom || 1, insertPosTo)
       finalCursorPos = (insertPosFrom || 1) + lines[0].length
     } else {
       // other lines, insert one by one
-      // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
       tr = tr.insertText(lines[0]!, insertPosFrom, insertPosTo)
-      // eslint-disable-next-line prefer-destructuring
-      let pos = insertPosFrom + lines[0].length
+      let pos = (insertPosFrom || 1) + lines[0].length
       for (let i = 1; i < lines.length; i++) {
-        const paragraph = state.schema.nodes.paragraph?.create(
-          {},
+        if (state.schema.nodes.hardBreak) {
+          const hardBreak = state.schema.nodes.hardBreak.create()
+          tr = tr.insert(pos, hardBreak)
+          pos += hardBreak.nodeSize
+          if (lines[i]) {
+            tr = tr.insertText(lines[i], pos)
+            pos += lines[i].length
+          }
+        } else {
+          const paragraph = state.schema.nodes.paragraph?.create(
+            {},
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+            lines[i] ? state.schema.text(lines[i]!) : null
+          )
           // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
-          lines[i] ? state.schema.text(lines[i]!) : null
-        )
-        // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
-        tr = tr.insert(pos, paragraph!)
-        pos += paragraph?.nodeSize ?? 0
+          tr = tr.insert(pos, paragraph!)
+          pos += paragraph?.nodeSize ?? 0
+        }
       }
       finalCursorPos = pos // 粘贴多行时，光标应在最后插入内容末尾
     }

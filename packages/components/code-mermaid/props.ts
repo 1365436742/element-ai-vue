@@ -1,3 +1,4 @@
+import { DisabledZoom } from '@element-ai-vue/hooks'
 import { MermaidConfig } from 'mermaid'
 import { ExtractPropTypes, PropType } from 'vue'
 
@@ -6,17 +7,13 @@ export const codeMermaidtProps = {
     type: String as PropType<'web' | 'page'>,
     default: 'page',
   },
-  disabledWheelZoom: {
-    type: Boolean,
-    default: false,
-  },
-  disabledFullscreenWheelZoom: {
-    type: Boolean,
-    default: false,
-  },
   mermaidConfig: {
     type: Object as PropType<MermaidConfig>,
     default: () => ({}),
+  },
+  disabledZoom: {
+    type: Array as PropType<DisabledZoom>,
+    default: () => [],
   },
 }
 export type CodeMermaidPropsType = PropType<

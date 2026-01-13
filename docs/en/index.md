@@ -13,6 +13,9 @@ hero:
     - theme: alt
       text: Component Preview
       link: /en/base/markdown
+    - theme: alt
+      text: Demo Preview
+      link: https://element-ai-vue.com/base-demo/
 ---
 
 ::: code-group

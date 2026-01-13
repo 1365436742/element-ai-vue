@@ -36,14 +36,13 @@ When configuring `theme` and `mermaidConfig` individually, all components must h
 
 ## Props
 
-| Property                    | Type            | Required | Default | Description                                                                                        |
-| :-------------------------- | :-------------- | :------- | :------ | :------------------------------------------------------------------------------------------------- |
-| content                     | `string`        | Yes      | —       | Mermaid syntax content                                                                             |
-| disabledWheelZoom           | `boolean`       | No       | false   | Disable mouse wheel zoom and mouse movement (non-fullscreen mode)                                  |
-| disabledFullscreenWheelZoom | `boolean`       | No       | false   | Disable mouse wheel zoom and mouse movement in fullscreen mode                                     |
-| theme                       | `string`        | No       | `base`  | Mermaid theme, supports `default`, `forest`, `dark`, `neutral`, `base`                             |
-| fullscreenMode              | `string`        | No       | `page`  | Fullscreen mode, supports `web` (web fullscreen) and `page` (page fullscreen)                      |
-| mermaidConfig               | `MermaidConfig` | No       | `{}`    | Mermaid config object, see [Mermaid Config](https://mermaid.js.org/config/schema-docs/config.html) |
+| Property       | Type            | Required | Default | Description                                                                                                                                                                                                                  |
+| :------------- | :-------------- | :------- | :------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| content        | `string`        | Yes      | —       | Mermaid syntax content                                                                                                                                                                                                       |
+| disabledZoom   | `string`        | No       | []      | `wheel`: Disable wheel zoom<br>`fullscreenWheel`: Disable wheel zoom in fullscreen mode<br> `clickMove`: Disable click drag zoom<br> `fullscreenClickMove`: Disable click drag zoom in fullscreen mode<br>`all`: Disable all |
+| theme          | `string`        | No       | `base`  | Mermaid theme, supports `default`, `forest`, `dark`, `neutral`, `base`                                                                                                                                                       |
+| fullscreenMode | `string`        | No       | `page`  | Fullscreen mode, supports `web` (web fullscreen) and `page` (page fullscreen)                                                                                                                                                |
+| mermaidConfig  | `MermaidConfig` | No       | `{}`    | Mermaid config object, see [Mermaid Config](https://mermaid.js.org/config/schema-docs/config.html)                                                                                                                           |
 
 ## Slots
 

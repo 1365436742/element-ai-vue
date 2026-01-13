@@ -13,6 +13,9 @@ hero:
     - theme: alt
       text: 组件预览
       link: /zh/base/markdown
+    - theme: alt
+      text: demo预览
+      link: https://element-ai-vue.com/base-demo/
 ---
 
 ::: code-group

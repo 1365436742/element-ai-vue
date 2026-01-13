@@ -2,11 +2,9 @@ import { unified } from 'unified'
 import remarkParse from 'remark-parse'
 import remarkGfm from 'remark-gfm'
 import remarkBreaks from 'remark-breaks'
-import rehypeStringify from 'rehype-stringify'
 import remarkMath from 'remark-math'
 import remarkRehype from 'remark-rehype'
 import rehypeKatex from 'rehype-katex'
-import DOMPurify from 'dompurify'
 import { katexConfig } from '@element-ai-vue/constants'
 import {
   remarkAbbr,
@@ -15,6 +13,8 @@ import {
   remarkMarkHighlight,
   remarkSubSuper,
 } from './models'
+import { transformToVNode } from './hast-to-vnode'
+import type { VNode } from 'vue'
 
 export interface ProcessMarkdownOptions {
   onError?: (error: Error) => void
@@ -80,7 +80,7 @@ export const createBaseProcessor = (
 
 export interface MarkdownPart {
   type: 'html' | 'code'
-  content: string
+  content: string | VNode | null | any
   language?: string
   loading?: boolean
 }
@@ -96,17 +96,14 @@ export const processMarkdownToParts = async (
   } as any)) as any
   const parts: MarkdownPart[] = []
   let currentHtmlNodes: any[] = []
+
   const flushHtml = () => {
     if (currentHtmlNodes.length > 0) {
       const root = { type: 'root', children: currentHtmlNodes, data: tree.data }
-      const html = unified()
-        .use(rehypeStringify, { allowDangerousHtml: true })
-        .stringify(root as any)
+      const vnode = transformToVNode(root as any)
       parts.push({
         type: 'html',
-        content: DOMPurify.sanitize(html, {
-          ADD_ATTR: ['target'],
-        }),
+        content: vnode,
       })
       currentHtmlNodes = []
     }

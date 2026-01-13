@@ -36,14 +36,13 @@ CodeMermaid 是一个基于 [Mermaid](https://mermaid.js.org/) 的流程图渲�
 
 ## props
 
-| 属性名                      | 类型            | 必填 | 默认值 | 描述                                                                                           |
-| :-------------------------- | :-------------- | :--- | :----- | :--------------------------------------------------------------------------------------------- |
-| content                     | `string`        | 是   | —      | Mermaid 语法内容                                                                               |
-| disabledWheelZoom           | `boolean`       | 否   | false  | 禁用鼠标滚轮缩放、鼠标移动（非全屏模式下）                                                     |
-| disabledFullscreenWheelZoom | `boolean`       | 否   | false  | 禁用全屏模式下鼠标滚轮缩放、鼠标移动                                                           |
-| theme                       | `string`        | 否   | `base` | Mermaid 主题，支持 `default`, `forest`, `dark`, `neutral`, `base`                              |
-| fullscreenMode              | `string`        | 否   | `page` | 全屏模式，支持 `web` (网页全屏) 和 `page` (页面全屏)                                           |
-| mermaidConfig               | `MermaidConfig` | 否   | `{}`   | Mermaid 配置对象，详见 [Mermaid Config](https://mermaid.js.org/config/schema-docs/config.html) |
+| 属性名         | 类型            | 必填 | 默认值 | 描述                                                                                                                                                                          |
+| :------------- | :-------------- | :--- | :----- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| content        | `string`        | 是   | —      | Mermaid 语法内容                                                                                                                                                              |
+| disabledZoom   | `string`        | 否   | []     | `wheel`: 禁止滚轮缩放<br>`fullscreenWheel`: 全屏状态下禁止滚轮缩放<br> `clickMove`: 禁止点击拖拽缩放<br> `fullscreenClickMove`: 全屏状态下禁止点击拖拽缩放<br>`all`: 全部禁止 |
+| theme          | `string`        | 否   | `base` | Mermaid 主题，支持 `default`, `forest`, `dark`, `neutral`, `base`                                                                                                             |
+| fullscreenMode | `string`        | 否   | `page` | 全屏模式，支持 `web` (网页全屏) 和 `page` (页面全屏)                                                                                                                          |
+| mermaidConfig  | `MermaidConfig` | 否   | `{}`   | Mermaid 配置对象，详见 [Mermaid Config](https://mermaid.js.org/config/schema-docs/config.html)                                                                                |
 
 ## slot
 

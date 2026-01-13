@@ -6,6 +6,7 @@
     "package.json": "package-lock.json, pnpm*, .yarnrc*, yarn*, .editorconfig",
     ".oxlintrc.json": ".oxlint*, oxlint*",
     ".prettierrc": ".prettier*, prettier*",
+    "README.md": "README*.md",
     "vitest.config.mts": "vitest.setup.ts, vitest.workspace.ts"
   }
 }

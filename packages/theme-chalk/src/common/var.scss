@@ -38,8 +38,8 @@
   --#{$namespace}-bubble-list-color-text-secondary: rgba(255, 255, 255, 0.85);
   --#{$namespace}-scrollbar-thumb-bg-color: rgba(183, 184, 186, 0.15);
 
+  --#{$namespace}-arrow-color: #fff;
   color: #fff;
-  background-color: #000;
 }
 
 :root {
@@ -83,6 +83,8 @@
     0 0 4px 0 rgba(0, 0, 0, 0.02), 0 10px 16px 0 rgba(47, 53, 64, 0.14);
   --#{$namespace}-bubble-list-color-text-secondary: rgba(0, 0, 0, 0.85);
   --#{$namespace}-scrollbar-thumb-bg-color: rgba(17, 25, 37, 0.15);
+
+  --#{$namespace}-arrow-color: #000000;
 }
 
 @mixin dark-markdown {
