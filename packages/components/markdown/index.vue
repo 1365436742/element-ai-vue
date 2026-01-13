@@ -39,7 +39,7 @@
       </slot>
       <VNodeRenderer
         v-else
-        :class="[ns.e('markdown-body'), 'markdown-body']"
+        :class="ns.e('markdown-body')"
         :content="part.content"
       />
     </template>

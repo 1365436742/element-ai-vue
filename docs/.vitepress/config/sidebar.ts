@@ -50,7 +50,10 @@ export const zhSidebar: DefaultTheme.Sidebar = [
   },
   {
     text: '实验室',
-    items: [{ text: 'ppt 编辑', link: '/zh/base/ppt' }],
+    items: [
+      { text: 'ppt 编辑', link: '/zh/base/ppt' },
+      { text: 'word 编辑', link: '/zh/base/word' },
+    ],
   },
 ]
 export const enSidebar: DefaultTheme.Sidebar = [
