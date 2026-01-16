@@ -4,7 +4,6 @@
 
 @include b(word) {
   @include e(editor) {
-
     &.ProseMirror-focused {
       outline: none;
     }

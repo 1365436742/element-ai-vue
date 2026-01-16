@@ -7,6 +7,8 @@ import remarkRehype from 'remark-rehype'
 import rehypeKatex from 'rehype-katex'
 import rehypeStringify from 'rehype-stringify'
 import { katexConfig } from '@element-ai-vue/constants'
+import type { VNode } from 'vue'
+import DOMPurify from 'dompurify'
 import {
   remarkAbbr,
   remarkATargetBlank,
@@ -15,7 +17,6 @@ import {
   remarkSubSuper,
 } from './models'
 import { transformToVNode } from './hast-to-vnode'
-import type { VNode } from 'vue'
 
 export interface ProcessMarkdownOptions {
   onError?: (error: Error) => void
@@ -196,4 +197,21 @@ export const createParsHtmlProcessor = (
 ) => {
   const baseProcessor = createBaseProcessor(middlewarePlugins)
   return baseProcessor.use(rehypeStringify, { allowDangerousHtml: true })
+}
+
+export const processBaseMarkdown = async (
+  processor: ReturnType<typeof createParsHtmlProcessor>,
+  content: string
+) => {
+  try {
+    // 预处理：转换 LaTeX 格式
+    const processedContent = katexProcess(content)
+    const result = await processor.process(processedContent)
+    // 配置 DOMPurify 以保留 KaTeX 所需的属性和元素
+    return DOMPurify.sanitize(result.toString(), {
+      ADD_ATTR: ['target'],
+    })
+  } catch (error: any) {
+    return `<div class="error">处理错误: ${error.message}</div>`
+  }
 }

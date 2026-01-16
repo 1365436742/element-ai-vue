@@ -4,10 +4,6 @@ import { ExtractPropTypes, PropType } from 'vue'
 // import type { EditorView } from 'prosemirror-view'
 
 export const baseWordInputProps = {
-  modelValue: {
-    type: String,
-    default: '',
-  },
   placeholder: {
     type: String,
     default: '',
@@ -27,7 +23,7 @@ export const baseWordInputProps = {
 }
 
 export type BaseWordInputEmitsType = {
-  (e: 'update:modelValue', value: string): void
+  (e: 'create'): void
   (e: 'paste', event: ClipboardEvent): void
   (e: 'pasteFile', files: File[]): void
   (e: 'blur'): void

@@ -1,12 +1,16 @@
 <template>
   <div :class="ns.b()">
-    <baseWordInput v-model="content" />
+    <baseWordInput
+      v-bind="{ ...props, theme }"
+      ref="baseWordInputRef"
+      @create="onCreate"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
 import { useNamespace, useTheme } from '@element-ai-vue/hooks'
-import { computed, ref } from 'vue'
+import { computed, useTemplateRef } from 'vue'
 import baseWordInput from './base-word-input/index.vue'
 import { wordProps } from './props'
 
@@ -19,7 +23,11 @@ const props = defineProps({
 const ns = useNamespace('word')
 const themeRef = computed(() => props.theme)
 const { theme } = useTheme(themeRef)
-const content = ref(`# 一级标题
+
+const baseWordInputRef = useTemplateRef('baseWordInputRef')
+
+const onCreate = () => {
+  baseWordInputRef.value?.setMarkdownContent(`# 一级标题
 ## 二级标题
 ### 三级标题
 #### 四级标题
@@ -71,7 +79,6 @@ g \\times h &= i \\\\
 \\end{aligned}
 $$
 
-
-
 `)
+}
 </script>

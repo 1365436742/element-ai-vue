@@ -1,5 +1,11 @@
 <template>
-  <div :class="[ns.b(), ns.e('markdown-body')]">
+  <div
+    :class="[
+      ns.b(),
+      ns.e('markdown-body'),
+      theme === 'dark' ? ns.m('dark') : '',
+    ]"
+  >
     <EditorContent :editor="editor" />
   </div>
 </template>
@@ -8,7 +14,7 @@
 defineOptions({
   name: 'ElABaseWordInput',
 })
-import { computed, watch } from 'vue'
+import { computed, PropType, watch } from 'vue'
 import { useEditor, EditorContent } from '@tiptap/vue-3'
 import StarterKit from '@tiptap/starter-kit'
 import Placeholder from '@tiptap/extension-placeholder'
@@ -17,22 +23,26 @@ import { Table } from '@tiptap/extension-table'
 import { TableRow } from '@tiptap/extension-table-row'
 import { TableCell } from '@tiptap/extension-table-cell'
 import { TableHeader } from '@tiptap/extension-table-header'
-import DOMPurify from 'dompurify'
-import { BaseWordInputEmitsType, baseWordInputProps } from './props'
 import {
   createParsHtmlProcessor,
   defaultCustomPlugins,
   getParseFile,
-  katexProcess,
+  KatexBlock,
+  KatexInline,
+  processBaseMarkdown,
 } from '@element-ai-vue/utils'
 import { useNamespace } from '@element-ai-vue/hooks'
 import { mergeWith } from 'lodash-es'
-import { KatexBlock, KatexInline } from './extensions'
+import { BaseWordInputEmitsType, baseWordInputProps } from './props'
 
 const ns = useNamespace('markdown')
 const baseNs = useNamespace('word')
 
 const props = defineProps({
+  theme: {
+    type: String as PropType<'light' | 'dark'>,
+    default: '',
+  },
   ...baseWordInputProps,
 })
 
@@ -43,18 +53,10 @@ const processor = computed(() => {
   return createParsHtmlProcessor(plugins)
 })
 
-const processBaseMarkdown = async (content: string) => {
-  try {
-    // 预处理：转换 LaTeX 格式
-    const processedContent = katexProcess(content)
-    const result = await processor.value.process(processedContent)
-    // 配置 DOMPurify 以保留 KaTeX 所需的属性和元素
-    return DOMPurify.sanitize(result.toString(), {
-      ADD_ATTR: ['target'],
-    })
-  } catch (error: any) {
-    return `<div class="error">处理错误: ${error.message}</div>`
-  }
+const setMarkdownContent = async (content: string) => {
+  if (!editor.value || !processor.value) return
+  const html = await processBaseMarkdown(processor.value, content)
+  editor.value.commands.setContent(html)
 }
 
 const editor = useEditor({
@@ -62,10 +64,6 @@ const editor = useEditor({
   editable: !props.disabled,
   extensions: [
     StarterKit,
-    Image.configure({
-      inline: true,
-      allowBase64: true,
-    }),
     Placeholder.configure({
       placeholder: () => props.placeholder,
       showOnlyWhenEditable: false,
@@ -75,6 +73,10 @@ const editor = useEditor({
       HTMLAttributes: {
         class: 'tiptap-table',
       },
+    }),
+    Image.configure({
+      inline: true,
+      allowBase64: true,
     }),
     TableRow,
     TableCell,
@@ -89,6 +91,7 @@ const editor = useEditor({
     },
   },
   onCreate() {
+    emits('create')
     // editor.value?.commands.setContent(props.modelValue || '')
   },
   onUpdate() {
@@ -106,16 +109,6 @@ const editor = useEditor({
 })
 
 watch(
-  [() => props.modelValue, () => processor.value, () => editor.value],
-  async () => {
-    if (props.modelValue !== undefined && editor.value) {
-      const html = await processBaseMarkdown(props.modelValue)
-      editor.value?.commands.setContent(html)
-    }
-  }
-)
-
-watch(
   () => props.disabled,
   () => {
     editor.value?.setEditable(!props.disabled)
@@ -129,17 +122,8 @@ watch(
   }
 )
 
-watch(
-  () => props.modelValue,
-  (newContent) => {
-    // const isSame = editor.value?.getHTML() === newContent
-    // // editor.value?.storage.markdown.
-    // if (isSame) return
-    // editor.value?.commands.setContent(newContent)
-  }
-)
-
 defineExpose({
   editor,
+  setMarkdownContent,
 })
 </script>
