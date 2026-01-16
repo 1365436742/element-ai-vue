@@ -15,6 +15,10 @@
     "@element-ai-vue/directives": "workspace:^",
     "@element-ai-vue/hooks": "workspace:^",
     "@element-ai-vue/utils": "workspace:^",
+    "@tiptap/extension-table": "^3.15.3",
+    "@tiptap/extension-table-cell": "^3.15.3",
+    "@tiptap/extension-table-header": "^3.15.3",
+    "@tiptap/extension-table-row": "^3.15.3",
     "@vueuse/core": "catalog:",
     "csstype": "catalog:",
     "lodash-unified": "catalog:"

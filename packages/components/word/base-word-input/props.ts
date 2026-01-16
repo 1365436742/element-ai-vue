@@ -1,3 +1,4 @@
+import { MiddlewarePluginItem } from '@element-ai-vue/utils'
 import { Extensions } from '@tiptap/vue-3'
 import { ExtractPropTypes, PropType } from 'vue'
 // import type { EditorView } from 'prosemirror-view'
@@ -17,6 +18,10 @@ export const baseWordInputProps = {
   },
   extensions: {
     type: Array as PropType<Extensions>,
+    default: () => [],
+  },
+  remarkPlugins: {
+    type: Array as PropType<MiddlewarePluginItem[]>,
     default: () => [],
   },
 }

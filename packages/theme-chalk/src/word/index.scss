@@ -3,16 +3,19 @@
 @use '../common/var' as *;
 
 @include b(word) {
-  &.ProseMirror-focused {
-    outline: none;
-  }
+  @include e(editor) {
 
-  p.is-editor-empty:first-child::before {
-    content: attr(data-placeholder);
-    position: absolute;
-    color: #adb5bd;
-    pointer-events: none;
-    font-size: 16px;
-    line-height: 24px;
+    &.ProseMirror-focused {
+      outline: none;
+    }
+
+    p.is-editor-empty:first-child::before {
+      content: attr(data-placeholder);
+      position: absolute;
+      color: #adb5bd;
+      pointer-events: none;
+      font-size: 16px;
+      line-height: 24px;
+    }
   }
 }

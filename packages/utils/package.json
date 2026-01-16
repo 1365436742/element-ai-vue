@@ -10,7 +10,9 @@
   "dependencies": {
     "@element-ai-vue/constants": "workspace:^",
     "@vueuse/core": "catalog:",
-    "lodash-unified": "catalog:"
+    "lodash-unified": "catalog:",
+    "rehype-parse": "^9.0.1",
+    "rehype-remark": "^10.0.1"
   },
   "devDependencies": {
     "@vue/shared": "catalog:",

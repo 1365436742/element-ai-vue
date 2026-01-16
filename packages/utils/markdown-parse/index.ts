@@ -5,6 +5,7 @@ import remarkBreaks from 'remark-breaks'
 import remarkMath from 'remark-math'
 import remarkRehype from 'remark-rehype'
 import rehypeKatex from 'rehype-katex'
+import rehypeStringify from 'rehype-stringify'
 import { katexConfig } from '@element-ai-vue/constants'
 import {
   remarkAbbr,
@@ -187,4 +188,12 @@ export const katexProcess = (content: string): string => {
     }
   )
   return resultContent
+}
+
+/** 把md解析成字符串的html内容 */
+export const createParsHtmlProcessor = (
+  middlewarePlugins: MiddlewarePluginItem[]
+) => {
+  const baseProcessor = createBaseProcessor(middlewarePlugins)
+  return baseProcessor.use(rehypeStringify, { allowDangerousHtml: true })
 }

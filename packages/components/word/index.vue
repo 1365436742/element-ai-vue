@@ -58,5 +58,20 @@ flowchart TD
 # js代码块
 \`\`\`javascript
 console.log(123); 
-\`\`\``)
+\`\`\`
+
+圆的面积公式是$ S = \\pi r^2 $，其中 $ r $ 是半径。
+
+$$
+\\begin{aligned}
+a + b &= c \\\\
+d - e &= f \\\\
+g \\times h &= i \\\\
+\\frac{j}{k} &= l
+\\end{aligned}
+$$
+
+
+
+`)
 </script>

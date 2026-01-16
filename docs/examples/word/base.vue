@@ -1,7 +1,9 @@
 <template>
   <div class="base-box">
     <ShadowBox>
-      <ElAWord></ElAWord>
+      <div style="padding: 6px; border: 1px solid #ccc">
+        <ElAWord></ElAWord>
+      </div>
     </ShadowBox>
   </div>
 </template>
