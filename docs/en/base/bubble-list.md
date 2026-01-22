@@ -31,9 +31,9 @@ Smart chat scroll container component, designed specifically for conversation sc
 
 ## Props
 
-| Property            | Description                                                     | Type     | Default |
-| ------------------- | --------------------------------------------------------------- | -------- | ------- |
-| bottomThreshold     | Distance threshold to determine "scrolled to bottom" (px)       | `number` | 30      |
+| Property        | Description                                               | Type     | Default |
+| --------------- | --------------------------------------------------------- | -------- | ------- |
+| bottomThreshold | Distance threshold to determine "scrolled to bottom" (px) | `number` | 30      |
 
 ## Ref
 
