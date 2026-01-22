@@ -33,8 +33,7 @@ Smart chat scroll container component, designed specifically for conversation sc
 
 | Property            | Description                                                     | Type     | Default |
 | ------------------- | --------------------------------------------------------------- | -------- | ------- |
-| backButtonThreshold | Scroll distance threshold to trigger back-to-bottom button (px) | `number` | 80      |
-| bottomThreshold     | Distance threshold to determine "scrolled to bottom" (px)       | `number` | 20      |
+| bottomThreshold     | Distance threshold to determine "scrolled to bottom" (px)       | `number` | 30      |
 
 ## Ref
 

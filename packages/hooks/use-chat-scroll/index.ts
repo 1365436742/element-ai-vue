@@ -1,9 +1,8 @@
 import { useScroll, useEventListener, useMutationObserver } from '@vueuse/core'
 import { throttle } from 'lodash-es'
-import { nextTick, ref, Ref, watch } from 'vue'
+import { computed, ref, Ref, watch } from 'vue'
 
 interface ChatScrollOptions {
-  backButtonThreshold?: number
   bottomThreshold?: number
 }
 
@@ -12,7 +11,7 @@ export const useChatScroll = (
   resizeContentRef: Ref<HTMLElement | null>,
   options?: ChatScrollOptions
 ) => {
-  const { bottomThreshold = 20, backButtonThreshold = 80 } = options || {}
+  const { bottomThreshold = 30 } = options || {}
 
   const scrollInfo = useScroll(scrollContentRef, {
     behavior: 'smooth',
@@ -20,65 +19,39 @@ export const useChatScroll = (
       bottom: bottomThreshold,
     },
   })
-  const { arrivedState, y } = scrollInfo
+  const { arrivedState } = scrollInfo
   /** 是否停止自动滚动 */
   const stopAutoScroll = ref(false)
   /** 是否显示滚动到底部的按钮 */
-  const hiddenBackButton = ref(true)
-
-  let touchStartY = 0
-  let touchStartTime = 0
+  const hiddenBackButton = computed(() => arrivedState.bottom)
+  /** 控制，如果smooth在滚动中。不要立刻滚动，等滚动结束后再滚动 */
+  let _smoothLoading = false
 
   // 取消自动滚动
   function cacleAutoScroll() {
-    if (!arrivedState.bottom) {
-      stopAutoScroll.value = true
-    }
-  }
-
-  function onTouchStart(e: TouchEvent) {
-    touchStartY = e.touches[0].clientY
-    touchStartTime = Date.now()
-  }
-
-  function onTouchMove(e: TouchEvent) {
-    const currentY = e.touches[0].clientY
-    const deltaY = touchStartY - currentY
-    const deltaTime = Date.now() - touchStartTime
-
-    // 如果向上滑动（deltaY > 0）且滑动距离超过阈值，并且不在底部，则停止自动滚动
-    if (deltaY > 10 && deltaTime > 100) {
-      cacleAutoScroll()
-    }
+    stopAutoScroll.value = true
   }
 
   useEventListener(scrollContentRef, 'wheel', cacleAutoScroll)
-
   /** 处理ios问题 ，在惯性滚动期间，scroll 事件可能延迟触发或在滚动停止后才触发*/
-  useEventListener(scrollContentRef, 'touchstart', onTouchStart)
-  useEventListener(scrollContentRef, 'touchmove', onTouchMove)
+  useEventListener(scrollContentRef, 'touchmove', cacleAutoScroll)
 
   const autoScrollToBottom = async (
     behavior: 'smooth' | 'instant' = 'instant'
   ) => {
     if (stopAutoScroll.value) return
-    await nextTick()
+    if (behavior === 'smooth') {
+      _smoothLoading = true
+    }
     scrollContentRef.value?.scrollTo({
       top: scrollContentRef.value?.scrollHeight,
       behavior,
     })
+    setTimeout(() => {
+      _smoothLoading = false
+    }, 200)
   }
 
-  /** 更新滚动到底部的按钮，是否显示 */
-  const updateIsScrollToBottom = () => {
-    if (scrollContentRef.value) {
-      const { scrollHeight, clientHeight, scrollTop } = scrollContentRef.value
-      hiddenBackButton.value =
-        Math.abs(scrollHeight - clientHeight - scrollTop) <= backButtonThreshold
-    }
-  }
-
-  watch(() => y.value, updateIsScrollToBottom)
   watch(
     () => arrivedState.bottom,
     () => {
@@ -87,13 +60,11 @@ export const useChatScroll = (
       }
     }
   )
+
   useMutationObserver(
     resizeContentRef,
     throttle(
       () => {
-        nextTick(() => {
-          updateIsScrollToBottom()
-        })
         if (stopAutoScroll.value) return
         autoScrollToBottom()
       },

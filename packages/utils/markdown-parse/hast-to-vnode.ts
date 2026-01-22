@@ -23,7 +23,7 @@ export function transformToVNode(
   ctx: Context = { ...DEFAULT_CONTEXT }
 ): VNode | string | null {
   if (node.type === 'root') {
-    return h('div', renderChildren(node.children, ctx))
+    return h(Fragment, renderChildren(node.children, ctx))
   }
 
   if (node.type === 'text') {
