@@ -25,6 +25,7 @@ export const useChatScroll = (
   /** 是否显示滚动到底部的按钮 */
   const hiddenBackButton = computed(() => arrivedState.bottom)
   /** 控制，如果smooth在滚动中。不要立刻滚动，等滚动结束后再滚动 */
+  // @ts-ignore
   let _smoothLoading = false
 
   // 取消自动滚动
