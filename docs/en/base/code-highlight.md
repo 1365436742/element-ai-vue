@@ -42,7 +42,7 @@ Supports slot definitions. When customizing the header, you need to handle theme
 :::
 
 ::: tip
-Default supported languages: `javascript`, `typescript`, `vue`, `html`, `css`, `json`, `bash`, `shell`, `yaml`, `markdown`, `python`, `java`, `go`, `sql`, `rust`, `mermaid`
+Default supported languages: `javascript`, `typescript`, `vue`, `html`, `css`, `json`, `bash`, `shell`, `yaml`, `markdown`, `python`, `java`, `go`, `sql`, `rust`, `mermaid`, `c`,`c++`,`c#`
 :::
 
 ## Props
