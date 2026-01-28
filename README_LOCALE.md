@@ -6,4 +6,3 @@ Oxc、Prettier - Code formatter
 
 6. sender给高度和或者行数设置固定高度
 7. 添加更多按钮的代码实现，宽度不够更多显示
-8. 代码支持显示代码行数、transformers传入

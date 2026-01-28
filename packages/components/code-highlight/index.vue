@@ -33,7 +33,10 @@
       </div>
     </slot>
     <TransitionHeight :show="computedExpanded">
-      <div :class="ns.e('content')" v-html="htmlContent"></div>
+      <div
+        :class="[ns.e('content'), ns.is('line-numbers', props.showLineNumbers)]"
+        v-html="htmlContent"
+      ></div>
     </TransitionHeight>
   </div>
 </template>

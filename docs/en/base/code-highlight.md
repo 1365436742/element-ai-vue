@@ -31,6 +31,16 @@ Supports slot definitions. When customizing the header, you need to handle theme
 
 :::
 
+## Show Line Numbers
+
+:::demo CodeHighlightLineNumbers
+
+```vue
+<!-- @include: ../../examples/code-highlight/line-numbers.vue -->
+```
+
+:::
+
 ## Individual Theme Configuration
 
 :::demo CodeHighlightDark
@@ -54,6 +64,7 @@ Default supported languages: `javascript`, `typescript`, `vue`, `html`, `css`, `
 | theme           | `string`            | No       | `light` | Highlight theme, defaults support `light`, `dark`                                  |
 | extendLanguages | `BundledLanguage[]` | No       | `[]`    | Additional languages to load, see [Shiki Languages](https://shiki.style/languages) |
 | extendThemes    | `BundledTheme[]`    | No       | `[]`    | Additional themes to load, see [Shiki Themes](https://shiki.style/themes)          |
+| showLineNumbers | `Boolean`           | No       | `false` | Controls whether to show line numbers                                              |
 
 ## Slots
 

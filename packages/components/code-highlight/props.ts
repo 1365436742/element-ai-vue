@@ -14,6 +14,10 @@ export const codeHighlightProps = {
     type: Boolean,
     default: undefined,
   },
+  showLineNumbers: {
+    type: Boolean,
+    default: false,
+  },
 }
 
 export type CodeHighlightEmitsType = {

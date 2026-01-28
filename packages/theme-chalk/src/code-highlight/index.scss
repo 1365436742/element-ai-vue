@@ -81,5 +81,25 @@
       padding: 14px;
       overflow-x: auto;
     }
+    &.is-line-numbers {
+      pre {
+        padding-left: 0;
+      }
+      code {
+        counter-reset: line;
+      }
+      .line {
+        &::before {
+          counter-increment: line;
+          content: counter(line);
+          display: inline-block;
+          width: 2em;
+          margin-right: 1em;
+          text-align: right;
+          color: rgba(0, 0, 0, 0.3);
+          user-select: none;
+        }
+      }
+    }
   }
 }

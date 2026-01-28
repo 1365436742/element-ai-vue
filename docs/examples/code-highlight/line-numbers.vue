@@ -1,11 +1,9 @@
 <template>
-  <div :style="{ backgroundColor: '#1d1e1f', borderRadius: '6px' }">
-    <ElACodeHighlight
-      language="javascript"
-      :content="content"
-      theme="dark"
-    ></ElACodeHighlight>
-  </div>
+  <ElACodeHighlight
+    language="javascript"
+    :content="content"
+    :show-line-numbers="true"
+  ></ElACodeHighlight>
 </template>
 
 <script setup lang="ts">
