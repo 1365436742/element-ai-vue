@@ -369,30 +369,21 @@ function updateComponentTs(kebabName: string, pascalName: string): void {
     return
   }
 
-  // 添加 import 语句
+  // 添加 import 语句 - 在最后一个 @element-ai-vue/components import 后面插入
   const importLine = `import { ${componentName} } from '@element-ai-vue/components/${kebabName}'`
-  const lastImportMatch = content.match(
-    /import .* from '@element-ai-vue\/components\/[^']+'\n/
-  )
-  if (lastImportMatch) {
-    const insertPos =
-      content.lastIndexOf(lastImportMatch[0]) + lastImportMatch[0].length
-    content =
-      content.slice(0, insertPos) + importLine + '\n' + content.slice(insertPos)
+  const importRegex =
+    /import \{ \w+ \} from '@element-ai-vue\/components\/[\w-]+'/g
+  const imports = content.match(importRegex)
+  if (imports && imports.length > 0) {
+    const lastImport = imports[imports.length - 1]
+    content = content.replace(lastImport, lastImport + '\n' + importLine)
   }
 
-  // 添加到导出数组
-  const exportArrayMatch = content.match(
-    /export default \[([\s\S]*?)\] as Plugin\[\]/
-  )
-  if (exportArrayMatch) {
-    const arrayContent = exportArrayMatch[1]
-    const lastItem = arrayContent.trim().split(',').pop()?.trim()
-    if (lastItem && !arrayContent.includes(componentName)) {
-      const newArrayContent =
-        arrayContent.trimEnd() + `,\n  ${componentName},\n`
-      content = content.replace(exportArrayMatch[1], newArrayContent)
-    }
+  // 添加到导出数组 - 在最后一个元素后面插入
+  const arrayRegex = /(export default \[[\s\S]*?)(,?\n\] as Plugin\[\])/
+  const arrayMatch = content.match(arrayRegex)
+  if (arrayMatch && !arrayMatch[1].includes(componentName)) {
+    content = content.replace(arrayRegex, `$1,\n  ${componentName}$2`)
   }
 
   fs.writeFileSync(COMPONENT_TS_FILE, content)
