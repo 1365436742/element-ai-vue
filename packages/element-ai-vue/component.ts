@@ -11,6 +11,7 @@ import { ElASender } from '@element-ai-vue/components/sender'
 import { ElAThinking } from '@element-ai-vue/components/thinking'
 import { ElAThoughtChain } from '@element-ai-vue/components/thought-chain'
 import { ElAConfigProvider } from '@element-ai-vue/components/config-provider'
+import { ElAOverflowToolbar } from '@element-ai-vue/components/overflow-toolbar'
 
 import type { Plugin } from 'vue'
 
@@ -28,4 +29,5 @@ export default [
   ElAThinking,
   ElAThoughtChain,
   ElAConfigProvider,
+  ElAOverflowToolbar,
 ] as Plugin[]

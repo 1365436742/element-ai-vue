@@ -14,6 +14,7 @@ declare module 'vue' {
     ElAThoughtChain: (typeof import('element-ai-vue'))['ElAThoughtChain']
     ElAConfigProvider: (typeof import('element-ai-vue'))['ElAConfigProvider']
     ElAPpt: (typeof import('element-ai-vue'))['ElAPpt']
+    ElAOverflowToolbar: (typeof import('element-ai-vue'))['ElAOverflowToolbar']
   }
 }
 

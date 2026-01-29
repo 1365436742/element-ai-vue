@@ -1,3 +1,4 @@
+// oxlint-disable no-unused-vars
 // oxlint-disable no-console
 import * as fs from 'fs'
 import * as path from 'path'
@@ -9,11 +10,40 @@ const COMPONENTS_DIR = path.join(ROOT_DIR, 'packages/components')
 const THEME_DIR = path.join(ROOT_DIR, 'packages/theme-chalk/src')
 const DOCS_DIR = path.join(ROOT_DIR, 'docs')
 const SIDEBAR_FILE = path.join(ROOT_DIR, 'docs/.vitepress/config/sidebar.ts')
+const COMPONENT_TS_FILE = path.join(
+  ROOT_DIR,
+  'packages/element-ai-vue/component.ts'
+)
+const GLOBAL_DTS_FILE = path.join(ROOT_DIR, 'typings/global.d.ts')
 
 // 组件类型配置 (从 sidebar.ts 的 zhSidebar 提取)
 interface CategoryItem {
   text: string
+  enText: string
   parent?: string
+}
+
+// 解析 sidebar 获取分类名列表
+function parseSidebarCategories(sidebarContent: string): string[] {
+  const categories: string[] = []
+  const lines = sidebarContent.split('\n')
+  let depth = 0
+
+  for (const line of lines) {
+    depth += (line.match(/{/g) || []).length
+    depth -= (line.match(/}/g) || []).length
+
+    const textMatch = line.match(/text:\s*['"]([^'"]+)['"]/)
+    const linkMatch = line.match(/link:\s*['"]([^'"]+)['"]/)
+
+    if (textMatch && !linkMatch) {
+      const text = textMatch[1]
+      if (text) {
+        categories.push(text)
+      }
+    }
+  }
+  return categories
 }
 
 // 解析 sidebar.ts 获取组件分类
@@ -23,49 +53,27 @@ function getComponentCategories(): CategoryItem[] {
 
   // 匹配 zhSidebar 部分
   const zhSidebarMatch = content.match(
-    /export const zhSidebar[\s\S]*?=\s*\[([\s\S]*?)\]\s*(?:export|$)/
+    /export const zhSidebar[\s\S]*?=\s*\[([\s\S]*?)\]\s*export/
   )
-  if (!zhSidebarMatch) {
+  // 匹配 enSidebar 部分
+  const enSidebarMatch = content.match(
+    /export const enSidebar[\s\S]*?=\s*\[([\s\S]*?)\]\s*$/
+  )
+
+  if (!zhSidebarMatch || !enSidebarMatch) {
     console.error('无法解析 sidebar.ts')
     return categories
   }
 
-  const sidebarContent = zhSidebarMatch[1]
+  const zhCategories = parseSidebarCategories(zhSidebarMatch[1])
+  const enCategories = parseSidebarCategories(enSidebarMatch[1])
 
-  // 匹配顶级分类
-  // oxlint-disable-next-line no-unused-vars
-  const topLevelRegex = /{\s*text:\s*['"]([^'"]+)['"]/g
-  // oxlint-disable-next-line no-unused-vars
-  let match
-
-  // 简单解析：提取所有非空的 text
-  const lines = sidebarContent.split('\n')
-  let currentParent = ''
-  let depth = 0
-
-  for (const line of lines) {
-    // 跟踪嵌套深度
-    depth += (line.match(/{/g) || []).length
-    depth -= (line.match(/}/g) || []).length
-
-    const textMatch = line.match(/text:\s*['"]([^'"]+)['"]/)
-    const linkMatch = line.match(/link:\s*['"]([^'"]+)['"]/)
-
-    if (textMatch && !linkMatch) {
-      // 这是一个分类（没有 link）
-      const text = textMatch[1]
-      if (text) {
-        if (depth <= 3) {
-          // 顶级分类
-          currentParent = ''
-          categories.push({ text })
-        } else {
-          // 子分类
-          categories.push({ text, parent: currentParent })
-        }
-        currentParent = text
-      }
-    }
+  // 通过索引对应中英文分类
+  for (let i = 0; i < zhCategories.length; i++) {
+    categories.push({
+      text: zhCategories[i],
+      enText: enCategories[i] || zhCategories[i],
+    })
   }
 
   return categories.filter((c) => c.text !== '')
@@ -130,7 +138,11 @@ async function select(
 }
 
 // 生成组件文件
-function generateComponentFiles(componentName: string, category: string): void {
+function generateComponentFiles(
+  componentName: string,
+  category: string,
+  enCategory: string
+): void {
   const kebabName = toKebabCase(componentName)
   const pascalName = toPascalCase(componentName)
   const camelName = toCamelCase(componentName)
@@ -262,7 +274,13 @@ import { ElA${pascalName} } from 'element-ai-vue'
   }
 
   // 10. 更新 sidebar.ts
-  updateSidebar(kebabName, pascalName, category)
+  updateSidebar(kebabName, pascalName, category, enCategory)
+
+  // 11. 更新 packages/element-ai-vue/component.ts
+  updateComponentTs(kebabName, pascalName)
+
+  // 12. 更新 typings/global.d.ts
+  updateGlobalDts(pascalName)
 
   console.log(`
 ✅ 组件 ${pascalName} 创建成功！
@@ -281,6 +299,8 @@ import { ElA${pascalName} } from 'element-ai-vue'
 
 已更新:
   📄 packages/components/index.ts
+  📄 packages/element-ai-vue/component.ts
+  📄 typings/global.d.ts
   📄 docs/.vitepress/config/sidebar.ts
 `)
 }
@@ -289,7 +309,8 @@ import { ElA${pascalName} } from 'element-ai-vue'
 function updateSidebar(
   kebabName: string,
   pascalName: string,
-  category: string
+  category: string,
+  enCategory: string
 ): void {
   let content = fs.readFileSync(SIDEBAR_FILE, 'utf-8')
 
@@ -317,17 +338,6 @@ function updateSidebar(
     return `${start}${newItems}${end}`
   })
 
-  // 获取英文对应的分类名
-  const categoryMap: Record<string, string> = {
-    通用组件: 'Common Components',
-    基础组件: 'Basic Components',
-    文件组件: 'File Components',
-    工具: 'Tools',
-    实验室: 'Laboratory',
-  }
-
-  const enCategory = categoryMap[category] || category
-
   // 更新英文 sidebar
   const enPattern = new RegExp(
     `(text:\\s*['"]${enCategory}['"][\\s\\S]*?items:\\s*\\[)([\\s\\S]*?)(\\]\\s*,?\\s*})`,
@@ -349,6 +359,70 @@ function updateSidebar(
   fs.writeFileSync(SIDEBAR_FILE, content)
 }
 
+// 更新 packages/element-ai-vue/component.ts
+function updateComponentTs(kebabName: string, pascalName: string): void {
+  let content = fs.readFileSync(COMPONENT_TS_FILE, 'utf-8')
+  const componentName = `ElA${pascalName}`
+
+  // 检查是否已存在
+  if (content.includes(`import { ${componentName} }`)) {
+    return
+  }
+
+  // 添加 import 语句
+  const importLine = `import { ${componentName} } from '@element-ai-vue/components/${kebabName}'`
+  const lastImportMatch = content.match(
+    /import .* from '@element-ai-vue\/components\/[^']+'\n/
+  )
+  if (lastImportMatch) {
+    const insertPos =
+      content.lastIndexOf(lastImportMatch[0]) + lastImportMatch[0].length
+    content =
+      content.slice(0, insertPos) + importLine + '\n' + content.slice(insertPos)
+  }
+
+  // 添加到导出数组
+  const exportArrayMatch = content.match(
+    /export default \[([\s\S]*?)\] as Plugin\[\]/
+  )
+  if (exportArrayMatch) {
+    const arrayContent = exportArrayMatch[1]
+    const lastItem = arrayContent.trim().split(',').pop()?.trim()
+    if (lastItem && !arrayContent.includes(componentName)) {
+      const newArrayContent =
+        arrayContent.trimEnd() + `,\n  ${componentName},\n`
+      content = content.replace(exportArrayMatch[1], newArrayContent)
+    }
+  }
+
+  fs.writeFileSync(COMPONENT_TS_FILE, content)
+}
+
+// 更新 typings/global.d.ts
+function updateGlobalDts(pascalName: string): void {
+  let content = fs.readFileSync(GLOBAL_DTS_FILE, 'utf-8')
+  const componentName = `ElA${pascalName}`
+
+  // 检查是否已存在
+  if (content.includes(`${componentName}:`)) {
+    return
+  }
+
+  // 在 GlobalComponents 接口中添加新组件
+  const interfaceMatch = content.match(
+    /(export interface GlobalComponents \{[\s\S]*?)(  \})/
+  )
+  if (interfaceMatch) {
+    const newLine = `    ${componentName}: (typeof import('element-ai-vue'))['${componentName}']\n`
+    content = content.replace(
+      interfaceMatch[0],
+      interfaceMatch[1] + newLine + interfaceMatch[2]
+    )
+  }
+
+  fs.writeFileSync(GLOBAL_DTS_FILE, content)
+}
+
 // 主函数
 async function main(): Promise<void> {
   console.log('🚀 Element AI Vue 组件生成器\n')
@@ -356,11 +430,17 @@ async function main(): Promise<void> {
   const rl = createInterface()
 
   try {
+    // 提示用户确认 git 状态
+    console.log('⚠️  在添加新组件之前，请确保已提交当前的 git 更改。')
+    const gitConfirm = await ask(rl, '是否已经提交 git? (y/n): ')
+    if (gitConfirm.toLowerCase() !== 'y') {
+      console.log('❌ 请先提交 git 更改后再运行此脚本')
+      rl.close()
+      return
+    }
+
     // 第一步：输入组件名称
-    const componentName = await ask(
-      rl,
-      '请输入组件名称 (例如: MyComponent 或 my-component): '
-    )
+    const componentName = await ask(rl, '请输入组件名称 (格式: my-component): ')
 
     if (!componentName) {
       console.error('❌ 组件名称不能为空')
@@ -370,9 +450,7 @@ async function main(): Promise<void> {
 
     // 第二步：选择组件类型
     const categories = getComponentCategories()
-    const categoryOptions = categories.map((c) =>
-      c.parent ? `  ${c.text} (属于 ${c.parent})` : c.text
-    )
+    const categoryOptions = categories.map((c) => c.text)
 
     const categoryIndex = await select(rl, '请选择组件类型:', categoryOptions)
     const selectedCategory = categories[categoryIndex]
@@ -389,7 +467,11 @@ async function main(): Promise<void> {
     }
 
     // 第三步：生成文件
-    generateComponentFiles(componentName, selectedCategory.text)
+    generateComponentFiles(
+      componentName,
+      selectedCategory.text,
+      selectedCategory.enText
+    )
   } finally {
     rl.close()
   }
