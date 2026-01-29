@@ -8,6 +8,7 @@
     "test": "vitest",
     "test:coverage": "vitest --coverage",
     "publish": "tsx scripts/publish.ts",
+    "component:add": "tsx scripts/component-add.ts",
     "clean": "pnpm run clean:dist && pnpm run -r --parallel clean",
     "clean:dist": "rimraf dist",
     "build": "pnpm run -C internal/build start",
