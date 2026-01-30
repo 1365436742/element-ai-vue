@@ -1,0 +1,30 @@
+{
+  "name": "@element-ai-vue/components",
+  "version": "0.0.5",
+  "description": "all components are settled here",
+  "main": "index.ts",
+  "module": "index.ts",
+  "unpkg": "index.js",
+  "jsdelivr": "index.js",
+  "peerDependencies": {
+    "vue": "catalog:"
+  },
+  "dependencies": {
+    "@ctrl/tinycolor": "catalog:",
+    "@element-ai-vue/constants": "workspace:^",
+    "@element-ai-vue/directives": "workspace:^",
+    "@element-ai-vue/hooks": "workspace:^",
+    "@element-ai-vue/utils": "workspace:^",
+    "@vueuse/core": "catalog:",
+    "csstype": "catalog:",
+    "lodash-unified": "catalog:"
+  },
+  "devDependencies": {
+    "@vue/test-utils": "catalog:",
+    "vue": "catalog:"
+  },
+  "types": "index.d.ts",
+  "sideEffects": [
+    "*/style/*"
+  ]
+}

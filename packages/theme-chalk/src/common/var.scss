@@ -1,0 +1,207 @@
+@use 'sass:map';
+@use '../mixins/config' as *;
+@use '../mixins/mixins' as *;
+
+@mixin dark-style {
+  --#{$namespace}-border-color-light: #1d1e1f;
+  --#{$namespace}-box-shadow-light: 0px 0px 12px rgba(0, 0, 0, 0.72);
+  --#{$namespace}-bg-color-overlay: #1d1e1f;
+  --#{$namespace}-header-bg-color: rgba(255, 255, 255, 0.12);
+  --#{$namespace}-content-bg-color: rgb(48, 48, 48);
+  --#{$namespace}-color-border-secondary: #303133;
+  --#{$namespace}-copy-bg-color: rgba(255, 255, 255, 0.12);
+  --#{$namespace}-toolbar-bg-color: rgb(34, 34, 34);
+  --#{$namespace}-input-tag-prefix-bg-color: #333333;
+  --#{$namespace}-primary-default-color: #e0e0e0;
+  --#{$namespace}-primary-traansparent-1-color: #383838;
+  --#{$namespace}-close-icon-color: #adadad;
+  --#{$namespace}-send-btn-bg-color: rgba(255, 255, 255, 0.4);
+  --#{$namespace}-drag--upload-mark-bg-color: rgba(96, 96, 96, 0.9);
+
+  --#{$namespace}-tooltip-bg-color: #303133;
+  --#{$namespace}-tooltip-text-color: #fff;
+  --#{$namespace}-tooltip-border-color: #303133;
+
+  --#{$namespace}-file-card-border-color: rgba(200, 202, 205, 0.2);
+  --#{$namespace}-file-card-bar-outer-bg-color: rgb(143, 143, 143);
+  --#{$namespace}-thought-chain-bg-color: rgba(255, 255, 255, 0.3);
+  --#{$namespace}-thought-chain-text-color: rgba(255, 255, 255, 0.45);
+
+  --#{$namespace}-bubble-content-bg: rgba(255, 255, 255, 0.12);
+  --#{$namespace}-bubble-content-shadow:
+    0 1px 2px 0 rgba(255, 255, 255, 0.08),
+    0 1px 6px -1px rgba(255, 255, 255, 0.07),
+    0 2px 4px 0 rgba(255, 255, 255, 0.027);
+
+  --#{$namespace}-bubble-list-bottom-btn-shadow:
+    0 0 4px 0 rgba(255, 255, 255, 0.02), 0 10px 16px 0 rgba(134, 145, 166, 0.14);
+  --#{$namespace}-bubble-list-color-text-secondary: rgba(255, 255, 255, 0.85);
+  --#{$namespace}-scrollbar-thumb-bg-color: rgba(183, 184, 186, 0.15);
+
+  --#{$namespace}-arrow-color: #fff;
+  color: #fff;
+}
+
+:root {
+  --#{$namespace}-border-color-light: #fff;
+  --#{$namespace}-box-shadow-light: 0px 0px 12px rgba(0, 0, 0, 0.12);
+  --#{$namespace}-bg-color-overlay: #e4e7ed;
+  --#{$namespace}-border-radius-base: 6px;
+  --#{$namespace}-border-radius-btn: 4px;
+  --#{$namespace}-header-bg-color: rgba(0, 0, 0, 0.06);
+  --#{$namespace}-content-bg-color: rgb(250, 250, 250);
+  --#{$namespace}-color-border-secondary: #f0f0f0;
+  --#{$namespace}-copy-bg-color: rgba(0, 0, 0, 0.07);
+  --#{$namespace}-toolbar-bg-color: #fff;
+  --#{$namespace}-input-tag-prefix-bg-color: rgba(0, 87, 255, 0.1);
+  --#{$namespace}-primary-default-color: #0057ff;
+  --#{$namespace}-primary-traansparent-1-color: rgba(0, 87, 255, 0.06);
+  --#{$namespace}-close-icon-color: #0a0a0a;
+  --#{$namespace}-drag--upload-mark-bg-color: rgba(206, 206, 206, 0.5);
+
+  --#{$namespace}-send-btn-bg-color: rgba(17, 17, 17, 1);
+  --#{$namespace}-send-btn-bg-disabled-color: rgba(17, 17, 17, 0.1);
+
+  --#{$namespace}-tooltip-bg-color: #1d1e1f;
+  --#{$namespace}-tooltip-text-color: #e5eaf3;
+  --#{$namespace}-tooltip-border-color: #3d3d3d;
+
+  --#{$namespace}-file-card-border-color: rgba(17, 25, 37, 0.2);
+  --#{$namespace}-file-card-bar-outer-bg-color: #e5e5e5;
+
+  --#{$namespace}-thought-chain-bg-color: rgba(0, 0, 0, 0.3);
+  --#{$namespace}-thought-chain-text-color: rgba(0, 0, 0, 0.45);
+
+  --#{$namespace}-thinking-border-color: #e0dddd;
+
+  --#{$namespace}-bubble-content-bg: rgba(0, 0, 0, 0.06);
+  --#{$namespace}-bubble-content-shadow:
+    0 1px 2px 0 rgba(0, 0, 0, 0.03), 0 1px 6px -1px rgba(0, 0, 0, 0.02),
+    0 2px 4px 0 rgba(0, 0, 0, 0.02);
+
+  --#{$namespace}-bubble-list-bottom-btn-shadow:
+    0 0 4px 0 rgba(0, 0, 0, 0.02), 0 10px 16px 0 rgba(47, 53, 64, 0.14);
+  --#{$namespace}-bubble-list-color-text-secondary: rgba(0, 0, 0, 0.85);
+  --#{$namespace}-scrollbar-thumb-bg-color: rgba(17, 25, 37, 0.15);
+
+  --#{$namespace}-arrow-color: #000000;
+}
+
+@mixin dark-markdown {
+  color-scheme: dark;
+  --focus-outlineColor: #1f6feb;
+  --fgColor-default: #f0f6fc;
+  --fgColor-muted: #9198a1;
+  --fgColor-accent: #4493f8;
+  --fgColor-success: #3fb950;
+  --fgColor-attention: #d29922;
+  --fgColor-danger: #f85149;
+  --fgColor-done: #ab7df8;
+  --bgColor-muted: #151b23;
+  --bgColor-neutral-muted: #656c7633;
+  --bgColor-attention-muted: #bb800926;
+  --borderColor-default: #3d444d;
+  --borderColor-muted: #3d444db3;
+  --borderColor-neutral-muted: #3d444db3;
+  --borderColor-accent-emphasis: #1f6feb;
+  --borderColor-success-emphasis: #238636;
+  --borderColor-attention-emphasis: #9e6a03;
+  --borderColor-danger-emphasis: #da3633;
+  --borderColor-done-emphasis: #8957e5;
+  --color-prettylights-syntax-comment: #9198a1;
+  --color-prettylights-syntax-constant: #79c0ff;
+  --color-prettylights-syntax-constant-other-reference-link: #a5d6ff;
+  --color-prettylights-syntax-entity: #d2a8ff;
+  --color-prettylights-syntax-storage-modifier-import: #f0f6fc;
+  --color-prettylights-syntax-entity-tag: #7ee787;
+  --color-prettylights-syntax-keyword: #ff7b72;
+  --color-prettylights-syntax-string: #a5d6ff;
+  --color-prettylights-syntax-variable: #ffa657;
+  --color-prettylights-syntax-brackethighlighter-unmatched: #f85149;
+  --color-prettylights-syntax-brackethighlighter-angle: #9198a1;
+  --color-prettylights-syntax-invalid-illegal-text: #f0f6fc;
+  --color-prettylights-syntax-invalid-illegal-bg: #8e1519;
+  --color-prettylights-syntax-carriage-return-text: #f0f6fc;
+  --color-prettylights-syntax-carriage-return-bg: #b62324;
+  --color-prettylights-syntax-string-regexp: #7ee787;
+  --color-prettylights-syntax-markup-list: #f2cc60;
+  --color-prettylights-syntax-markup-heading: #1f6feb;
+  --color-prettylights-syntax-markup-italic: #f0f6fc;
+  --color-prettylights-syntax-markup-bold: #f0f6fc;
+  --color-prettylights-syntax-markup-deleted-text: #ffdcd7;
+  --color-prettylights-syntax-markup-deleted-bg: #67060c;
+  --color-prettylights-syntax-markup-inserted-text: #aff5b4;
+  --color-prettylights-syntax-markup-inserted-bg: #033a16;
+  --color-prettylights-syntax-markup-changed-text: #ffdfb6;
+  --color-prettylights-syntax-markup-changed-bg: #5a1e02;
+  --color-prettylights-syntax-markup-ignored-text: #f0f6fc;
+  --color-prettylights-syntax-markup-ignored-bg: #1158c7;
+  --color-prettylights-syntax-meta-diff-range: #d2a8ff;
+  --color-prettylights-syntax-sublimelinter-gutter-mark: #3d444d;
+}
+
+@include b(markdown) {
+  --base-size-4: 0.25rem;
+  --base-size-8: 0.5rem;
+  --base-size-16: 1rem;
+  --base-size-24: 1.5rem;
+  --base-size-40: 2.5rem;
+  --base-text-weight-normal: 400;
+  --base-text-weight-medium: 500;
+  --base-text-weight-semibold: 600;
+  --fontStack-monospace:
+    ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono,
+    monospace;
+  --fgColor-accent: Highlight;
+  /* light */
+  color-scheme: light;
+  --focus-outlineColor: #0969da;
+  --fgColor-default: #1f2328;
+  --fgColor-muted: #59636e;
+  --fgColor-accent: #0969da;
+  --fgColor-success: #1a7f37;
+  --fgColor-attention: #9a6700;
+  --fgColor-danger: #d1242f;
+  --fgColor-done: #8250df;
+  --bgColor-muted: #f6f8fa;
+  --bgColor-neutral-muted: #818b981f;
+  --bgColor-attention-muted: #fff8c5;
+  --borderColor-default: #d1d9e0;
+  --borderColor-muted: #d1d9e0b3;
+  --borderColor-neutral-muted: #d1d9e0b3;
+  --borderColor-accent-emphasis: #0969da;
+  --borderColor-success-emphasis: #1a7f37;
+  --borderColor-attention-emphasis: #9a6700;
+  --borderColor-danger-emphasis: #cf222e;
+  --borderColor-done-emphasis: #8250df;
+  --color-prettylights-syntax-comment: #59636e;
+  --color-prettylights-syntax-constant: #0550ae;
+  --color-prettylights-syntax-constant-other-reference-link: #0a3069;
+  --color-prettylights-syntax-entity: #6639ba;
+  --color-prettylights-syntax-storage-modifier-import: #1f2328;
+  --color-prettylights-syntax-entity-tag: #0550ae;
+  --color-prettylights-syntax-keyword: #cf222e;
+  --color-prettylights-syntax-string: #0a3069;
+  --color-prettylights-syntax-variable: #953800;
+  --color-prettylights-syntax-brackethighlighter-unmatched: #82071e;
+  --color-prettylights-syntax-brackethighlighter-angle: #59636e;
+  --color-prettylights-syntax-invalid-illegal-text: #f6f8fa;
+  --color-prettylights-syntax-invalid-illegal-bg: #82071e;
+  --color-prettylights-syntax-carriage-return-text: #f6f8fa;
+  --color-prettylights-syntax-carriage-return-bg: #cf222e;
+  --color-prettylights-syntax-string-regexp: #116329;
+  --color-prettylights-syntax-markup-list: #3b2300;
+  --color-prettylights-syntax-markup-heading: #0550ae;
+  --color-prettylights-syntax-markup-italic: #1f2328;
+  --color-prettylights-syntax-markup-bold: #1f2328;
+  --color-prettylights-syntax-markup-deleted-text: #82071e;
+  --color-prettylights-syntax-markup-deleted-bg: #ffebe9;
+  --color-prettylights-syntax-markup-inserted-text: #116329;
+  --color-prettylights-syntax-markup-inserted-bg: #dafbe1;
+  --color-prettylights-syntax-markup-changed-text: #953800;
+  --color-prettylights-syntax-markup-changed-bg: #ffd8b5;
+  --color-prettylights-syntax-markup-ignored-text: #d1d9e0;
+  --color-prettylights-syntax-markup-ignored-bg: #0550ae;
+  --color-prettylights-syntax-meta-diff-range: #8250df;
+  --color-prettylights-syntax-sublimelinter-gutter-mark: #818b98;
+}

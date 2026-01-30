@@ -1,0 +1,20 @@
+{
+  "name": "@element-ai-vue/theme-chalk",
+  "version": "0.1.0",
+  "description": "Element component chalk theme.",
+  "keywords": [
+    "vue-components",
+    "element-ai-vue",
+    "theme-chalk",
+    "theme-light"
+  ],
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "gulp --require tsx/dist/loader.cjs"
+  },
+  "license": "MIT",
+  "main": "index.css",
+  "unpkg": "index.css",
+  "jsdelivr": "index.css",
+  "style": "index.css"
+}

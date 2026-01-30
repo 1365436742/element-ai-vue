@@ -1,0 +1,76 @@
+@use '../mixins/config' as *;
+@use '../mixins/mixins' as *;
+
+@include b(overflow-toolbar-offscreen-measure) {
+  position: absolute;
+  visibility: hidden;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+@include b(overflow-toolbar) {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 8px;
+
+  @include e(list-item) {
+    flex-shrink: 0;
+  }
+  @include e(default-item) {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    height: 30px;
+    padding: 0 12px;
+    border-radius: 30px;
+    border: 1px solid var(--#{$namespace}-thinking-border-color);
+    cursor: pointer;
+    @media (hover: hover) {
+      &:hover {
+        background-color: var(--#{$namespace}-copy-bg-color);
+      }
+    }
+    @include m(img) {
+      width: 16px;
+      height: 16px;
+      display: block;
+    }
+    @include m(text) {
+      font-size: 14px;
+      line-height: 22px;
+    }
+  }
+  @include e(more-content) {
+    padding: 10px;
+  }
+  @include e(default-more-item) {
+    padding: 7px 10px;
+    height: 36px;
+    border: none;
+    border-radius: 4px;
+    box-sizing: border-box;
+    gap: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+
+    @media (hover: hover) {
+      &:hover {
+        background-color: var(--#{$namespace}-copy-bg-color);
+      }
+    }
+    @include m(img) {
+      width: 16px;
+      height: 16px;
+      display: block;
+    }
+    @include m(text) {
+      font-size: 14px;
+      line-height: 22px;
+    }
+  }
+}

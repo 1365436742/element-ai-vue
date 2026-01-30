@@ -1,0 +1,24 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "composite": true,
+    "lib": ["ESNext"],
+    "types": ["node"],
+    "skipLibCheck": true
+  },
+  "include": [
+    "internal/**/*",
+    "internal/**/*.json",
+    "docs/.vitepress/**/*.mts",
+    "docs/.vitepress/**/*.ts",
+    "packages/theme-chalk/*",
+    "packages/element-ai-vue/version.ts",
+    "packages/element-ai-vue/package.json"
+  ],
+  "exclude": [
+    "docs/.vitepress/theme/**/*.ts",
+    "**/__tests__/**",
+    "**/tests/**",
+    "**/dist"
+  ]
+}

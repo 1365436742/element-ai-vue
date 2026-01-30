@@ -1,0 +1,59 @@
+@use '../mixins/config' as *;
+@use '../mixins/mixins' as *;
+
+@include b(popover) {
+  display: inline-block;
+
+  @include e(popper) {
+    position: absolute;
+    z-index: 2000;
+    font-size: 14px;
+    line-height: 1.6;
+    min-width: 150px;
+    word-wrap: break-word;
+    border-radius: var(--#{$namespace}-border-radius-base, 6px);
+    box-shadow: var(--#{$namespace}-box-shadow-light);
+    background-color: var(--#{$namespace}-border-color-light);
+  }
+
+  @include e(arrow) {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    transform: rotate(45deg);
+    z-index: -1;
+    background-color: var(--#{$namespace}-border-color-light);
+
+    // 根据位置隐藏箭头边框
+    &[data-side='top'] {
+      border-right: 1px solid var(--#{$namespace}-bg-color-overlay);
+      border-bottom: 1px solid var(--#{$namespace}-bg-color-overlay);
+    }
+
+    &[data-side='bottom'] {
+      border-left: 1px solid var(--#{$namespace}-bg-color-overlay);
+      border-top: 1px solid var(--#{$namespace}-bg-color-overlay);
+    }
+
+    &[data-side='left'] {
+      border-right: 1px solid var(--#{$namespace}-bg-color-overlay);
+      border-top: 1px solid var(--#{$namespace}-bg-color-overlay);
+    }
+
+    &[data-side='right'] {
+      border-left: 1px solid var(--#{$namespace}-bg-color-overlay);
+      border-bottom: 1px solid var(--#{$namespace}-bg-color-overlay);
+    }
+  }
+}
+
+// Transition - 只使用透明度动画
+.#{$namespace}-popover-fade-enter-active,
+.#{$namespace}-popover-fade-leave-active {
+  transition: opacity 0.15s ease;
+}
+
+.#{$namespace}-popover-fade-enter-from,
+.#{$namespace}-popover-fade-leave-to {
+  opacity: 0;
+}
