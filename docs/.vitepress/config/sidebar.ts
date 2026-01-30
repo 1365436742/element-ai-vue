@@ -14,10 +14,7 @@ export const zhSidebar: DefaultTheme.Sidebar = [
       { text: 'Markdown', link: '/zh/base/markdown' },
       { text: 'Sender 输入框', link: '/zh/base/sender' },
       { text: 'BubbleList 气泡列表', link: '/zh/base/bubble-list' },
-      {
-        text: 'OverflowToolbar 溢出工具栏<span class="sidebar-tag-new">New</span>',
-        link: '/zh/base/overflow-toolbar',
-      },
+      { text: 'OverflowToolbar 溢出工具栏', link: '/zh/base/overflow-toolbar' },
     ],
   },
   {
@@ -71,10 +68,7 @@ export const enSidebar: DefaultTheme.Sidebar = [
       { text: 'Markdown', link: '/en/base/markdown' },
       { text: 'Sender', link: '/en/base/sender' },
       { text: 'BubbleList', link: '/en/base/bubble-list' },
-      {
-        text: 'OverflowToolbar<span class="sidebar-tag-new">New</span>',
-        link: '/en/base/overflow-toolbar',
-      },
+      { text: 'OverflowToolbar', link: '/en/base/overflow-toolbar' },
     ],
   },
   {
