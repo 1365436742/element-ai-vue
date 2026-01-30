@@ -1,0 +1,23 @@
+# Editor directories and files
+.idea
+
+# Package Manager
+node_modules
+.pnpm-debug.log*
+pnpm-lock.yaml
+
+# System
+.DS_Store
+
+# Bundle
+dist
+coverage
+
+# local env files
+*.local
+.eslintcache
+docs/.vitepress/cache
+packages/element-ai-vue/version.ts
+
+# User ignored
+packages/theme-chalk/src/font

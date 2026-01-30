@@ -1,0 +1,99 @@
+@font-face {
+  font-family: "element-ai-vue-iconfont"; /* Project id 5088023 */
+  src: url('iconfont.woff2?t=1769738721340') format('woff2'),
+       url('iconfont.woff?t=1769738721340') format('woff'),
+       url('iconfont.ttf?t=1769738721340') format('truetype');
+}
+
+.element-ai-vue-iconfont {
+  font-family: "element-ai-vue-iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-more:before {
+  content: "\e600";
+}
+
+.icon-expanded:before {
+  content: "\e640";
+}
+
+.icon-out-screen:before {
+  content: "\e60b";
+}
+
+.icon-ppt:before {
+  content: "\e805";
+}
+
+.icon-file:before {
+  content: "\e76b";
+}
+
+.icon-doc:before {
+  content: "\e69e";
+}
+
+.icon-docx:before {
+  content: "\e69f";
+}
+
+.icon-stop-chat:before {
+  content: "\e60c";
+}
+
+.icon-arrow-up:before {
+  content: "\e66b";
+}
+
+.icon-select-down:before {
+  content: "\e647";
+}
+
+.icon-correct:before {
+  content: "\e68b";
+}
+
+.icon-zoom-out:before {
+  content: "\ec13";
+}
+
+.icon-zoom-in:before {
+  content: "\ec14";
+}
+
+.icon-download:before {
+  content: "\e606";
+}
+
+.icon-full-screen:before {
+  content: "\e63f";
+}
+
+.icon-preview:before {
+  content: "\e649";
+}
+
+.icon-close:before {
+  content: "\e639";
+}
+
+.icon-circle-close:before {
+  content: "\e60a";
+}
+
+.icon-regen:before {
+  content: "\e615";
+}
+
+.icon-adapt-page:before {
+  content: "\e64e";
+}
+
+.icon-copy:before {
+  content: "\e8b0";
+}
+

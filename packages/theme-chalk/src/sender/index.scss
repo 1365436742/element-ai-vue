@@ -1,0 +1,230 @@
+@use '../mixins/mixins' as *;
+@use '../mixins/config' as *;
+@use '../common/var' as *;
+
+@include b(base-sender-input) {
+  position: relative;
+  @include e(editor) {
+    p {
+      margin: 0;
+    }
+
+    &.ProseMirror-focused {
+      outline: none;
+    }
+
+    p.is-editor-empty:first-child::before {
+      content: attr(data-placeholder);
+      position: absolute;
+      color: #adb5bd;
+      pointer-events: none;
+      font-size: 16px;
+      line-height: 24px;
+    }
+  }
+}
+
+@include b(input-tag-prefix) {
+  float: left;
+  position: relative;
+  z-index: 2;
+  @include e(wrapper) {
+    display: inline-block;
+    padding: 0 6px;
+    margin: 0 2px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.5;
+    letter-spacing: 0px;
+    color: var(--#{$namespace}-primary-default-color);
+    box-sizing: content-box;
+    cursor: pointer;
+
+    &:hover {
+      background: var(--#{$namespace}-input-tag-prefix-bg-color);
+      .#{$B}__content--remove {
+        opacity: 1;
+        pointer-events: unset;
+      }
+    }
+    @include e(content) {
+      white-space: nowrap;
+      user-select: none;
+
+      @include m(remove) {
+        color: var(--#{$namespace}-close-icon-color);
+        cursor: pointer;
+        font-size: 16px;
+        opacity: 0;
+        pointer-events: none;
+        position: absolute;
+        right: -4px;
+        top: -6px;
+        line-height: 1;
+        transition-duration: 0.15s;
+        transition-property: opacity;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      }
+    }
+  }
+}
+
+@include b(sender) {
+  width: 100%;
+  box-sizing: border-box;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 8px;
+
+  @include e(content) {
+    flex: 1;
+    width: 0;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    box-sizing: border-box;
+  }
+
+  @include e(action) {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    @include m(other) {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+  }
+  @include e(send-btn) {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: var(--#{$namespace}-send-btn-bg-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    cursor: pointer;
+    &.disabled {
+      background-color: var(--#{$namespace}-send-btn-bg-disabled-color);
+      cursor: not-allowed;
+    }
+    & > span {
+      color: #fff;
+    }
+  }
+
+  @include e(loading) {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    & > span {
+      animation: rotate 1.5s linear infinite;
+      font-size: 32px;
+      cursor: pointer;
+    }
+  }
+  // 使用 &-updown 生成 el-ai-sender-updown
+  &-updown {
+    flex-direction: column;
+    align-items: initial;
+
+    .#{$namespace}-sender__content {
+      width: 100%;
+    }
+
+    .#{$namespace}-sender__action {
+      display: flex;
+      width: 100%;
+
+      &--other {
+        width: 0;
+      }
+    }
+
+    .#{$namespace}-sender__send-btn {
+      margin-left: auto;
+    }
+  }
+}
+
+@include b(input-slot) {
+  display: inline-block;
+  position: relative;
+  padding: 2px 6px;
+  margin: 0 2px;
+  border-radius: 4px;
+  background-color: var(--#{$namespace}-primary-traansparent-1-color);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--#{$namespace}-primary-default-color);
+  box-sizing: content-box;
+
+  @include e(content) {
+    color: var(--#{$namespace}-primary-default-color);
+  }
+
+  @include e(placeholder) {
+    position: absolute;
+    white-space: pre;
+    position: absolute;
+    left: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--#{$namespace}-primary-default-color);
+    pointer-events: none;
+    user-select: none;
+    opacity: 0.6;
+  }
+}
+
+@include b(select-slot) {
+  display: inline-block;
+  @include e(select-wap) {
+    padding: 2px 6px;
+    margin: 0 2px;
+    border-radius: 4px;
+    background-color: var(--#{$namespace}-primary-traansparent-1-color);
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--#{$namespace}-primary-default-color);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+  @include e(select-icon) {
+    font-size: 8px;
+  }
+
+  @include e(options-wap) {
+    padding: 8px;
+    border-radius: var(--#{$namespace}-border-radius-btn);
+    max-height: 200px;
+    overflow-y: auto;
+
+    @include m(icon) {
+      font-size: 10px;
+      margin-left: 4px;
+    }
+
+    @include m(option-item) {
+      box-sizing: border-box;
+      padding: 4px 8px;
+      border-radius: var(--#{$namespace}-border-radius-btn);
+      cursor: pointer;
+      &.is-active {
+        color: var(--#{$namespace}-primary-default-color);
+      }
+      &:hover {
+        background-color: var(--#{$namespace}-copy-bg-color);
+      }
+    }
+  }
+}

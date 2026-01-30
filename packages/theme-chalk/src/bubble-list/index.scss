@@ -1,0 +1,62 @@
+@use '../mixins/mixins' as *;
+@use '../mixins/config' as *;
+@use '../common/var' as *;
+
+@include b(bubble-list) {
+  height: 100%;
+  overflow-y: auto;
+  position: relative;
+  &::-webkit-scrollbar {
+    width: 4px;
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    border: 0px;
+    border-color: transparent;
+    background: var(--#{$namespace}-scrollbar-thumb-bg-color);
+  }
+}
+
+@include b(bubble-list-bubble-content) {
+  width: 100%;
+}
+
+@include b(bubble-list-bottom-action) {
+  position: sticky;
+  left: 0;
+  right: 0;
+  bottom: 40px;
+  @include e(inner) {
+    position: absolute;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid var(--#{$namespace}-color-border-secondary);
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: var(--#{$namespace}-border-color-light);
+    &:hover {
+      box-shadow: var(--#{$namespace}-bubble-list-bottom-btn-shadow);
+    }
+  }
+  @include e(icon) {
+    width: 12px;
+    height: 12px;
+    border: 1px solid var(--#{$namespace}-bubble-list-color-text-secondary);
+    border-top-color: transparent;
+    border-left-color: transparent;
+    transform: rotate(45deg) translate(-15%, -22%);
+  }
+}

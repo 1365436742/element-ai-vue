@@ -1,0 +1,49 @@
+// CSS3 var
+@use '../common/var.scss' as *;
+@use '../mixins/mixins.scss' as *;
+@use '../mixins/config.scss' as *;
+
+html.dark {
+  @include dark-style;
+  @include b(markdown) {
+    @include dark-markdown;
+  }
+}
+
+@include b(tooltip) {
+  @include e(popper) {
+    &.is-dark {
+      @include dark-style;
+    }
+  }
+}
+
+@include b(popover) {
+  @include e(popper) {
+    &.is-dark {
+      @include dark-style;
+    }
+  }
+}
+
+@include b(code-highlight) {
+  &.#{$namespace}-code-highlight--dark {
+    @include dark-style;
+  }
+}
+@include b(code-mermaid) {
+  &.#{$namespace}-code-mermaid--dark {
+    @include dark-style;
+  }
+}
+@include b(markdown) {
+  &.#{$namespace}-markdown--dark {
+    @include dark-markdown;
+  }
+}
+
+@include b(sender) {
+  &.#{$namespace}-sender--dark {
+    @include dark-style;
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "name": "@element-ai-vue/hooks",
+  "version": "0.0.5",
+  "description": "Element AI composables",
+  "license": "MIT",
+  "main": "index.ts",
+  "module": "index.ts",
+  "unpkg": "index.js",
+  "jsdelivr": "index.js",
+  "types": "index.d.ts",
+  "peerDependencies": {
+    "vue": "catalog:"
+  },
+  "dependencies": {
+    "@vueuse/core": "catalog:",
+    "d3-selection": "^3.0.0",
+    "d3-zoom": "^3.0.0",
+    "lodash-unified": "catalog:"
+  },
+  "devDependencies": {
+    "vue": "catalog:"
+  }
+}

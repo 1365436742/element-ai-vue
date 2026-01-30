@@ -1,0 +1,94 @@
+.upload-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 6px 12px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #606266;
+  background-color: #fff;
+  border: 1px solid #dcdfe6;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  &.dark {
+    background-color: #3a3a3a;
+    border-color: #555;
+    color: #fff;
+
+    &:hover {
+      background-color: #4a4a4a;
+      border-color: #666;
+    }
+  }
+
+  &:hover {
+    color: #409eff;
+    border-color: #c6e2ff;
+    background-color: #ecf5ff;
+  }
+
+  &:active {
+    color: #3a8ee6;
+    border-color: #3a8ee6;
+  }
+}
+
+.model-select {
+  padding: 8px 28px 8px 12px;
+  font-size: 14px;
+  color: #606266;
+  background-color: #fff;
+  border: 1px solid #dcdfe6;
+  border-radius: 6px;
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23606266' d='M2.5 4.5L6 8l3.5-3.5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  transition: all 0.2s ease;
+  &.dark {
+    background-color: #3a3a3a;
+    border-color: #555;
+    color: #fff;
+
+    &:hover {
+      border-color: #666;
+    }
+
+    &:focus {
+      border-color: #409eff;
+    }
+  }
+  &:hover {
+    border-color: #c0c4cc;
+  }
+
+  &:focus {
+    border-color: #409eff;
+  }
+}
+
+.sender {
+  .el-ai-sender__content {
+    max-height: 200px;
+    overflow-y: auto;
+    &::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    &::-webkit-scrollbar-thumb {
+      border-radius: 6px;
+      background-color: rgba(144, 147, 153, 0.3);
+      &:hover {
+        background-color: rgba(144, 147, 153, 0.5);
+      }
+    }
+    &::-webkit-scrollbar-track {
+      background-color: transparent;
+    }
+  }
+}

@@ -1,0 +1,105 @@
+@use '../mixins/mixins' as *;
+@use '../mixins/config' as *;
+@use '../common/var' as *;
+
+@include b(code-highlight) {
+  position: relative;
+  border-radius: var(--#{$namespace}-border-radius-base);
+  border: 1px solid var(--#{$namespace}-border-color-light);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  @include e(header) {
+    display: flex;
+    align-items: center;
+    height: 40px;
+    padding: 0 14px;
+    background-color: var(--#{$namespace}-header-bg-color);
+    font-size: 14px;
+    @include e(select) {
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 5px;
+      margin-top: 3px;
+      cursor: pointer;
+
+      & > span {
+        display: flex;
+        font-size: 12px;
+        transform: rotate(-90deg);
+        transition: all 0.2s ease;
+      }
+      &.is-expanded > span {
+        transform: rotate(0);
+      }
+    }
+    @include e(language) {
+      font-weight: bold;
+    }
+  }
+
+  @include e(action) {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    padding: 0 14px;
+    cursor: pointer;
+
+    @include e(icon) {
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--#{$namespace}-border-radius-btn);
+      @media (hover: hover) {
+        &:hover {
+          background-color: var(--#{$namespace}-copy-bg-color);
+        }
+      }
+      .element-ai-vue-iconfont {
+        font-size: 14px;
+      }
+    }
+  }
+
+  @include e(content) {
+    flex: 1;
+    background-color: var(--#{$namespace}-content-bg-color);
+    border: 1px solid var(--#{$namespace}-color-border-secondary);
+    pre {
+      background-color: transparent !important;
+      margin: 0;
+      padding: 14px;
+      overflow-x: auto;
+    }
+    &.is-line-numbers {
+      pre {
+        padding-left: 0;
+      }
+      code {
+        counter-reset: line;
+      }
+      .line {
+        &::before {
+          counter-increment: line;
+          content: counter(line);
+          display: inline-block;
+          width: 2em;
+          margin-right: 1em;
+          text-align: right;
+          color: rgba(0, 0, 0, 0.3);
+          user-select: none;
+        }
+      }
+    }
+  }
+}

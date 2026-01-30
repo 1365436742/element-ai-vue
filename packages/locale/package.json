@@ -1,0 +1,11 @@
+{
+  "name": "@element-ai-vue/locale",
+  "version": "0.0.5",
+  "description": "Element AI locale",
+  "license": "MIT",
+  "main": "index.ts",
+  "module": "index.ts",
+  "unpkg": "index.js",
+  "jsdelivr": "index.js",
+  "types": "index.d.ts"
+}

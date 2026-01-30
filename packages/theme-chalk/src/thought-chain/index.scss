@@ -1,0 +1,81 @@
+@use '../mixins/mixins' as *;
+@use '../mixins/config' as *;
+@use '../common/var' as *;
+
+@include b(thought-chain) {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  @include e(item) {
+    display: flex;
+    gap: 8px;
+    .is-last-item {
+      &:after {
+        display: none;
+      }
+    }
+  }
+  @include e(status) {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    @include m(icon) {
+      width: 20px;
+      height: 20px;
+      line-height: 24px;
+    }
+    @include e(status-line-warp) {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+    }
+    @include e(status-line) {
+      display: block;
+      background-color: var(--#{$namespace}-thought-chain-bg-color);
+      width: 1px;
+      flex: 1;
+      margin: 6px auto 0;
+    }
+  }
+
+  @include e(content) {
+    @include e(content-top) {
+      display: flex;
+      align-items: center;
+
+      @include m(title) {
+        font-size: 16px;
+        font-weight: bold;
+        line-height: 20px;
+        color: var(--#{$namespace}-thought-chain-title-color);
+      }
+      @include m(extend-warp) {
+        width: 16px;
+        height: 16px;
+        margin-left: 8px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+      }
+      @include m(extended) {
+        width: 8px;
+        height: 8px;
+        border: 1px solid var(--#{$namespace}-arrow-color);
+        border-left-color: transparent;
+        border-bottom-color: transparent;
+        transform-origin: center center;
+        transform: rotate(45deg);
+        transition: transform 0.3s ease;
+        &.is-extended {
+          transform: rotate(135deg);
+        }
+      }
+    }
+    @include m(description) {
+      padding-top: 8px;
+      font-size: 14px;
+      color: var(--#{$namespace}-thought-chain-text-color);
+    }
+  }
+}
