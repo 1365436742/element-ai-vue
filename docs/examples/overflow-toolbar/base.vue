@@ -13,7 +13,7 @@
 
 <script setup lang="ts">
 import { ElAOverflowToolbar, OverflowToolbarItem } from 'element-ai-vue'
-import { nextTick, ref, useTemplateRef, watch } from 'vue'
+import { ref, useTemplateRef, watch } from 'vue'
 import { useData } from 'vitepress'
 
 const { isDark } = useData()
