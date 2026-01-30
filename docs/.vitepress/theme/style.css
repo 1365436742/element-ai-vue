@@ -140,3 +140,18 @@
 .VPHero .image-bg {
   background: radial-gradient(circle, #6366f180, #8b5cf600 70%);
 }
+.sidebar-tag-new {
+  display: inline-block;
+  margin-left: 4px;
+  padding: 0 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  line-height: 18px;
+  color: #fff;
+  background-color: var(--vp-c-danger-1, #f56c6c);
+  transform: scale(0.8) translate(-50%, -50%);
+  transform-origin: left center;
+  vertical-align: middle;
+  position: absolute;
+  top: 0;
+}
