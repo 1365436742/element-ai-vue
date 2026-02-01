@@ -124,10 +124,12 @@ const calcContributors = (commits: ApiResult['nodes']) => {
 const getContributorsByComponents = async (components: string[]) => {
   let options: FetchOption[] = components.flatMap((component) => [
     { key: component, path: `packages/components/${component}` },
-    { key: component, path: `packages/theme-chalk/src/${component}.scss` },
+    { key: component, path: `packages/theme-chalk/src/${component}` },
     { key: component, path: `docs/examples/${component}` },
-    { key: component, path: `docs/en-US/component/${component}.md` },
+    { key: component, path: `docs/en/base/${component}.md` },
+    { key: component, path: `docs/zh/base/${component}.md` },
   ])
+
   const commits: Record<string /* component name */, ApiResult['nodes']> = {}
   do {
     const results = await fetchCommits(options)
@@ -159,6 +161,7 @@ async function getContributors() {
     cwd: path.resolve(projRoot, 'packages/components'),
     onlyDirectories: true,
   })
+
   let contributors: Record<string, ContributorInfo[]> = {}
 
   consola.info('Fetching contributors...')
@@ -171,6 +174,15 @@ async function getContributors() {
       chalk.green(`Fetched contributors: ${chunkComponents.join(', ')}`)
     )
   }
+
+  if (Object.keys(contributors).length === 0) {
+    consola.warn(
+      chalk.yellow(
+        'No contributors found. This might be because the files have not been pushed to the remote repository yet, or "dist" file exists in DEV mode.'
+      )
+    )
+  }
+
   return contributors
 }
 
