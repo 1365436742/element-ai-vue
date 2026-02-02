@@ -146,7 +146,10 @@ import {
   useNamespace,
   useTheme,
 } from '@element-ai-vue/hooks'
-import { downloadPngBySvgElement } from '@element-ai-vue/utils'
+import {
+  downloadPngBySvgElement,
+  mermaidRenderQueue,
+} from '@element-ai-vue/utils'
 import { debounce } from 'lodash-es'
 import Tooltip from '../tooltip/index.vue'
 import ElACodeHighlight from '../code-highlight/index.vue'
@@ -211,17 +214,22 @@ onMounted(() => {
 
 const render = async () => {
   if (!props.content) return
-  mermaid.initialize({
-    ...config.value,
+  mermaidRenderQueue(async () => {
+    mermaid.initialize({
+      ...config.value,
+    })
+    try {
+      const isValid = await mermaid.parse(props.content)
+      if (!isValid) {
+        return
+      }
+      const { svg } = await mermaid.render(
+        `mermaid-${Date.now()}`,
+        props.content
+      )
+      htmlContent.value = svg
+    } catch (error) {}
   })
-  try {
-    const isValid = await mermaid.parse(props.content)
-    if (!isValid) {
-      return
-    }
-    const { svg } = await mermaid.render(`mermaid-${Date.now()}`, props.content)
-    htmlContent.value = svg
-  } catch (error) {}
 }
 
 const toggleFullscreen = () => {

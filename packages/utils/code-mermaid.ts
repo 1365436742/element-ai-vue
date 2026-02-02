@@ -41,3 +41,14 @@ export const downloadPngBySvgElement = (svgElement: SVGSVGElement) => {
   }
   img.src = url
 }
+
+let renderPromise = Promise.resolve()
+
+export const mermaidRenderQueue = <T>(fn: () => Promise<T>): Promise<T> => {
+  return new Promise((resolve, reject) => {
+    renderPromise = renderPromise
+      .then(() => fn())
+      .then(resolve)
+      .catch(reject)
+  })
+}
