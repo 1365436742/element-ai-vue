@@ -25,7 +25,9 @@ import { computed, nextTick, ref, watchEffect } from 'vue'
 
 const ns = useNamespace('input-slot')
 const props = defineProps<NodeViewProps>()
-const placeholder = props.node.attrs.placeholder || ''
+const placeholder = computed(() => {
+  return props.node.attrs.placeholder || '';
+});
 
 const isEmpty = computed(() => {
   return props.node.textContent === strings.ZERO_WIDTH_CHAR
@@ -41,10 +43,10 @@ const placeholderRef = ref<HTMLElement | null>(null)
 const placeholderWidth = ref<number | undefined>(undefined)
 
 watchEffect(async () => {
-  if (isEmpty.value && placeholderRef.value) {
+  if (isEmpty.value && placeholderRef.value && placeholder.value) {
     await nextTick(() => {
-      placeholderWidth.value = placeholderRef.value?.offsetWidth
-    })
+      placeholderWidth.value = placeholderRef.value?.offsetWidth;
+    });
   }
-})
+});
 </script>
