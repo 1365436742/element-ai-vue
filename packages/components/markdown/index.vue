@@ -1,5 +1,11 @@
 <template>
-  <div :class="[ns.b(), theme === 'dark' ? ns.m('dark') : '']">
+  <div
+    :class="[
+      ns.b(),
+      ns.e('markdown-body'),
+      theme === 'dark' ? ns.m('dark') : '',
+    ]"
+  >
     <template v-for="(part, index) in parts" :key="index">
       <slot
         v-if="part.type === 'code' && part.language === 'mermaid'"
@@ -37,11 +43,7 @@
           </template>
         </CodeHighlight>
       </slot>
-      <VNodeRenderer
-        v-else
-        :class="[ns.e('markdown-body'), 'markdown-body']"
-        :content="part.content"
-      />
+      <VNodeRenderer v-else :content="part.content" />
     </template>
   </div>
 </template>
