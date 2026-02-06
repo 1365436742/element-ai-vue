@@ -78,6 +78,7 @@
     "@tiptap/extension-hard-break": "^3.13.0",
     "@tiptap/extension-history": "^3.13.0",
     "@tiptap/extension-paragraph": "^3.13.0",
+    "@vueuse/core": "^10.11.1",
     "@tiptap/extension-placeholder": "^3.13.0",
     "@tiptap/extension-text": "^3.13.0",
     "@tiptap/pm": "^3.13.0",
@@ -90,7 +91,11 @@
     "dompurify": "^3.3.0",
     "hast-util-to-html": "^9.0.5",
     "lodash-es": "^4.17.21",
+    "lodash-unified": "^1.0.3",
     "mermaid": "^11.12.2",
+    "prosemirror-model": "^1.25.0",
+    "prosemirror-state": "^1.4.0",
+    "prosemirror-transform": "^1.10.0",
     "prosemirror-view": "^1.41.4",
     "rehype-katex": "^7.0.1",
     "remark-breaks": "^4.0.0",
@@ -100,7 +105,8 @@
     "remark-rehype": "^11.1.2",
     "shiki": "^3.19.0",
     "unified": "^11.0.5",
-    "unist-util-visit": "^5.0.0"
+    "unist-util-visit": "^5.0.0",
+    "uuid": "^13.0.0"
   },
   "devDependencies": {
     "@types/node": "*",
