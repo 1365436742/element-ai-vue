@@ -141,11 +141,11 @@
 }
 
 @include b(markdown) {
-  --base-size-4: 0.25rem;
-  --base-size-8: 0.5rem;
-  --base-size-16: 1rem;
-  --base-size-24: 1.5rem;
-  --base-size-40: 2.5rem;
+  --base-size-4: 0.25em;
+  --base-size-8: 0.25em;
+  --base-size-16: 1em;
+  --base-size-24: 1.5em;
+  --base-size-40: 2.5em;
   --base-text-weight-normal: 400;
   --base-text-weight-medium: 500;
   --base-text-weight-semibold: 600;
