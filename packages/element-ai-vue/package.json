@@ -1,6 +1,6 @@
 {
   "name": "element-ai-vue",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "A AI Component Library for Vue 3",
   "keywords": [
     "element-ai-vue",
@@ -78,12 +78,12 @@
     "@tiptap/extension-hard-break": "^3.13.0",
     "@tiptap/extension-history": "^3.13.0",
     "@tiptap/extension-paragraph": "^3.13.0",
-    "@vueuse/core": "^10.11.1",
     "@tiptap/extension-placeholder": "^3.13.0",
     "@tiptap/extension-text": "^3.13.0",
     "@tiptap/pm": "^3.13.0",
     "@tiptap/starter-kit": "^3.13.0",
     "@tiptap/vue-3": "^3.13.0",
+    "@vueuse/core": "^10.11.1",
     "copy-to-clipboard": "^3.3.3",
     "d3-selection": "^3.0.0",
     "d3-transition": "^3.0.0",
