@@ -85,6 +85,12 @@ export default defineConfig({
         icon: 'npm',
         link: 'https://www.npmjs.com/package/element-ai-vue',
       },
+      {
+        icon: {
+          svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" rx="64" /><rect x="110" y="310" width="60" height="60" fill="#fafafa"/><text x="320" y="370" font-family="'Geist Mono', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="420" font-weight="500" text-anchor="middle" fill="#fafafa" ><tspan>/</tspan></text></svg>`,
+        },
+        link: 'https://npmx.dev/package/element-ai-vue',
+      },
     ],
   },
   head: [
