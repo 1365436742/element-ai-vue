@@ -1,3 +1,5 @@
+import { defineComponent, h, type VNode } from 'vue'
+import type { Element, RootContent } from 'hast'
 import { commonLangs, commonThemes } from '@element-ai-vue/constants'
 import { merge, uniq } from 'lodash-es'
 import {
@@ -31,3 +33,39 @@ export const getHighlighter = (options?: GetHighlighterOptions) => {
     })
   })
 }
+
+// 将 hast 节点转换为 Vue VNode
+export const hastToVNode = (node: RootContent): VNode | string | null => {
+  if (node.type === 'text') {
+    return node.value
+  }
+  if (node.type === 'element') {
+    const el = node
+    const children =
+      el.children?.map(hastToVNode).filter((n) => n !== null) || []
+    return h(el.tagName, el.properties || {}, children)
+  }
+  return null
+}
+
+/**
+ * 渲染 hast 树的组件
+ */
+export const CodeVNode = defineComponent({
+  name: 'CodeVNode',
+  props: {
+    hast: {
+      type: Object as () => Element,
+      default: null,
+    },
+  },
+  render() {
+    if (!this.hast || !this.hast.children) {
+      return h('pre', {}, [h('code', {}, '')])
+    }
+    const vnodes = this.hast.children
+      .map(hastToVNode)
+      .filter((n: VNode | string | null) => n !== null)
+    return h('div', {}, vnodes)
+  },
+})
