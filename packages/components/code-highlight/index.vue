@@ -33,10 +33,10 @@
       </div>
     </slot>
     <TransitionHeight :show="computedExpanded">
-      <div
+      <CodeVNode
         :class="[ns.e('content'), ns.is('line-numbers', props.showLineNumbers)]"
-        v-html="htmlContent"
-      ></div>
+        :hast="hastTree"
+      ></CodeVNode>
     </TransitionHeight>
   </div>
 </template>
@@ -52,8 +52,13 @@ import {
   useNamespace,
   useTheme,
 } from '@element-ai-vue/hooks'
-import { getHighlighter, HighlighterType } from '@element-ai-vue/utils'
+import {
+  CodeVNode,
+  getHighlighter,
+  HighlighterType,
+} from '@element-ai-vue/utils'
 import { computed, onMounted, PropType, ref, watch } from 'vue'
+import type { Element } from 'hast'
 import Tooltip from '../tooltip/index.vue'
 import { CodeHighlightEmitsType, codeHighlightProps } from './props'
 import TransitionHeight from '../transition-height/index.vue'
@@ -81,7 +86,7 @@ const props = defineProps({
 const themeRef = computed(() => props.theme)
 const { theme } = useTheme(themeRef)
 
-const htmlContent = ref('')
+const hastTree = ref<Element>()
 const highlighter = ref<HighlighterType | null>(null)
 const { isCopied, onCopy: copyContent } = useCopy()
 
@@ -101,6 +106,19 @@ onMounted(async () => {
   })
 })
 
+const updateHast = () => {
+  if (!highlighter.value || !theme.value) return
+  const hasLang = commonLangs.includes(props.language || '')
+  const hast = highlighter.value.codeToHast(props.content, {
+    lang: hasLang ? props.language : 'plaintext',
+    theme:
+      CodeHighlightThemeMap[theme.value || 'light'] ||
+      theme.value ||
+      'github-light',
+  })
+  hastTree.value = hast as any
+}
+
 defineExpose({
   onCopy,
   toggleExpanded,
@@ -108,18 +126,7 @@ defineExpose({
 
 watch(
   [() => props.content, () => highlighter.value, () => theme.value],
-  async () => {
-    if (!highlighter.value || !theme.value) return
-    const hasLang = commonLangs.includes(props.language || '')
-    const html = await highlighter.value.codeToHtml(props.content, {
-      lang: hasLang ? props.language : 'plaintext',
-      theme:
-        CodeHighlightThemeMap[theme.value || 'light'] ||
-        theme.value ||
-        'github-light',
-    })
-    htmlContent.value = html
-  },
+  updateHast,
   { immediate: true }
 )
 </script>
