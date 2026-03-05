@@ -23,5 +23,28 @@ Another option for Claude Code users:
 /plugin marketplace add element-ai-vue/skills
 
 # Install individual skills
-/plugin install element-ai-vue-helper@element-ai-vue-skills
+/plugin install element-ai-vue@element-ai-vue-skills
 ```
+
+## Example Usage
+
+After installing the Skill, you can ask the Agent about the usage of ElementAiVue components directly, for example:
+
+**Input:**
+
+> Please write an example using the Bubble component from ElementAiVue.
+
+**Output:**
+
+The Agent will generate accurate code based on the information provided by the Skill:
+
+```vue
+<script setup lang="ts">
+import { Bubble } from 'element-ai-vue'
+</script>
+
+<template>
+  <Bubble content="Hello, Element AI Vue!" />
+</template>
+```
+

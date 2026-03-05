@@ -23,5 +23,29 @@ npx skills add element-ai-vue/skills
 /plugin marketplace add element-ai-vue/skills
 
 # Install individual skills
-/plugin install element-ai-vue-helper@element-ai-vue-skills
+/plugin install element-ai-vue@element-ai-vue-skills
 ```
+
+## 使用示例
+
+安装 Skill 后，您可以直接询问 Agent 关于 ElementAiVue 组件的用法，例如：
+
+**Input:**
+
+> 请帮我写一个使用 ElementAiVue 的 Bubble 组件的例子。
+
+**Output:**
+
+Agent 将根据 Skill 提供的信息生成准确的代码：
+
+```vue
+<script setup lang="ts">
+import { Bubble } from 'element-ai-vue'
+</script>
+
+<template>
+  <Bubble content="Hello, Element AI Vue!" />
+</template>
+```
+
+
