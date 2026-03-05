@@ -47,4 +47,3 @@ import { Bubble } from 'element-ai-vue'
   <Bubble content="Hello, Element AI Vue!" />
 </template>
 ```
-
