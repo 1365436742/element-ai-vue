@@ -6,7 +6,10 @@
       opacity,
     }"
   >
-    <slot name="input-tag-prefix">
+    <slot
+      v-if="inputTagVariant === 'default' || variant === 'default'"
+      name="input-tag-prefix"
+    >
       <InputTagPrefix
         v-if="showInputTagPrefix && inputTagPrefixValue"
         :value="inputTagPrefixValue"

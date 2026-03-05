@@ -23,6 +23,10 @@ export const baseInputProps = {
     type: String,
     default: '',
   },
+  inputTagVariant: {
+    type: String as PropType<'default' | 'updown'>,
+    default: 'default',
+  },
   enterBreak: {
     type: Boolean,
     default: false,
@@ -39,6 +43,10 @@ export const baseInputProps = {
     type: Function as PropType<
       (view: EditorView, event: KeyboardEvent) => void
     >,
+  },
+  variant: {
+    type: String as PropType<'default' | 'updown'>,
+    default: 'default',
   },
 }
 

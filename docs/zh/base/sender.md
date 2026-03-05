@@ -88,6 +88,176 @@ html.dark {
 如果你想扩展更多html类型，可以查看源码方式，自行传入extensions进行扩展使用
 :::
 
+## 技能（前置标签）设置
+
+:::demo SenderInputTagUpdown
+
+```vue
+<template>
+  <div>
+    <button class="switch-btn" @click="variant = 'updown'">垂直</button>
+    <button class="switch-btn" @click="variant = 'default'">水平</button>
+    <button class="switch-btn" @click="inputTagVariant = 'default'">
+      水平标签
+    </button>
+    <button class="switch-btn" @click="inputTagVariant = 'updown'">
+      垂直标签变体
+    </button>
+  </div>
+
+  <div>
+    <button class="switch-btn" @click="showInputTagPrefix = true">
+      前置标签开启
+    </button>
+    <button class="switch-btn" @click="showInputTagPrefix = false">
+      前置标签关闭
+    </button>
+  </div>
+
+  <div class="wapper" :class="{ 'focus-class': focusClass }">
+    <ElASender
+      v-model="content"
+      v-model:show-input-tag-prefix="showInputTagPrefix"
+      inputTagPrefixValue="技能：翻译"
+      :input-tag-variant="inputTagVariant"
+      :placeholder
+      :variant
+      @focus="focusClass = true"
+      @blur="focusClass = false"
+    >
+    </ElASender>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ElASender } from 'element-ai-vue'
+import { ref } from 'vue'
+import ShadowBox from '../shadow-box.vue'
+
+const content = ref(``)
+const variant = ref<'default' | 'updown'>('updown')
+const inputTagVariant = ref<'default' | 'updown'>('updown')
+const focusClass = ref(false)
+
+const placeholder = ref(`请输入聊天内容`)
+const showInputTagPrefix = ref(true)
+</script>
+
+<style scoped lang="scss">
+html.dark {
+  .wapper {
+    border-color: rgba(121, 121, 121, 0.6);
+
+    &.focus-class {
+      border-color: rgba($color: #fff, $alpha: 0.6);
+    }
+  }
+}
+
+.wapper {
+  width: 100%;
+  border-radius: 8px;
+  padding: 8px;
+  border: 1px solid rgba(17, 25, 37, 0.15);
+
+  &.focus-class {
+    border-color: rgba(17, 25, 37, 0.45);
+  }
+}
+</style>
+```
+
+:::
+
+## 高级用法
+
+:::demo SenderBaseHtml
+
+```vue
+<template>
+  <div>
+    <button class="switch-btn" @click="variant = 'updown'">垂直</button>
+    <button class="switch-btn" @click="variant = 'default'">水平</button>
+  </div>
+
+  <div>
+    <button class="switch-btn" @click="showInputTagPrefix = true">
+      前置标签开启
+    </button>
+    <button class="switch-btn" @click="showInputTagPrefix = false">
+      前置标签关闭
+    </button>
+    <button class="switch-btn" @click="changeContent('input-slot')">
+      input-slot
+    </button>
+    <button class="switch-btn" @click="changeContent('select-slot')">
+      select-slot
+    </button>
+  </div>
+  <div class="box">
+    <div class="wapper" :class="{ 'focus-class': focusClass }">
+      <ElASender
+        v-model="content"
+        v-model:show-input-tag-prefix="showInputTagPrefix"
+        inputTagPrefixValue="技能：翻译"
+        :placeholder
+        :variant
+        @focus="focusClass = true"
+        @blur="focusClass = false"
+      >
+      </ElASender>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ElASender } from 'element-ai-vue'
+import { ref } from 'vue'
+
+const content = ref(``)
+const variant = ref<'default' | 'updown'>('default')
+const focusClass = ref(false)
+
+const placeholder = ref(`请输入聊天内容`)
+const showInputTagPrefix = ref(false)
+
+const options = ref([
+  { label: '前端开发', value: '1' },
+  { label: '设计视觉', value: '2' },
+  { label: 'java开发', value: '3' },
+])
+const temp: Record<string, string> = {
+  'input-slot':
+    '我是一个<input-slot placeholder="[职业你好我试试]"></input-slot>',
+  'select-slot': `我是<select-slot value="3" options='${JSON.stringify(
+    options.value
+  )}'></select-slot>，帮我完成...`,
+}
+const changeContent = (key: string) => {
+  content.value = temp[key]
+}
+</script>
+
+<style scoped lang="scss">
+.box {
+  background-color: #000;
+  padding: 20px;
+  .wapper {
+    width: 100%;
+    border-radius: 8px;
+    padding: 8px;
+    border: 1px solid rgba(121, 121, 121, 0.6);
+
+    &.focus-class {
+      border-color: rgba($color: #fff, $alpha: 0.6);
+    }
+  }
+}
+</style>
+```
+
+:::
+
 ## 主题设置
 
 :::demo SenderBaseHtmlDark
@@ -394,6 +564,7 @@ const { handleFileUpload } = useFileOperation(commonProps, fileList)
 | disabled                      | 是否禁用                                                              | `boolean`                                          | `false`     |
 | extensions                    | [tiptap](https://tiptap.dev/docs/editor/extensions/overview) 扩展配置 | `Array<Extensions>`                                | `[]`        |
 | inputTagPrefixValue           | 输入框前置标签内容                                                    | `string`                                           | `''`        |
+| inputTagVariant               | 输入框前置标签样式变体                                                | `'default' \| 'updown'`                            | `'default'` |
 | enterBreak                    | 回车是否换行，为 `false` 时回车触发 `enterPressed` 事件               | `boolean`                                          | `false`     |
 | onHandleKeyDown               | 自定义键盘事件处理                                                    | `(view: EditorView, event: KeyboardEvent) => void` | -           |
 | variant                       | 布局变体                                                              | `'default' \| 'updown'`                            | `'default'` |

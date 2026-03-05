@@ -7,10 +7,6 @@ export const senderProps = {
     type: Boolean,
     default: false,
   },
-  variant: {
-    type: String as PropType<'default' | 'updown'>,
-    default: 'default',
-  },
 }
 
 export interface SenderSelectOption {

@@ -88,6 +88,176 @@ html.dark {
 If you want to extend more HTML types, please refer to the source code and pass in `extensions` for customization.
 :::
 
+## Skill (Prefix Tag) Settings
+
+:::demo SenderInputTagUpdown
+
+```vue
+<template>
+  <div>
+    <button class="switch-btn" @click="variant = 'updown'">Vertical</button>
+    <button class="switch-btn" @click="variant = 'default'">Horizontal</button>
+    <button class="switch-btn" @click="inputTagVariant = 'default'">
+      Horizontal Tag
+    </button>
+    <button class="switch-btn" @click="inputTagVariant = 'updown'">
+      Vertical Tag Variant
+    </button>
+  </div>
+
+  <div>
+    <button class="switch-btn" @click="showInputTagPrefix = true">
+      Enable Prefix Tag
+    </button>
+    <button class="switch-btn" @click="showInputTagPrefix = false">
+      Disable Prefix Tag
+    </button>
+  </div>
+
+  <div class="wapper" :class="{ 'focus-class': focusClass }">
+    <ElASender
+      v-model="content"
+      v-model:show-input-tag-prefix="showInputTagPrefix"
+      inputTagPrefixValue="Skill: Translation"
+      :input-tag-variant="inputTagVariant"
+      :placeholder
+      :variant
+      @focus="focusClass = true"
+      @blur="focusClass = false"
+    >
+    </ElASender>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ElASender } from 'element-ai-vue'
+import { ref } from 'vue'
+import ShadowBox from '../shadow-box.vue'
+
+const content = ref(``)
+const variant = ref<'default' | 'updown'>('updown')
+const inputTagVariant = ref<'default' | 'updown'>('updown')
+const focusClass = ref(false)
+
+const placeholder = ref(`Please enter chat content`)
+const showInputTagPrefix = ref(true)
+</script>
+
+<style scoped lang="scss">
+html.dark {
+  .wapper {
+    border-color: rgba(121, 121, 121, 0.6);
+
+    &.focus-class {
+      border-color: rgba($color: #fff, $alpha: 0.6);
+    }
+  }
+}
+
+.wapper {
+  width: 100%;
+  border-radius: 8px;
+  padding: 8px;
+  border: 1px solid rgba(17, 25, 37, 0.15);
+
+  &.focus-class {
+    border-color: rgba(17, 25, 37, 0.45);
+  }
+}
+</style>
+```
+
+:::
+
+## Advanced Usage
+
+:::demo SenderBaseHtml
+
+```vue
+<template>
+  <div>
+    <button class="switch-btn" @click="variant = 'updown'">Vertical</button>
+    <button class="switch-btn" @click="variant = 'default'">Horizontal</button>
+  </div>
+
+  <div>
+    <button class="switch-btn" @click="showInputTagPrefix = true">
+      Enable Prefix Tag
+    </button>
+    <button class="switch-btn" @click="showInputTagPrefix = false">
+      Disable Prefix Tag
+    </button>
+    <button class="switch-btn" @click="changeContent('input-slot')">
+      input-slot
+    </button>
+    <button class="switch-btn" @click="changeContent('select-slot')">
+      select-slot
+    </button>
+  </div>
+  <div class="box">
+    <div class="wapper" :class="{ 'focus-class': focusClass }">
+      <ElASender
+        v-model="content"
+        v-model:show-input-tag-prefix="showInputTagPrefix"
+        inputTagPrefixValue="Skill: Translation"
+        :placeholder
+        :variant
+        @focus="focusClass = true"
+        @blur="focusClass = false"
+      >
+      </ElASender>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ElASender } from 'element-ai-vue'
+import { ref } from 'vue'
+
+const content = ref(``)
+const variant = ref<'default' | 'updown'>('default')
+const focusClass = ref(false)
+
+const placeholder = ref(`Please enter chat content`)
+const showInputTagPrefix = ref(false)
+
+const options = ref([
+  { label: 'Frontend Dev', value: '1' },
+  { label: 'Visual Design', value: '2' },
+  { label: 'Java Dev', value: '3' },
+])
+const temp: Record<string, string> = {
+  'input-slot':
+    'I am a <input-slot placeholder="[Job Hello Test]"></input-slot>',
+  'select-slot': `I am <select-slot value="3" options='${JSON.stringify(
+    options.value
+  )}'></select-slot>, help me complete...`,
+}
+const changeContent = (key: string) => {
+  content.value = temp[key]
+}
+</script>
+
+<style scoped lang="scss">
+.box {
+  background-color: #000;
+  padding: 20px;
+  .wapper {
+    width: 100%;
+    border-radius: 8px;
+    padding: 8px;
+    border: 1px solid rgba(121, 121, 121, 0.6);
+
+    &.focus-class {
+      border-color: rgba($color: #fff, $alpha: 0.6);
+    }
+  }
+}
+</style>
+```
+
+:::
+
 ## Theme Settings
 
 :::demo SenderBaseHtmlDark
@@ -394,6 +564,7 @@ const { handleFileUpload } = useFileOperation(commonProps, fileList)
 | disabled                      | Whether disabled                                                                             | `boolean`                                          | `false`     |
 | extensions                    | [tiptap](https://tiptap.dev/docs/editor/extensions/overview) extension configuration         | `Array<Extensions>`                                | `[]`        |
 | inputTagPrefixValue           | Content of the input box prefix tag                                                          | `string`                                           | `''`        |
+| inputTagVariant               | Input tag style variant                                                                      | `'default' \| 'updown'`                            | `'default'` |
 | enterBreak                    | Whether Enter key inserts a line break. If `false`, Enter triggers the `enterPressed` event. | `boolean`                                          | `false`     |
 | onHandleKeyDown               | Custom keyboard event handling                                                               | `(view: EditorView, event: KeyboardEvent) => void` | -           |
 | variant                       | Layout variant                                                                               | `'default' \| 'updown'`                            | `'default'` |

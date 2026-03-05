@@ -23,6 +23,16 @@
       </BaseInput>
     </div>
     <div :class="ns.e('action')">
+      <slot
+        v-if="variant === 'updown' && inputTagVariant === 'updown'"
+        name="input-tag-prefix"
+      >
+        <InputTagUpdown
+          v-if="showInputTagPrefix && inputTagPrefixValue"
+          :value="inputTagPrefixValue"
+          @remove="() => emits('update:showInputTagPrefix', false)"
+        ></InputTagUpdown>
+      </slot>
       <slot v-if="variant === 'updown'" name="prefix"></slot>
       <div :class="ns.em('action', 'other')">
         <slot name="action-list"></slot>
@@ -59,6 +69,7 @@ import { SELECT_SLOT_CONTENT_INJECTION_KEY } from '@element-ai-vue/constants'
 import BaseInput from './base-input/index.vue'
 import { BaseInputEmitsType } from './base-input/props'
 import { senderProps, SenderEmitsType, SenderSlotsType } from './props'
+import InputTagUpdown from './base-input/input-tag-updown.vue'
 
 const ns = useNamespace('sender')
 const props = defineProps({

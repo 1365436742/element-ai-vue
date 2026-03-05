@@ -70,6 +70,50 @@
   }
 }
 
+@include b(input-tag-updown) {
+  display: flex;
+  align-items: center;
+  background: var(--#{$namespace}-input-tag-prefix-bg-color);
+  color: var(--#{$namespace}-primary-default-color);
+  padding: 0 6px;
+  margin: 0 2px;
+  border-radius: 6px;
+  gap: 2px;
+  height: 32px;
+  cursor: pointer;
+  box-sizing: border-box;
+
+  @include e(wrapper) {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.5;
+    letter-spacing: 0px;
+    white-space: nowrap;
+    user-select: none;
+  }
+  @include e(remove) {
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+
+    @media (hover: hover) {
+      &:hover {
+        background: var(--#{$namespace}-input-tag-prefix-bg-color);
+      }
+    }
+    @include m(icon) {
+      &.element-ai-vue-iconfont {
+        font-size: 12px;
+        color: var(--#{$namespace}-primary-default-color);
+      }
+    }
+  }
+}
+
 @include b(sender) {
   width: 100%;
   box-sizing: border-box;
@@ -188,19 +232,21 @@
 @include b(select-slot) {
   display: inline-block;
   @include e(select-wap) {
-    padding: 2px 6px;
+    padding: 0 6px;
     margin: 0 2px;
     border-radius: 4px;
     background-color: var(--#{$namespace}-primary-traansparent-1-color);
     font-size: 14px;
-    line-height: 1.5;
+    line-height: inherit;
     color: var(--#{$namespace}-primary-default-color);
     cursor: pointer;
     display: flex;
     align-items: center;
   }
   @include e(select-icon) {
-    font-size: 8px;
+    &.element-ai-vue-iconfont {
+      font-size: 8px;
+    }
   }
 
   @include e(options-wap) {
