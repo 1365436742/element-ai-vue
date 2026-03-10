@@ -104,7 +104,14 @@ export default defineConfig({
           'element-ai-vue, element ai vue, element, vue3, ai components, ui library, element-plus, chat ui, ai search, llm, agent, prompt, chatbot, 大模型前端组件库',
       },
     ],
-    ['meta', { name: 'robots', content: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' }],
+    [
+      'meta',
+      {
+        name: 'robots',
+        content:
+          'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
+      },
+    ],
     ['meta', { property: 'og:title', content: 'Element Ai Vue' }],
     ['meta', { property: 'og:description', content: '企业级 AI 交互组件库' }],
     ['meta', { property: 'og:url', content: 'https://element-ai-vue.com' }],
