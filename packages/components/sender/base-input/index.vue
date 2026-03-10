@@ -33,7 +33,11 @@ import HardBreak from '@tiptap/extension-hard-break'
 import History from '@tiptap/extension-history'
 import Placeholder from '@tiptap/extension-placeholder'
 import type { EditorView } from 'prosemirror-view'
-import { handlePasteLogic, getParseFile } from '@element-ai-vue/utils'
+import {
+  handlePasteLogic,
+  getParseFile,
+  getPlaceholderHeight,
+} from '@element-ai-vue/utils'
 import { useNamespace } from '@element-ai-vue/hooks'
 import InputTagPrefix from './input-tag-prefix.vue'
 import InputSlot from '../input-slot/index'
@@ -102,7 +106,7 @@ const editor = useEditor({
   },
   onCreate() {
     if (editor.value?.isEmpty) {
-      placeholderHeight.value = getPlaceholderHeight()
+      placeholderHeight.value = getPlaceholderHeight(editor.value)
     }
     editor.value?.commands.setContent(props.modelValue || '')
     opacity.value = 1
@@ -117,17 +121,6 @@ const editor = useEditor({
   onBlur: () => emits('blur'),
   onFocus: () => emits('focus'),
 })
-
-const getPlaceholderHeight = () => {
-  const placeholder = editor.value?.view.dom.querySelector(
-    '[data-placeholder]'
-  ) as HTMLElement
-  if (placeholder) {
-    const style = window.getComputedStyle(placeholder, '::before')
-    return style.height || '0px'
-  }
-  return ''
-}
 
 const closeInputTagPrefix = () => {
   emits('update:showInputTagPrefix', false)

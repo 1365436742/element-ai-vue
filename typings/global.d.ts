@@ -15,6 +15,7 @@ declare module 'vue' {
     ElAConfigProvider: (typeof import('element-ai-vue'))['ElAConfigProvider']
     ElAPpt: (typeof import('element-ai-vue'))['ElAPpt']
     ElAOverflowToolbar: (typeof import('element-ai-vue'))['ElAOverflowToolbar']
+    ElAMDocEditor: (typeof import('element-ai-vue'))['ElAMDocEditor']
   }
 }
 

@@ -35,7 +35,10 @@ export const KatexBlock = Node.create({
   },
 
   renderHTML({ HTMLAttributes }) {
-    return ['div', mergeAttributes(HTMLAttributes, { 'data-type': 'katex-block' })]
+    return [
+      'div',
+      mergeAttributes(HTMLAttributes, { 'data-type': 'katex-block' }),
+    ]
   },
 
   addNodeView() {
@@ -76,7 +79,10 @@ export const KatexInline = Node.create({
   },
 
   renderHTML({ HTMLAttributes }) {
-    return ['span', mergeAttributes(HTMLAttributes, { 'data-type': 'katex-inline' })]
+    return [
+      'span',
+      mergeAttributes(HTMLAttributes, { 'data-type': 'katex-inline' }),
+    ]
   },
 
   addNodeView() {

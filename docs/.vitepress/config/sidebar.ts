@@ -52,7 +52,10 @@ export const zhSidebar: DefaultTheme.Sidebar = [
   },
   {
     text: '实验室',
-    items: [{ text: 'ppt 编辑', link: '/zh/base/ppt' }],
+    items: [
+      { text: 'ppt 编辑', link: '/zh/base/ppt' },
+      { text: 'MDocEditor', link: '/zh/base/m-doc-editor' },
+    ],
   },
 ]
 export const enSidebar: DefaultTheme.Sidebar = [
@@ -107,6 +110,9 @@ export const enSidebar: DefaultTheme.Sidebar = [
   },
   {
     text: 'Laboratory',
-    items: [{ text: 'PPT Editor', link: '/en/base/ppt' }],
+    items: [
+      { text: 'PPT Editor', link: '/en/base/ppt' },
+      { text: 'MDocEditor', link: '/en/base/m-doc-editor' },
+    ],
   },
 ]

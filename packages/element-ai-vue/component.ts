@@ -12,6 +12,7 @@ import { ElAThinking } from '@element-ai-vue/components/thinking'
 import { ElAThoughtChain } from '@element-ai-vue/components/thought-chain'
 import { ElAConfigProvider } from '@element-ai-vue/components/config-provider'
 import { ElAOverflowToolbar } from '@element-ai-vue/components/overflow-toolbar'
+import { ElAMDocEditor } from '@element-ai-vue/components/m-doc-editor'
 
 import type { Plugin } from 'vue'
 
@@ -30,4 +31,5 @@ export default [
   ElAThoughtChain,
   ElAConfigProvider,
   ElAOverflowToolbar,
+  ElAMDocEditor,
 ] as Plugin[]

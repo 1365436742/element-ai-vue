@@ -1,0 +1,23 @@
+@use '../mixins/config' as *;
+@use '../mixins/mixins' as *;
+
+@include b(m-doc-editor) {
+  @include e(editor) {
+    p {
+      margin: 0;
+    }
+
+    &.ProseMirror-focused {
+      outline: none;
+    }
+
+    p.is-editor-empty:first-child::before {
+      content: attr(data-placeholder);
+      position: absolute;
+      color: #adb5bd;
+      pointer-events: none;
+      font-size: 16px;
+      line-height: 24px;
+    }
+  }
+}
