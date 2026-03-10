@@ -5,6 +5,7 @@ import remarkBreaks from 'remark-breaks'
 import remarkMath from 'remark-math'
 import remarkRehype from 'remark-rehype'
 import rehypeKatex from 'rehype-katex'
+import { toHtml } from 'hast-util-to-html'
 import { katexConfig } from '@element-ai-vue/constants'
 import {
   remarkAbbr,
@@ -187,4 +188,20 @@ export const katexProcess = (content: string): string => {
     }
   )
   return resultContent
+}
+
+/**
+ * 将 Markdown 字符串转换为 HTML 字符串
+ * @param content - Markdown 原始文本
+ * @param processor - 通过 createBaseProcessor 创建的 unified 处理器
+ * @returns HTML 字符串
+ */
+export const processMarkdownToHtml = async (
+  content: string,
+  processor: ProcessorType
+): Promise<string> => {
+  const tree = (await processor.run(processor.parse(content), {
+    value: content,
+  } as any)) as any
+  return toHtml(tree, { allowDangerousHtml: true })
 }
