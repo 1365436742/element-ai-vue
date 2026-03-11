@@ -11,6 +11,7 @@ export const KatexBlock = Node.create({
   name: 'katexBlock',
   group: 'block',
   atom: true,
+  selectable: false,
 
   addAttributes() {
     return {
@@ -55,6 +56,7 @@ export const KatexInline = Node.create({
   group: 'inline',
   inline: true,
   atom: true,
+  selectable: false,
 
   addAttributes() {
     return {
