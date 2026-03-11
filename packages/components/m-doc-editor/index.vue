@@ -61,7 +61,17 @@ const editor = useEditor({
   content: '',
   editable: !props.disabled,
   extensions: [
-    StarterKit,
+    StarterKit.configure({
+      link: {
+        openOnClick: false, // 编辑模式下点击不跳转，而是允许编辑
+        autolink: true, // 自动识别输入的 URL
+        linkOnPaste: true, // 粘贴 URL 时自动创建链接
+        HTMLAttributes: {
+          target: '_blank',
+          rel: 'noopener noreferrer',
+        },
+      },
+    }),
     KatexInline,
     KatexBlock,
     Image.configure({
