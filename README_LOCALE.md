@@ -5,4 +5,4 @@ Oxc、Prettier - Code formatter
 # TODO
 
 6. sender给高度和或者行数设置固定高度
-7. CodeHighlight 改成也要vnode渲染。不然会出现滚动的问题
+7. 解析error做个兜底，就显示代码，这里注意流式接口返回

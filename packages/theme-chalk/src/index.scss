@@ -16,3 +16,7 @@
 @use 'font/iconfont.css' as iconfont;
 @use 'overflow-toolbar/index.scss' as overflow-toolbar;
 @use 'm-doc-editor/index.scss' as m-doc-editor;
+@use 'conversations/index.scss' as conversations;
+@use 'conversation-item/index.scss' as conversation-item;
+@use 'conversation-create/index.scss' as conversation-create;
+@use 'conversation-menu/index.scss' as conversation-menu;

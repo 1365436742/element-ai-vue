@@ -15,6 +15,7 @@ export const zhSidebar: DefaultTheme.Sidebar = [
       { text: 'Markdown', link: '/zh/base/markdown' },
       { text: 'Sender 输入框', link: '/zh/base/sender' },
       { text: 'BubbleList 气泡列表', link: '/zh/base/bubble-list' },
+      { text: 'Conversations 会话管理', link: '/zh/base/conversations' },
       { text: 'OverflowToolbar 溢出工具栏', link: '/zh/base/overflow-toolbar' },
     ],
   },
@@ -36,6 +37,14 @@ export const zhSidebar: DefaultTheme.Sidebar = [
           { text: 'ThoughtChain 思维链', link: '/zh/base/thought-chain' },
         ],
       },
+      {
+        text: 'Conversations 会话管理',
+        items: [
+          { text: 'ConversationItem', link: '/zh/base/conversation-item' },
+          { text: 'ConversationCreate', link: '/zh/base/conversation-create' },
+          { text: 'ConversationMenu', link: '/zh/base/conversation-menu' },
+        ],
+      },
     ],
   },
   {
@@ -53,7 +62,7 @@ export const zhSidebar: DefaultTheme.Sidebar = [
   {
     text: '实验室',
     items: [
-      { text: 'MDocEditor', link: '/zh/base/m-doc-editor' },
+      // { text: 'MDocEditor', link: '/zh/base/m-doc-editor' },
       { text: 'ppt 编辑', link: '/zh/base/ppt' },
     ],
   },
@@ -73,6 +82,7 @@ export const enSidebar: DefaultTheme.Sidebar = [
       { text: 'Markdown', link: '/en/base/markdown' },
       { text: 'Sender', link: '/en/base/sender' },
       { text: 'BubbleList', link: '/en/base/bubble-list' },
+      { text: 'Conversations', link: '/en/base/conversations' },
       { text: 'OverflowToolbar', link: '/en/base/overflow-toolbar' },
     ],
   },
@@ -94,6 +104,14 @@ export const enSidebar: DefaultTheme.Sidebar = [
           { text: 'ThoughtChain', link: '/en/base/thought-chain' },
         ],
       },
+      {
+        text: 'Conversations',
+        items: [
+          { text: 'ConversationItem', link: '/en/base/conversation-item' },
+          { text: 'ConversationCreate', link: '/en/base/conversation-create' },
+          { text: 'ConversationMenu', link: '/en/base/conversation-menu' },
+        ],
+      },
     ],
   },
   {
@@ -111,7 +129,7 @@ export const enSidebar: DefaultTheme.Sidebar = [
   {
     text: 'Laboratory',
     items: [
-      { text: 'MDocEditor', link: '/en/base/m-doc-editor' },
+      // { text: 'MDocEditor', link: '/en/base/m-doc-editor' },
       { text: 'PPT Editor', link: '/en/base/ppt' },
     ],
   },

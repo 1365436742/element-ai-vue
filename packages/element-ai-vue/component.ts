@@ -13,6 +13,10 @@ import { ElAThoughtChain } from '@element-ai-vue/components/thought-chain'
 import { ElAConfigProvider } from '@element-ai-vue/components/config-provider'
 import { ElAOverflowToolbar } from '@element-ai-vue/components/overflow-toolbar'
 import { ElAMDocEditor } from '@element-ai-vue/components/m-doc-editor'
+import { ElAConversations } from '@element-ai-vue/components/conversations'
+import { ElAConversationItem } from '@element-ai-vue/components/conversation-item'
+import { ElAConversationCreate } from '@element-ai-vue/components/conversation-create'
+import { ElAConversationMenu } from '@element-ai-vue/components/conversation-menu'
 
 import type { Plugin } from 'vue'
 
@@ -32,4 +36,8 @@ export default [
   ElAConfigProvider,
   ElAOverflowToolbar,
   ElAMDocEditor,
+  ElAConversations,
+  ElAConversationItem,
+  ElAConversationCreate,
+  ElAConversationMenu,
 ] as Plugin[]
