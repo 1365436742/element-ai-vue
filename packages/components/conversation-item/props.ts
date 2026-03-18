@@ -25,7 +25,6 @@ export const conversationItemProps = {
 
 export interface ConversationItem {
   key?: string
-  icon?: string
   label?: string
   group?: string
   disabled?: boolean
@@ -37,7 +36,6 @@ export interface ConversationItem {
 }
 
 export type CoversationItemSlotsType = {
-  icon?: (item: ConversationItem) => VNode[]
   item?: (item: ConversationItem) => VNode[]
   group?: (groupName: string) => VNode[]
 }
