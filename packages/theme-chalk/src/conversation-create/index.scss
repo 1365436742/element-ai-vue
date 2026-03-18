@@ -2,4 +2,40 @@
 @use '../mixins/mixins' as *;
 
 @include b(conversation-create) {
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0 12px;
+  gap: 8px;
+  border-radius: var(--#{$namespace}-border-radius-base);
+  border: 1px solid var(--#{$namespace}-file-card-border-color);
+  font-size: 14px;
+  font-weight: bold;
+  &:hover {
+    background-color: var(--#{$namespace}-group-item-active-bg);
+  }
+  @include e(title) {
+    flex: 1;
+    width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  @include e(end) {
+    display: flex;
+    align-items: center;
+    margin-right: 6px;
+    gap: 4px;
+    > span {
+      display: flex;
+      align-items: center;
+      border-radius: var(--#{$namespace}-border-radius-btn);
+      border: 1px solid var(--#{$namespace}-file-card-border-color);
+      font-size: 12px;
+      height: 16px;
+      padding: 0 4px;
+    }
+  }
 }
