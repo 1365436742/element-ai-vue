@@ -34,7 +34,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    border-radius: 8px;
+    border-radius: var(--#{$namespace}-border-radius-base);
     cursor: pointer;
     width: 100%;
     transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
