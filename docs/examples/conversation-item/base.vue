@@ -68,7 +68,7 @@ html.dark {
   .box-bg {
     background-color: rgb(48, 48, 48);
     .item-box {
-      background-color: black;
+      --el-ai-conversation-item-bg-color: black;
     }
   }
 }
@@ -79,7 +79,7 @@ html.dark {
   .item-box {
     width: 256px;
     padding: 12px;
-    background-color: #fff;
+    --el-ai-conversation-item-bg-color: #fff;
     border-radius: 6px;
   }
 }
