@@ -39,6 +39,9 @@
   --#{$namespace}-scrollbar-thumb-bg-color: rgba(183, 184, 186, 0.15);
 
   --#{$namespace}-arrow-color: #fff;
+
+  --#{$namespace}-group-title-color: rgba(255, 255, 255, 0.45);
+  --#{$namespace}-group-item-active-bg: rgba(255, 255, 255, 0.12);
   color: #fff;
 }
 
@@ -85,6 +88,9 @@
   --#{$namespace}-scrollbar-thumb-bg-color: rgba(17, 25, 37, 0.15);
 
   --#{$namespace}-arrow-color: #000000;
+
+  --#{$namespace}-group-title-color: rgba(0, 0, 0, 0.45);
+  --#{$namespace}-group-item-active-bg: rgba(0, 0, 0, 0.06);
 }
 
 @mixin dark-markdown {
