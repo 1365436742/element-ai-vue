@@ -6,6 +6,7 @@
   --#{$namespace}-border-color-light: #1d1e1f;
   --#{$namespace}-box-shadow-light: 0px 0px 12px rgba(0, 0, 0, 0.72);
   --#{$namespace}-bg-color-overlay: #1d1e1f;
+  --#{$namespace}-color-text-disabled: rgba(255, 255, 255, 0.25);
   --#{$namespace}-header-bg-color: rgba(255, 255, 255, 0.12);
   --#{$namespace}-content-bg-color: rgb(48, 48, 48);
   --#{$namespace}-color-border-secondary: #303133;
@@ -42,6 +43,7 @@
 
   --#{$namespace}-group-title-color: rgba(255, 255, 255, 0.45);
   --#{$namespace}-group-item-active-bg: rgba(255, 255, 255, 0.12);
+  --#{$namespace}-conversation-item-bg-color: #000;
   color: #fff;
 }
 
@@ -49,6 +51,7 @@
   --#{$namespace}-border-color-light: #fff;
   --#{$namespace}-box-shadow-light: 0px 0px 12px rgba(0, 0, 0, 0.12);
   --#{$namespace}-bg-color-overlay: #e4e7ed;
+  --#{$namespace}-color-text-disabled: rgba(0, 0, 0, 0.25);
   --#{$namespace}-border-radius-base: 6px;
   --#{$namespace}-border-radius-btn: 4px;
   --#{$namespace}-header-bg-color: rgba(0, 0, 0, 0.06);
@@ -91,6 +94,7 @@
 
   --#{$namespace}-group-title-color: rgba(0, 0, 0, 0.45);
   --#{$namespace}-group-item-active-bg: rgba(0, 0, 0, 0.06);
+  --#{$namespace}-conversation-item-bg-color: #fff;
 }
 
 @mixin dark-markdown {
