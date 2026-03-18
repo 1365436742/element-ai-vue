@@ -1,5 +1,5 @@
 <template>
-  <section :class="ns.b()">
+  <section :class="[ns.b(), ns.is('sticky', sticky)]">
     <ul :class="ns.e('group')" v-for="(items, groupName) in groups">
       <li
         v-if="groupName !== 'undefined' && groupName !== 'null' && groupName"
@@ -14,6 +14,7 @@
         :class="[
           ns.e('item'),
           ns.is('active', item[keyName] === props.activeKey),
+          ns.is('disabled', item.disabled),
         ]"
         :key="item.key"
         @click="handleClick(item)"
@@ -52,6 +53,7 @@ const themeRef = computed(() => props.theme)
 const { theme } = useTheme(themeRef)
 
 const handleClick = (item: ConversationItem) => {
+  if (item.disabled) return
   const activeKey = item[props.keyName]
   emits('update:activeKey', activeKey)
   emits('activeChange', activeKey, item)
