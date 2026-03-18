@@ -9,6 +9,10 @@ export const conversationItemCommonProps = {
     type: String,
     default: 'key',
   },
+  sticky: {
+    type: Boolean,
+    default: false,
+  },
   activeKey: {
     type: String,
     default: '',
