@@ -1,0 +1,15 @@
+@use '../mixins/config' as *;
+@use '../mixins/mixins' as *;
+
+@include b(text-overflow-tooltip) {
+  width: 100%;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  @include e(toolip) {
+    &.#{$namespace}-tooltip {
+      display: block;
+    }
+  }
+}
