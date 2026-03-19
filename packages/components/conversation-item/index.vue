@@ -1,5 +1,5 @@
 <template>
-  <section :class="[ns.b(), ns.is('sticky', sticky)]">
+  <section :class="[ns.b(), ns.m(theme), ns.is('sticky', sticky)]">
     <ul
       :class="ns.e('group')"
       v-for="(items, groupName) in groups"
