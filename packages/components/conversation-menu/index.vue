@@ -1,5 +1,5 @@
 <template>
-  <div :class="ns.b()">
+  <div :class="[ns.b(), ns.m(theme)]">
     <template v-for="item in items" :key="item[keyName]">
       <div
         :class="[
