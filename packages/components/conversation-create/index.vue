@@ -1,5 +1,5 @@
 <template>
-  <div :class="ns.b()" @click="handleClick">
+  <div :class="[ns.b(), ns.m(theme)]" @click="handleClick">
     <slot name="icon">
       <div :class="ns.e('icon')">
         <svg
