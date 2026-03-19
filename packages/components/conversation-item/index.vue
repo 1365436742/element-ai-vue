@@ -1,6 +1,10 @@
 <template>
   <section :class="[ns.b(), ns.is('sticky', sticky)]">
-    <ul :class="ns.e('group')" v-for="(items, groupName) in groups">
+    <ul
+      :class="ns.e('group')"
+      v-for="(items, groupName) in groups"
+      :key="groupName"
+    >
       <li
         v-if="groupName !== 'undefined' && groupName !== 'null' && groupName"
         :class="ns.e('title')"
@@ -16,11 +20,13 @@
           ns.is('active', item[keyName] === props.activeKey),
           ns.is('disabled', item.disabled),
         ]"
-        :key="item.key"
+        :key="item[keyName]"
         @click="handleClick(item)"
       >
         <slot name="item" :item="item">
-          {{ item.label }}
+          <ElATextOverflowTooltip
+            :content="item.label"
+          ></ElATextOverflowTooltip>
         </slot>
       </li>
     </ul>
@@ -36,6 +42,7 @@ import {
   conversationItemProps,
   CoversationItemEmitsType,
 } from './props'
+import ElATextOverflowTooltip from '../text-overflow-tooltip'
 
 defineOptions({
   name: 'ElAConversationItem',
