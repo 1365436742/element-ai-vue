@@ -1,6 +1,10 @@
 import { ExtractPropTypes, PropType } from 'vue'
 
 export const conversationMenuCommonProps = {
+  items: {
+    type: Array as PropType<ConversationMenu[]>,
+    default: () => ({}),
+  },
   openKeys: {
     type: Array as PropType<string[]>,
     default: () => [],
@@ -13,6 +17,14 @@ export const conversationMenuCommonProps = {
     type: String,
     default: '',
   },
+}
+
+export interface ConversationMenu {
+  key?: string
+  label?: string
+  disabled?: boolean
+  children?: ConversationMenu[]
+  [key: string]: any
 }
 
 export const conversationMenuProps = {
