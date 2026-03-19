@@ -1,5 +1,5 @@
 <template>
-  <div :class="ns.b()"></div>
+  <div :class="[ns.b(), ns.m(theme)]"></div>
 </template>
 
 <script setup lang="ts">
