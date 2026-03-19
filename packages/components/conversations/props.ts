@@ -3,7 +3,6 @@ import {
   ConversationItem,
   conversationItemCommonProps,
   CoversationItemEmitsType,
-  CoversationItemSlotsType,
 } from '../conversation-item'
 import {
   conversationMenuCommonProps,
@@ -41,7 +40,7 @@ export type CoversationsSlotsType = {
   conversationCreate?: () => VNode[]
 
   loader?: () => VNode[]
-} & CoversationItemSlotsType
+}
 
 export type ConversationsEmitsType = {
   (e: 'next'): void
