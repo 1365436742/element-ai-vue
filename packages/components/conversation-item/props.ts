@@ -1,4 +1,4 @@
-import { ExtractPropTypes, PropType, VNode } from 'vue'
+import { ExtractPropTypes, PropType } from 'vue'
 
 export const conversationItemCommonProps = {
   items: {
@@ -32,16 +32,7 @@ export interface ConversationItem {
   label?: string
   group?: string
   disabled?: boolean
-
-  // dividerLine?: boolean
-  // dashed?: boolean
-
   [key: string]: any
-}
-
-export type CoversationItemSlotsType = {
-  item?: (item: ConversationItem) => VNode[]
-  group?: (groupName: string) => VNode[]
 }
 
 export type CoversationItemEmitsType = {
