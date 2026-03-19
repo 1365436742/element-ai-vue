@@ -40,8 +40,8 @@ export const zhSidebar: DefaultTheme.Sidebar = [
       {
         text: 'Conversations 会话管理',
         items: [
-          { text: 'ConversationItem', link: '/zh/base/conversation-item' },
           { text: 'ConversationCreate', link: '/zh/base/conversation-create' },
+          { text: 'ConversationItem', link: '/zh/base/conversation-item' },
           { text: 'ConversationMenu', link: '/zh/base/conversation-menu' },
         ],
       },
@@ -107,8 +107,8 @@ export const enSidebar: DefaultTheme.Sidebar = [
       {
         text: 'Conversations',
         items: [
-          { text: 'ConversationItem', link: '/en/base/conversation-item' },
           { text: 'ConversationCreate', link: '/en/base/conversation-create' },
+          { text: 'ConversationItem', link: '/en/base/conversation-item' },
           { text: 'ConversationMenu', link: '/en/base/conversation-menu' },
         ],
       },
