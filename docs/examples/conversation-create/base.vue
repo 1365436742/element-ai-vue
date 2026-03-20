@@ -29,6 +29,7 @@
 <script setup lang="ts">
 import { ElAConversationCreate } from 'element-ai-vue'
 const handleClick = () => {
+  // oxlint-disable-next-line no-console
   console.log('点击了创建按钮')
 }
 </script>
