@@ -5,8 +5,13 @@
   ul,
   li {
     margin: 0;
-    padding: 0 8px;
     list-style: none;
+  }
+  ul {
+    padding: 0;
+  }
+  li {
+    padding: 0 8px;
   }
   &.is-sticky {
     .#{$namespace}-conversation-item__title {
