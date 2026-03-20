@@ -1,5 +1,18 @@
 <template>
-  <div :class="[ns.b(), ns.m(theme)]"></div>
+  <div :class="[ns.b(), ns.m(theme)]">
+    <div :class="ns.e('header')">
+      <slot name="header"></slot>
+    </div>
+    <div :class="ns.e('scroll')">
+      <slot name="scroll"></slot>
+      <div :class="ns.e('loading')">
+        <slot name="loading"></slot>
+      </div>
+    </div>
+    <div :class="ns.e('footer')">
+      <slot name="footer"></slot>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
