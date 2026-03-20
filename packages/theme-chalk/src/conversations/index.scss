@@ -2,4 +2,21 @@
 @use '../mixins/mixins' as *;
 
 @include b(conversations) {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background-color: var(--el-ai-conversation-item-bg-color, #fff);
+  @include e(header) {
+    display: flex;
+    flex-direction: column;
+  }
+  @include e(scroll) {
+    height: 0;
+    flex: 1;
+    overflow-y: auto;
+  }
+  @include e(loading) {
+  }
+  @include e(footer) {
+  }
 }
