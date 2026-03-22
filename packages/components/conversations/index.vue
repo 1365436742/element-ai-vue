@@ -5,8 +5,8 @@
     </div>
     <div :class="ns.e('scroll')">
       <slot name="scroll"></slot>
-      <div :class="ns.e('loading')">
-        <slot name="loading"></slot>
+      <div :class="ns.e('loading')" v-if="hasMore">
+        <slot name="loading"> <Loading></Loading> </slot>
       </div>
     </div>
     <div :class="ns.e('footer')">
@@ -18,6 +18,7 @@
 <script setup lang="ts">
 import { useNamespace, useTheme } from '@element-ai-vue/hooks'
 import { conversationsProps } from './props'
+import Loading from './loading.vue'
 import { computed } from 'vue'
 
 defineOptions({
