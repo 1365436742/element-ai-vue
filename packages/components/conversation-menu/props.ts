@@ -38,6 +38,7 @@ export const conversationMenuProps = {
 export type ConversationMenuEmitsType = {
   (e: 'update:activeKey', value: string): void
   (e: 'update:openKeys', value: string[]): void
+  (e: 'activeChange', value: string, item: ConversationMenu): void
 }
 
 export type ConversationMenuPropsType = PropType<

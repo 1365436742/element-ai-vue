@@ -110,5 +110,6 @@ const handlClick = (item: ConversationMenu) => {
     return
   }
   emits('update:activeKey', activeKey)
+  emits('activeChange', activeKey, item)
 }
 </script>

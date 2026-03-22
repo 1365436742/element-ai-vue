@@ -13,11 +13,27 @@
           v-model:active-key="activeKey"
         >
           <template #default="{ item }">
-            <div class="item-slot">
+            <div class="item-slot" @click="handleClickMenu($event, item)">
               <img v-if="item.icon" :src="item.icon" alt="" srcset="" />
               <span>{{ item.label }}</span>
-            </div></template
-          >
+              <div v-if="item.link" class="link">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="1em"
+                  height="1em"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    fill="currentColor"
+                    fill-rule="evenodd"
+                    d="M6.757 5.636a1 1 0 0 1 1-1h10.607a1 1 0 0 1 1 1v10.606a1 1 0 0 1-2 0V8.05L6.343 19.07a1 1 0 0 1-1.414-1.413l11.02-11.021H7.757a1 1 0 0 1-1-1"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+              </div>
+            </div>
+          </template>
         </ElAConversationMenu>
       </template>
       <template #scroll>
@@ -63,7 +79,8 @@ const menuList: ConversationMenu[] = [
     children: [
       {
         key: '4-1',
-        label: '应用生成',
+        label: '去百度看看',
+        link: 'https://www.baidu.com/',
       },
       {
         key: '4-2',
@@ -102,6 +119,13 @@ const handleClick = () => {
     label: 'React 和 Vue 框架对比分析',
     group: '更早',
   })
+}
+
+const handleClickMenu = (e: Event, item: ConversationMenu) => {
+  if (item.link) {
+    e.stopPropagation()
+    window.open(item.link)
+  }
 }
 </script>
 

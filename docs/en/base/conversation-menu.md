@@ -32,10 +32,11 @@
 
 ## Events
 
-| Event            | Description                                                        | Callback Parameters |
-| ---------------- | ------------------------------------------------------------------ | ------------------- |
-| update:activeKey | Emitted when the active item changes, used for `v-model:activeKey` | `(value: string)`   |
-| update:openKeys  | Emitted when expanded items change, used for `v-model:openKeys`    | `(value: string[])` |
+| Event            | Description                                                        | Callback Parameters                       |
+| ---------------- | ------------------------------------------------------------------ | ----------------------------------------- |
+| update:activeKey | Emitted when the active item changes, used for `v-model:activeKey` | `(value: string)`                         |
+| update:openKeys  | Emitted when expanded items change, used for `v-model:openKeys`    | `(value: string[])`                       |
+| activeChange     | Emitted when the user clicks to switch the active item             | `(value: string, item: ConversationMenu)` |
 
 ## Slots
 
