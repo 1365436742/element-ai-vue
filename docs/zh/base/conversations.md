@@ -27,3 +27,13 @@
 <<< ../../examples/conversations/mock.ts
 
 :::
+
+## 展开收起&支持移动端
+
+:::demo ConversationsMobile
+
+```vue
+<!-- @include: ../../examples/conversations/mobile.vue -->
+```
+
+:::
