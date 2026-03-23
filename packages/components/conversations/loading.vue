@@ -1,9 +1,12 @@
 <template>
-  <!-- 加载动画组件 -->
-  <div ref="loadMoreTrigger" :class="ns.b()">
-    <span :class="ns.e('dot')"></span>
-    <span :class="ns.e('dot')"></span>
-    <span :class="ns.e('dot')"></span>
+  <div ref="loadMoreTrigger">
+    <slot>
+      <div :class="ns.b()">
+        <span :class="ns.e('dot')"></span>
+        <span :class="ns.e('dot')"></span>
+        <span :class="ns.e('dot')"></span>
+      </div>
+    </slot>
   </div>
 </template>
 
@@ -17,10 +20,6 @@ const ns = useNamespace('conversations-loading-dots')
 const loadMoreTrigger = useTemplateRef('loadMoreTrigger')
 
 const props = defineProps({
-  hasMore: {
-    type: Boolean,
-    default: false,
-  },
   loading: {
     type: Boolean,
     default: false,
@@ -33,13 +32,12 @@ const { stop } = useIntersectionObserver(
   loadMoreTrigger,
   ([{ isIntersecting }]) => {
     if (isIntersecting) {
-      if (props.loading || props.hasMore) return
+      if (props.loading) return
       emits('next')
     }
   },
   {
     threshold: 0,
-    rootMargin: '0px 0px 30px 0px',
   }
 )
 
