@@ -158,7 +158,7 @@ html.dark {
   background-color: rgb(240, 242, 245);
   padding: 20px;
   .box {
-    width: 256px;
+    max-width: 256px;
     height: 600px;
     padding: 12px;
     --el-ai-conversation-item-bg-color: #fff;
