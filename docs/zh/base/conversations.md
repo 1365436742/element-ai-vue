@@ -9,3 +9,21 @@
 ```
 
 :::
+
+## 滚动加载
+
+:::demo ConversationsLoadMore
+
+```vue
+<!-- @include: ../../examples/conversations/loadMore.vue -->
+```
+
+:::
+
+:::details ./mock.ts file
+
+::: code-group
+
+<<< ../../examples/conversations/mock.ts
+
+:::
