@@ -110,7 +110,7 @@ html.dark {
   background-color: rgb(240, 242, 245);
   padding: 20px;
   .item-box {
-    width: 256px;
+    max-width: 256px;
     height: 500px;
     overflow-y: auto;
     padding: 12px;
