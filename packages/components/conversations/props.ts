@@ -9,14 +9,13 @@ export const conversationsProps = {
     type: Boolean,
     default: false,
   },
+  onNext: {
+    type: Function,
+  },
 }
 
 export interface CoversationShortcutKeys {
   conversationCreate?: string[]
-}
-
-export type ConversationsEmitsType = {
-  (e: 'next'): void
 }
 
 export type ConversationsPropsType = PropType<
