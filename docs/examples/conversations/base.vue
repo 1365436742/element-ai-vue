@@ -110,14 +110,29 @@ const list = ref<ConversationItem[]>([
     label: '帮我写一个防抖函数',
     group: '今天',
   },
+  {
+    key: '9',
+    label: '如何优化前端首屏加载速度？',
+    group: '7 天内',
+  },
+  {
+    key: '10',
+    label: 'Node.js 异步编程最佳实践',
+    group: '7 天内',
+  },
+  {
+    key: '11',
+    label: '写一个深拷贝函数',
+    group: '更早',
+  },
 ])
 
 const handleClick = () => {
   const key = list.value.length + 2
-  list.value.push({
+  list.value.unshift({
     key: key + '',
     label: 'React 和 Vue 框架对比分析',
-    group: '更早',
+    group: '今天',
   })
 }
 
