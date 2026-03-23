@@ -20,6 +20,7 @@ declare module 'vue' {
     ElAConversationItem: (typeof import('element-ai-vue'))['ElAConversationItem']
     ElAConversationCreate: (typeof import('element-ai-vue'))['ElAConversationCreate']
     ElAConversationMenu: (typeof import('element-ai-vue'))['ElAConversationMenu']
+    ElAConversationPopover: (typeof import('element-ai-vue'))['ElAConversationPopover']
   }
 }
 

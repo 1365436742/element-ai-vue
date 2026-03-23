@@ -17,6 +17,7 @@ import { ElAConversations } from '@element-ai-vue/components/conversations'
 import { ElAConversationItem } from '@element-ai-vue/components/conversation-item'
 import { ElAConversationCreate } from '@element-ai-vue/components/conversation-create'
 import { ElAConversationMenu } from '@element-ai-vue/components/conversation-menu'
+import { ElAConversationPopover } from '@element-ai-vue/components/conversation-popover'
 
 import type { Plugin } from 'vue'
 
@@ -40,4 +41,5 @@ export default [
   ElAConversationItem,
   ElAConversationCreate,
   ElAConversationMenu,
+  ElAConversationPopover,
 ] as Plugin[]
