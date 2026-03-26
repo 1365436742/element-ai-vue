@@ -45,6 +45,7 @@
   --#{$namespace}-group-item-active-bg: rgba(255, 255, 255, 0.12);
   --#{$namespace}-conversation-item-bg-color: #000;
   --#{$namespace}-conversation-loading: rgba(255, 255, 255, 0.3);
+  --#{$namespace}-conversation-popover-mark: rgba(255, 255, 255, 0.3);
   color: #fff;
 }
 
@@ -97,6 +98,7 @@
   --#{$namespace}-group-item-active-bg: rgba(0, 0, 0, 0.06);
   --#{$namespace}-conversation-item-bg-color: #fff;
   --#{$namespace}-conversation-loading: rgba(0, 0, 0, 0.2);
+  --#{$namespace}-conversation-popover-mark: rgba(0, 0, 0, 0.3);
 }
 
 @mixin dark-markdown {
