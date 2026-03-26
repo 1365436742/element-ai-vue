@@ -4,50 +4,52 @@
     <button class="switch-btn" @click="collapse = true">收起</button>
   </div>
   <div class="box-bg">
-    <ElAConversations class="box">
-      <template #header>
-        <ElAConversationCreate
-          :shortcutKeys="['Meta_k']"
-          @conversation-create-click="handleClick"
-        ></ElAConversationCreate>
-        <ElAConversationMenu
-          class="item-menu"
-          :items="menuList"
-          v-model:open-keys="openKeys"
-          v-model:active-key="activeKey"
-        >
-          <template #default="{ item }">
-            <div class="item-slot" @click="handleClickMenu($event, item)">
-              <img v-if="item.icon" :src="item.icon" alt="" srcset="" />
-              <span>{{ item.label }}</span>
-              <div v-if="item.link" class="link">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="1em"
-                  height="1em"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    fill="currentColor"
-                    fill-rule="evenodd"
-                    d="M6.757 5.636a1 1 0 0 1 1-1h10.607a1 1 0 0 1 1 1v10.606a1 1 0 0 1-2 0V8.05L6.343 19.07a1 1 0 0 1-1.414-1.413l11.02-11.021H7.757a1 1 0 0 1-1-1"
-                    clip-rule="evenodd"
-                  ></path>
-                </svg>
+    <ElAConversationPopover v-model:collapse="collapse">
+      <ElAConversations class="box">
+        <template #header>
+          <ElAConversationCreate
+            :shortcutKeys="['Meta_k']"
+            @conversation-create-click="handleClick"
+          ></ElAConversationCreate>
+          <ElAConversationMenu
+            class="item-menu"
+            :items="menuList"
+            v-model:open-keys="openKeys"
+            v-model:active-key="activeKey"
+          >
+            <template #default="{ item }">
+              <div class="item-slot" @click="handleClickMenu($event, item)">
+                <img v-if="item.icon" :src="item.icon" alt="" srcset="" />
+                <span>{{ item.label }}</span>
+                <div v-if="item.link" class="link">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="1em"
+                    height="1em"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      fill="currentColor"
+                      fill-rule="evenodd"
+                      d="M6.757 5.636a1 1 0 0 1 1-1h10.607a1 1 0 0 1 1 1v10.606a1 1 0 0 1-2 0V8.05L6.343 19.07a1 1 0 0 1-1.414-1.413l11.02-11.021H7.757a1 1 0 0 1-1-1"
+                      clip-rule="evenodd"
+                    ></path>
+                  </svg>
+                </div>
               </div>
-            </div>
-          </template>
-        </ElAConversationMenu>
-      </template>
-      <template #scroll>
-        <ElAConversationItem
-          class="item-box"
-          :items="list"
-          v-model:active-key="activeKey"
-        />
-      </template>
-    </ElAConversations>
+            </template>
+          </ElAConversationMenu>
+        </template>
+        <template #scroll>
+          <ElAConversationItem
+            class="item-box"
+            :items="list"
+            v-model:active-key="activeKey"
+          />
+        </template>
+      </ElAConversations>
+    </ElAConversationPopover>
   </div>
 </template>
 
@@ -59,12 +61,13 @@ import {
   ConversationItem,
   ElAConversationMenu,
   ConversationMenu,
+  ElAConversationPopover,
 } from 'element-ai-vue'
 import { ref } from 'vue'
 
 const activeKey = ref('')
 const openKeys = ref([])
-const collapse = ref(false)
+const collapse = ref(true)
 
 const menuList: ConversationMenu[] = [
   {
@@ -153,40 +156,40 @@ const handleClickMenu = (e: Event, item: ConversationMenu) => {
 html.dark {
   .box-bg {
     background-color: rgb(48, 48, 48);
-    .box {
-      --el-ai-conversation-item-bg-color: black;
-    }
+  }
+  .box {
+    --el-ai-conversation-item-bg-color: black;
   }
 }
 
 .box-bg {
   background-color: rgb(240, 242, 245);
   padding: 20px;
-  .box {
-    max-width: 256px;
-    height: 600px;
-    padding: 12px;
-    --el-ai-conversation-item-bg-color: #fff;
-    border-radius: 6px;
-    .item-menu {
-      margin-top: 4px;
+  height: 640px;
+}
+.box {
+  max-width: 256px;
+  height: 600px;
+  padding: 12px;
+  --el-ai-conversation-item-bg-color: #fff;
+  .item-menu {
+    margin-top: 4px;
+  }
+  .item-slot {
+    display: flex;
+    align-items: center;
+    > img {
+      width: 16px;
+      height: 16px;
+      margin-right: 8px;
     }
-    .item-slot {
-      display: flex;
-      align-items: center;
-      > img {
-        width: 16px;
-        height: 16px;
-        margin-right: 8px;
-      }
-      > span {
-        display: block;
-        flex: 1;
-        width: 0;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
+    > span {
+      display: block;
+      flex: 1;
+      width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
   }
 }
