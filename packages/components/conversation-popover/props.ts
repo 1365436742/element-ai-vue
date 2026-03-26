@@ -5,6 +5,14 @@ export const conversationPopoverProps = {
     type: String as PropType<'dark' | 'light'>,
     default: undefined,
   },
+  collapse: {
+    type: Boolean,
+    default: false,
+  },
+}
+
+export type ConversatioPopoverEmitsType = {
+  (e: 'update:collapse', value: boolean): void
 }
 
 export type ConversationPopoverPropsType = PropType<
