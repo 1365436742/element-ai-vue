@@ -1,23 +1,20 @@
 import { ExtractPropTypes, PropType } from 'vue'
 
-export const conversationsProps = {
+export const conversationPopoverProps = {
   theme: {
     type: String as PropType<'dark' | 'light'>,
     default: undefined,
   },
-  hasMore: {
+  collapse: {
     type: Boolean,
     default: false,
   },
-  onNext: {
-    type: Function,
-  },
 }
 
-export interface CoversationShortcutKeys {
-  conversationCreate?: string[]
+export type ConversatioPopoverEmitsType = {
+  (e: 'update:collapse', value: boolean): void
 }
 
-export type ConversationsPropsType = PropType<
-  Partial<ExtractPropTypes<typeof conversationsProps>>
+export type ConversationPopoverPropsType = PropType<
+  Partial<ExtractPropTypes<typeof conversationPopoverProps>>
 >
