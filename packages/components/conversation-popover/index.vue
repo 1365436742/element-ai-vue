@@ -1,6 +1,12 @@
 <template>
   <Teleport to="body" :disabled="!isMobileWidth">
-    <div :class="[ns.b(), ns.is('mobile', isMobileWidth && !closeMobile)]">
+    <div
+      :class="[
+        ns.b(),
+        ns.is('mobile', isMobileWidth && !closeMobile),
+        ns.m(theme),
+      ]"
+    >
       <div :class="ns.e('wrapper')">
         <Transition
           :name="ns.e('collapse')"
