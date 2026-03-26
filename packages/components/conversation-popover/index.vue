@@ -32,7 +32,7 @@
 <script setup lang="ts">
 import { useDevice, useNamespace, useTheme } from '@element-ai-vue/hooks'
 import { conversationPopoverProps, ConversatioPopoverEmitsType } from './props'
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 
 defineOptions({
   name: 'ElAConversationPopover',
@@ -47,6 +47,18 @@ const ns = useNamespace('conversation-popover')
 const { isMobileWidth } = useDevice()
 
 const leaveing = ref(false)
+
+watch(
+  () => [isMobileWidth.value, props.collapse] as const,
+  ([isMobile, collapse]) => {
+    if (isMobile && !collapse) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+  },
+  { immediate: true }
+)
 
 const closeMobile = computed(() => {
   if (props.collapse) {
