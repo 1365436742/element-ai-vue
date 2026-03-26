@@ -16,6 +16,11 @@ declare module 'vue' {
     ElAPpt: (typeof import('element-ai-vue'))['ElAPpt']
     ElAOverflowToolbar: (typeof import('element-ai-vue'))['ElAOverflowToolbar']
     ElAMDocEditor: (typeof import('element-ai-vue'))['ElAMDocEditor']
+    ElAConversations: (typeof import('element-ai-vue'))['ElAConversations']
+    ElAConversationItem: (typeof import('element-ai-vue'))['ElAConversationItem']
+    ElAConversationCreate: (typeof import('element-ai-vue'))['ElAConversationCreate']
+    ElAConversationMenu: (typeof import('element-ai-vue'))['ElAConversationMenu']
+    ElAConversationPopover: (typeof import('element-ai-vue'))['ElAConversationPopover']
   }
 }
 

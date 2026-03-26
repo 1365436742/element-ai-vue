@@ -1,0 +1,72 @@
+@use '../mixins/config' as *;
+@use '../mixins/mixins' as *;
+
+@include b(conversation-popover) {
+  @include e(wrapper) {
+    overflow: hidden;
+  }
+
+  @include e(collapse) {
+    &-enter-active,
+    &-leave-active {
+      transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    }
+
+    &-enter-from,
+    &-leave-to {
+      transform: translateX(-100%);
+    }
+
+    &-enter-to,
+    &-leave-from {
+      transform: translateX(0);
+    }
+  }
+
+  &.is-mobile {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
+    @include e(wrapper) {
+      position: relative;
+      z-index: 2;
+      max-width: 75vw;
+      min-height: 100vh;
+      height: 100%;
+      overflow: visible;
+    }
+    @include e(content) {
+      height: 100%;
+    }
+    @include e(mark) {
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      height: 100%;
+      background-color: var(--#{$namespace}-conversation-popover-mark);
+      z-index: 1;
+      &-enter-active,
+      &-leave-active {
+        transition: opacity 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+      }
+
+      &-enter-from,
+      &-leave-to {
+        opacity: 0;
+      }
+
+      &-enter-to,
+      &-leave-from {
+        opacity: 1;
+      }
+    }
+    @include b(conversations) {
+      height: 100%;
+    }
+  }
+}

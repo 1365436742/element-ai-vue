@@ -29,5 +29,8 @@ export default {
     overflowToolbar: {
       more: 'More',
     },
+    conversationCreate: {
+      title: 'Create a new chat',
+    },
   },
 }

@@ -1,0 +1,61 @@
+@use '../mixins/config' as *;
+@use '../mixins/mixins' as *;
+
+@include b(conversation-item) {
+  ul,
+  li {
+    margin: 0;
+    list-style: none;
+  }
+  ul {
+    padding: 0;
+  }
+  li {
+    padding: 0 8px;
+  }
+  &.is-sticky {
+    .#{$namespace}-conversation-item__title {
+      position: sticky;
+      top: 0;
+    }
+  }
+  background-color: var(--#{$namespace}-conversation-item-bg-color);
+  @include e(group) {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  @include e(title) {
+    line-height: 40px;
+    display: flex;
+    align-items: center;
+    color: var(--#{$namespace}-group-title-color);
+    font-size: 14px;
+    background-color: var(--#{$namespace}-conversation-item-bg-color);
+  }
+  @include e(item) {
+    line-height: 40px;
+    font-size: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    border-radius: var(--#{$namespace}-border-radius-base);
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+
+    &:hover {
+      background-color: var(--#{$namespace}-group-item-active-bg);
+    }
+
+    &.is-active {
+      background-color: var(--#{$namespace}-group-item-active-bg);
+    }
+
+    &.is-disabled {
+      cursor: not-allowed;
+      background-color: transparent;
+      color: var(--#{$namespace}-color-text-disabled);
+    }
+  }
+}

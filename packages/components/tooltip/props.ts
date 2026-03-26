@@ -75,6 +75,10 @@ export const tooltipProps = {
     type: [String, Object] as PropType<string | HTMLElement>,
     default: 'body',
   },
+  className: {
+    type: String,
+    default: '',
+  },
 }
 
 export const tooltipEmits = {

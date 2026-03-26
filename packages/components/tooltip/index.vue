@@ -1,5 +1,5 @@
 <template>
-  <div :class="ns.b()" ref="referenceRef">
+  <div :class="[ns.b(), className]" ref="referenceRef">
     <slot></slot>
   </div>
   <Teleport :to="teleportTo">

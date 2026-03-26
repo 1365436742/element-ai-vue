@@ -112,10 +112,30 @@ export default defineConfig({
           'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
       },
     ],
+    ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:title', content: 'Element Ai Vue' }],
     ['meta', { property: 'og:description', content: '企业级 AI 交互组件库' }],
     ['meta', { property: 'og:url', content: 'https://element-ai-vue.com' }],
+    [
+      'meta',
+      {
+        property: 'og:image',
+        content: 'https://element-ai-vue.com/og-image.png',
+      },
+    ],
+    ['meta', { property: 'og:image:width', content: '1200' }],
+    ['meta', { property: 'og:image:height', content: '630' }],
+    ['meta', { property: 'og:site_name', content: 'Element Ai Vue' }],
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
+    ['meta', { name: 'twitter:title', content: 'Element Ai Vue' }],
+    ['meta', { name: 'twitter:description', content: '企业级 AI 交互组件库' }],
+    [
+      'meta',
+      {
+        name: 'twitter:image',
+        content: 'https://element-ai-vue.com/og-image.png',
+      },
+    ],
   ],
   locales: {
     root: {

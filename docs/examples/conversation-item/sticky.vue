@@ -1,0 +1,132 @@
+<template>
+  <div class="box-bg">
+    <ElAConversationItem
+      class="item-box"
+      :items="list"
+      :sticky="true"
+      v-model:active-key="activeKey"
+    />
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ConversationItem, ElAConversationItem } from 'element-ai-vue'
+import { ref } from 'vue'
+
+const activeKey = ref('')
+
+const list: ConversationItem[] = [
+  {
+    key: '-1',
+    label: '如何快速上手 Vue3 组合式 API？',
+  },
+  {
+    key: '1',
+    label: '如何快速上手 Vue3 组合式 API？',
+    group: '今天',
+  },
+  {
+    key: '2',
+    label: 'TypeScript 泛型有哪些使用技巧？',
+    group: '今天',
+  },
+  {
+    key: '3',
+    label: '帮我写一个防抖函数',
+    group: '今天',
+  },
+  {
+    key: '4',
+    label: 'Pinia 和 Vuex 有什么区别？',
+    group: '昨天',
+  },
+  {
+    key: '5',
+    label: 'CSS Flexbox 布局常见问题解答',
+    group: '昨天',
+  },
+  {
+    key: '6',
+    label: '如何优化前端页面加载性能？',
+    group: '昨天',
+  },
+  {
+    key: '7',
+    label: 'Node.js 异步编程最佳实践',
+    group: '更早',
+  },
+  {
+    key: '8',
+    label: 'React 和 Vue 框架对比分析',
+    group: '更早',
+    disabled: true,
+  },
+  {
+    key: '9',
+    label: '如何优化前端页面加载性能？',
+    group: '昨天',
+  },
+  {
+    key: '10',
+    label: 'Node.js 异步编程最佳实践',
+    group: '更早',
+  },
+  {
+    key: '11',
+    label: 'React 和 Vue 框架对比分析',
+    group: '更早',
+    disabled: true,
+  },
+  {
+    key: '12',
+    label: '如何优化前端页面加载性能？',
+    group: '昨天',
+  },
+  {
+    key: '13',
+    label: 'Node.js 异步编程最佳实践',
+    group: '更早',
+  },
+  {
+    key: '14',
+    label: 'React 和 Vue 框架对比分析',
+    group: '更早',
+    disabled: true,
+  },
+]
+</script>
+
+<style scoped lang="scss">
+html.dark {
+  .box-bg {
+    background-color: rgb(48, 48, 48);
+    .item-box {
+      background-color: black;
+    }
+  }
+}
+
+.box-bg {
+  background-color: rgb(240, 242, 245);
+  padding: 20px;
+  .item-box {
+    max-width: 256px;
+    height: 500px;
+    overflow-y: auto;
+    padding: 12px;
+    background-color: #fff;
+    border-radius: 6px;
+    &.is-sticky {
+      :deep(.el-ai-conversation-item__title) {
+        top: -12px;
+      }
+    }
+  }
+}
+</style>
+
+<style lang="scss">
+.vp-doc li + li {
+  margin-top: 0 !important;
+}
+</style>

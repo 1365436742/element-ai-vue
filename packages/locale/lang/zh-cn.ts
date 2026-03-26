@@ -28,5 +28,8 @@ export default {
     overflowToolbar: {
       more: '更多',
     },
+    conversationCreate: {
+      title: '新对话',
+    },
   },
 }
