@@ -169,7 +169,7 @@ html.dark {
 }
 .box {
   max-width: 256px;
-  height: 600px;
+  height: 100%;
   padding: 12px;
   --el-ai-conversation-item-bg-color: #fff;
   .item-menu {
