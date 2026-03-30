@@ -2,8 +2,11 @@
 @use '../mixins/mixins' as *;
 
 @include b(conversation-popover) {
+  height: 100%;
   @include e(wrapper) {
     overflow: hidden;
+    height: 100%;
+    transition: width 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
   }
 
   @include e(collapse) {
@@ -22,7 +25,9 @@
       transform: translateX(0);
     }
   }
-
+  @include e(content) {
+    height: 100%;
+  }
   &.is-mobile {
     position: fixed;
     left: 0;
@@ -38,9 +43,7 @@
       height: 100%;
       overflow: visible;
     }
-    @include e(content) {
-      height: 100%;
-    }
+
     @include e(mark) {
       position: absolute;
       left: 0;
