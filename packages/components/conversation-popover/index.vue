@@ -7,11 +7,15 @@
         ns.m(theme),
       ]"
     >
-      <div :class="ns.e('wrapper')">
+      <div ref="wrapperRef" :class="ns.e('wrapper')">
         <Transition
           :name="ns.e('collapse')"
-          @before-leave="leaveing = true"
-          @after-leave="leaveing = false"
+          @before-leave="onBeforeLeave"
+          @leave="onLeave"
+          @after-leave="onAfterLeave"
+          @before-enter="onBeforeEnter"
+          @enter="onEnter"
+          @after-enter="onAfterEnter"
         >
           <div v-if="!props.collapse" :class="ns.e('content')">
             <slot></slot>
@@ -34,6 +38,8 @@ import { useDevice, useNamespace, useTheme } from '@element-ai-vue/hooks'
 import { conversationPopoverProps, ConversatioPopoverEmitsType } from './props'
 import { computed, ref, watch } from 'vue'
 
+const wrapperRef = ref<HTMLElement | null>(null)
+
 defineOptions({
   name: 'ElAConversationPopover',
 })
@@ -47,6 +53,43 @@ const ns = useNamespace('conversation-popover')
 const { isMobileWidth } = useDevice()
 
 const leaveing = ref(false)
+
+// PC 端 wrapper 宽度动画钩子
+const savedWidth = ref('')
+
+function onBeforeLeave(el: Element | HTMLElement) {
+  leaveing.value = true
+  if (!isMobileWidth.value && wrapperRef.value) {
+    savedWidth.value = wrapperRef.value.scrollWidth + 'px'
+    wrapperRef.value.style.width = savedWidth.value
+    ;(el as HTMLElement).style.width = savedWidth.value
+  }
+}
+function onLeave() {
+  if (!isMobileWidth.value && wrapperRef.value) {
+    wrapperRef.value.style.width = '0'
+  }
+}
+function onAfterLeave() {
+  leaveing.value = false
+}
+function onBeforeEnter(el: Element) {
+  if (!isMobileWidth.value && wrapperRef.value) {
+    ;(el as HTMLElement).style.width = savedWidth.value
+    wrapperRef.value.style.width = '0'
+  }
+}
+function onEnter() {
+  if (!isMobileWidth.value && wrapperRef.value) {
+    wrapperRef.value.style.width = savedWidth.value
+  }
+}
+function onAfterEnter(el: Element) {
+  if (!isMobileWidth.value && wrapperRef.value) {
+    wrapperRef.value.style.width = ''
+    ;(el as HTMLElement).style.width = ''
+  }
+}
 
 watch(
   () => [isMobileWidth.value, props.collapse] as const,
