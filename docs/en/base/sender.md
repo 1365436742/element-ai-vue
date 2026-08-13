@@ -561,6 +561,7 @@ const { handleFileUpload } = useFileOperation(commonProps, fileList)
 | v-model:loading               | Sending status; style can be customized via slot                                             | `boolean`                                          | `false`     |
 | theme                         | Theme                                                                                        | `'light' \| 'dark'`                                | `'light'`   |
 | placeholder                   | Placeholder text                                                                             | `string`                                           | `''`        |
+| trimTextIsEmpty               | Clear trim to be empty                                                                       | `boolean`                                          | `false`     |
 | disabled                      | Whether disabled                                                                             | `boolean`                                          | `false`     |
 | extensions                    | [tiptap](https://tiptap.dev/docs/editor/extensions/overview) extension configuration         | `Array<Extensions>`                                | `[]`        |
 | inputTagPrefixValue           | Content of the input box prefix tag                                                          | `string`                                           | `''`        |

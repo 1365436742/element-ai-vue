@@ -6,6 +6,7 @@
   flex-direction: column;
   gap: 4px;
   background-color: var(--el-ai-conversation-item-bg-color, #fff);
+  height: 100%;
   @include e(header) {
     display: flex;
     flex-direction: column;

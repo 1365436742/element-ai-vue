@@ -85,7 +85,11 @@ const emits = defineEmits<BaseInputEmitsType & SenderEmitsType>()
 const baseInputRef = useTemplateRef('baseInputRef')
 
 const isEmpty = computed(() => {
-  return baseInputRef.value?.editor?.isEmpty
+  return (
+    baseInputRef.value?.editor?.isEmpty ||
+    (props.trimTextIsEmpty &&
+      baseInputRef.value?.editor?.getText().trim() === '')
+  )
 })
 const onEnterPressed = () => {
   if (props.loading) return

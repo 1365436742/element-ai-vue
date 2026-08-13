@@ -25,6 +25,7 @@
       transform: translateX(0);
     }
   }
+
   @include e(content) {
     height: 100%;
   }

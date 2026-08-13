@@ -561,6 +561,7 @@ const { handleFileUpload } = useFileOperation(commonProps, fileList)
 | v-model:loading               | 发送中、可以通过slot自定义样式                                        | `boolean`                                          | `false`     |
 | theme                         | 主题                                                                  | `'light' \| 'dark'`                                | `'light'`   |
 | placeholder                   | 占位文本                                                              | `string`                                           | `''`        |
+| trimTextIsEmpty               | 清空trim为空                                                          | `boolean`                                          | `false`     |
 | disabled                      | 是否禁用                                                              | `boolean`                                          | `false`     |
 | extensions                    | [tiptap](https://tiptap.dev/docs/editor/extensions/overview) 扩展配置 | `Array<Extensions>`                                | `[]`        |
 | inputTagPrefixValue           | 输入框前置标签内容                                                    | `string`                                           | `''`        |

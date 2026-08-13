@@ -7,6 +7,10 @@ export const baseInputProps = {
     type: String as PropType<'light' | 'dark'>,
     default: 'light',
   },
+  trimTextIsEmpty: {
+    type: Boolean,
+    default: false,
+  },
   placeholder: {
     type: String,
     default: '',
