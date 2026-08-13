@@ -124,7 +124,7 @@
     "lodash-es": "^4.17.21",
     "mermaid": "^11.12.2",
     "prosemirror-state": "^1.4.4",
-    "prosemirror-view": "^1.41.4",
+    "prosemirror-view": "^1.42.2",
     "rehype-katex": "^7.0.1",
     "remark-breaks": "^4.0.0",
     "remark-gfm": "^4.0.1",
