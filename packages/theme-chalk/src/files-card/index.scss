@@ -103,10 +103,6 @@
       flex: 1;
       width: 0;
       text-align: left;
-      :deep(.error) {
-        padding: 9px 0;
-        opacity: 0;
-      }
     }
     @include m(icon) {
       display: block;
