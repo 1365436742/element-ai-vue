@@ -49,11 +49,18 @@ const plugins: Plugin[] = [
 
 async function buildModulesComponents() {
   const input = excludeFiles(
-    await glob(['**/*.{js,ts,vue}', '!**/style/(index|css).{js,ts,vue}'], {
-      cwd: pkgRoot,
-      absolute: true,
-      onlyFiles: true,
-    })
+    await glob(
+      [
+        '**/*.{js,ts,vue}',
+        '!**/style/(index|css).{js,ts,vue}',
+        '!uniapp-polyfill/**',
+      ],
+      {
+        cwd: pkgRoot,
+        absolute: true,
+        onlyFiles: true,
+      }
+    )
   )
   const bundle = await rollup({
     input,

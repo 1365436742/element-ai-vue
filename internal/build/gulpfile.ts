@@ -56,6 +56,9 @@ export default series(
     runTask('buildFullBundle'),
     runTask('generateTypesDefinitions'),
     runTask('buildHelper'),
+    withTaskName('buildUniappPolyfill', () =>
+      run('pnpm build:uniapp-polyfill')
+    ),
     series(
       withTaskName('buildThemeChalk', () =>
         run('pnpm run -C packages/theme-chalk build')
