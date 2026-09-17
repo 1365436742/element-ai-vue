@@ -6,6 +6,7 @@ export const zhSidebar: DefaultTheme.Sidebar = [
     items: [
       { text: '简介', link: '/zh/intro' },
       { text: '快速开始', link: '/zh/start' },
+      { text: 'UniApp', link: '/zh/uniapp' },
       { text: 'Agent Skills', link: '/zh/skills' },
     ],
   },
@@ -73,6 +74,7 @@ export const enSidebar: DefaultTheme.Sidebar = [
     items: [
       { text: 'Introduction', link: '/en/intro' },
       { text: 'Quick Start', link: '/en/start' },
+      { text: 'UniApp', link: '/en/uniapp' },
       { text: 'Agent Skills', link: '/en/skills' },
     ],
   },
