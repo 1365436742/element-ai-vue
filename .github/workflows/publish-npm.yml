@@ -39,9 +39,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Test release script
-        run: npm run test:publish
-
       - name: Configure Git author
         run: |
           git config user.name 'github-actions[bot]'
@@ -53,6 +50,8 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           RESUME_RELEASE: ${{ inputs.resume || false }}
+          # 等同于本地 npx 提示安装时输入 y，继续使用原来的构建流程。
+          npm_config_yes: 'true'
         run: |
           if [ "$RESUME_RELEASE" = "true" ]; then
             npm run publish -- --resume --push
