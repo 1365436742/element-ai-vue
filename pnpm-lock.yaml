@@ -667,6 +667,31 @@ importers:
 
   packages/theme-chalk: {}
 
+  packages/uniapp-polyfill:
+    dependencies:
+      '@babel/parser':
+        specifier: ^7.28.5
+        version: 7.28.5
+      magic-string:
+        specifier: ^0.30.21
+        version: 0.30.21
+    devDependencies:
+      '@types/node':
+        specifier: ^24.10.1
+        version: 24.10.1
+      esbuild:
+        specifier: ^0.27.1
+        version: 0.27.1
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
+      vite:
+        specifier: ^5.4.21
+        version: 5.4.21(@types/node@24.10.1)(sass@1.95.0)
+      vue:
+        specifier: 'catalog:'
+        version: 3.5.25(typescript@5.9.3)
+
   packages/utils:
     dependencies:
       '@element-ai-vue/constants':

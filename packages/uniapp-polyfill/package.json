@@ -1,0 +1,80 @@
+{
+  "name": "element-ai-vue-uniapp-polyfill",
+  "version": "0.1.7",
+  "description": "Vue API compatibility polyfills for uni-app and element-ai-vue",
+  "type": "module",
+  "license": "MIT",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./runtime": {
+      "import": {
+        "types": "./dist/runtime.d.ts",
+        "default": "./dist/runtime.mjs"
+      },
+      "require": {
+        "types": "./dist/runtime.d.cts",
+        "default": "./dist/runtime.cjs"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "clean": "node -e \"require('node:fs').rmSync('dist', { recursive: true, force: true })\"",
+    "typecheck": "tsc --noEmit",
+    "test": "pnpm build && node --test tests/*.test.mjs",
+    "prepack": "pnpm build"
+  },
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "keywords": [
+    "uni-app",
+    "uniapp",
+    "vue",
+    "polyfill",
+    "vite-plugin",
+    "element-ai-vue"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/1365436742/element-ai-vue.git",
+    "directory": "packages/uniapp-polyfill"
+  },
+  "peerDependencies": {
+    "vite": "^5.0.0 || ^6.0.0 || ^7.0.0",
+    "vue": "^3.4.0"
+  },
+  "dependencies": {
+    "@babel/parser": "^7.28.5",
+    "magic-string": "^0.30.21"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "esbuild": "^0.27.1",
+    "typescript": "^5.9.3",
+    "vite": "^5.4.21",
+    "vue": "catalog:"
+  }
+}

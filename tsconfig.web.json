@@ -18,5 +18,5 @@
     "types/*.ts",
     "docs"
   ],
-  "exclude": ["node_modules", "**/dist", "**/*.md"]
+  "exclude": ["node_modules", "**/dist", "**/*.md", "packages/uniapp-polyfill"]
 }
