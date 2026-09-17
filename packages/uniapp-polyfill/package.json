@@ -1,6 +1,6 @@
 {
   "name": "element-ai-vue-uniapp-polyfill",
-  "version": "0.1.0",
+  "version": "0.1.7",
   "description": "Vue API compatibility polyfills for uni-app and element-ai-vue",
   "type": "module",
   "license": "MIT",
