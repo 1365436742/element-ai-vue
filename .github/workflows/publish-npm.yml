@@ -1,0 +1,61 @@
+name: Publish element-ai-vue packages to NPM
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      resume:
+        description: '重试当前版本（不递增版本号，跳过已发布的包）'
+        type: boolean
+        default: false
+
+concurrency:
+  group: publish-npm
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout release branch
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '20'
+          registry-url: https://registry.npmjs.org/
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v6 # 使用 package.json 的 packageManager 版本
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Test release script
+        run: npm run test:publish
+
+      - name: Configure Git author
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+
+      # 脚本按顺序递增 patch、构建、提交并推送版本，再分别发布两个 dist 包。
+      # 版本提交带 [skip ci]，防止再次触发发布；推送失败时不会继续发布。
+      - name: Bump versions, commit and publish packages
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          RESUME_RELEASE: ${{ inputs.resume || false }}
+        run: |
+          if [ "$RESUME_RELEASE" = "true" ]; then
+            npm run publish -- --resume --push
+          else
+            npm run publish -- --push
+          fi
