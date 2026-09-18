@@ -49,6 +49,18 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      # vue-tsc 的 TypeScript peer 范围会装入不提供 lib/tsc 的 TypeScript 7。
+      # 每次用 npx 获取最新 vue-tsc，搭配项目使用的 TypeScript 5；仅在 CI 临时安装。
+      - name: Prepare latest vue-tsc with compatible TypeScript
+        run: |
+          compiler_dir="$(mktemp -d "$RUNNER_TEMP/vue-tsc.XXXXXX")"
+          cd "$compiler_dir"
+          printf '{"private":true}\n' > package.json
+          compiler_bin="$(npx --yes --prefer-online --package=vue-tsc@latest --package=typescript@5 -c 'command -v vue-tsc')"
+          test -x "$compiler_bin"
+          ln -sf "$compiler_bin" "$GITHUB_WORKSPACE/node_modules/.bin/vue-tsc"
+          "$GITHUB_WORKSPACE/node_modules/.bin/vue-tsc" --version
+
       - name: Configure Git author
         run: |
           git config user.name 'github-actions[bot]'
