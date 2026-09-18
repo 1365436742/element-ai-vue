@@ -33,6 +33,16 @@ jobs:
           node-version: '20'
           registry-url: https://registry.npmjs.org/
 
+      # npm 10.8.2 的 npx 在 pnpm 子脚本设置的 prefix 下查找全局包时，
+      # 会因 internal/build/lib 不存在而报 ENOENT；10.9.4 已处理该情况。
+      - name: Fix npx global package lookup
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          npm install --global npm@10.9.4 --no-audit --no-fund
+          npm --version
+          npx --version
+
       - name: Install pnpm
         uses: pnpm/action-setup@v6 # 使用 package.json 的 packageManager 版本
 
