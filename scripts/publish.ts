@@ -13,10 +13,10 @@ const root = process.cwd()
 const registry = 'https://registry.npmjs.org/'
 const packages = [
   { name: 'element-ai-vue', manifest: 'packages/element-ai-vue/package.json' },
-  {
-    name: 'element-ai-vue-uniapp-polyfill',
-    manifest: 'packages/uniapp-polyfill/package.json',
-  },
+  // {
+  //   name: 'element-ai-vue-uniapp-polyfill',
+  //   manifest: 'packages/uniapp-polyfill/package.json',
+  // },
 ]
 const metadataManifest = 'internal/metadata/package.json'
 const generatedVersion = 'packages/element-ai-vue/version.ts'
