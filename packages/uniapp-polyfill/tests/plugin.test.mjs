@@ -251,7 +251,9 @@ test('declarations resolve for both ESM and CommonJS TypeScript consumers', asyn
     execFileSync(
       process.execPath,
       [
-        require.resolve('typescript/bin/tsc'),
+        fileURLToPath(
+          new URL('bin/tsc', import.meta.resolve('typescript/package.json'))
+        ),
         '--noEmit',
         '--module',
         'NodeNext',

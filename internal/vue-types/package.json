@@ -1,0 +1,13 @@
+{
+  "name": "@element-ai-vue/vue-types",
+  "private": true,
+  "scripts": {
+    "typecheck": "vue-tsc -p ../../tsconfig.web.json --noEmit",
+    "typecheck:test": "vue-tsc -p ../../tsconfig.vitest.json --noEmit",
+    "emit": "vue-tsc -p ../../tsconfig.build.json --declaration --emitDeclarationOnly --declarationDir ../../dist/types"
+  },
+  "devDependencies": {
+    "typescript": "npm:@typescript/typescript6@^6.0.2",
+    "vue-tsc": "~3.3.11"
+  }
+}

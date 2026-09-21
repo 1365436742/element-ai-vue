@@ -1,12 +1,5 @@
 import path from 'path'
-import { nodeResolve } from '@rollup/plugin-node-resolve'
-import { rollup } from 'rollup'
-import replace from '@rollup/plugin-replace'
-import commonjs from '@rollup/plugin-commonjs'
-import vue from '@vitejs/plugin-vue'
-import VueMacros from 'unplugin-vue-macros/rollup'
-import vueJsx from '@vitejs/plugin-vue-jsx'
-import esbuild, { minify as minifyPlugin } from 'rollup-plugin-esbuild'
+import { vuePlugins } from '../plugins/vue'
 import { parallel } from 'gulp'
 import glob from 'fast-glob'
 import { camelCase, upperFirst } from 'lodash-unified'
@@ -27,66 +20,24 @@ import {
 import { target } from '../build-info'
 
 import type { TaskFunction } from 'gulp'
-import type { Plugin } from 'rollup'
 
 const banner = `/*! ${PKG_BRAND_NAME} v${version} */\n`
 
 async function buildFullEntry(minify: boolean) {
-  const plugins: Plugin[] = [
-    ElementAiAlias(),
-    VueMacros({
-      setupComponent: false,
-      setupSFC: false,
-      plugins: {
-        vue: vue({
-          isProduction: true,
-          template: {
-            compilerOptions: {
-              hoistStatic: false,
-              cacheHandlers: false,
-            },
-          },
-        }),
-        vueJsx: vueJsx(),
-      },
-    }) as Plugin,
-    nodeResolve({
-      extensions: ['.mjs', '.js', '.json', '.ts'],
-    }),
-    commonjs(),
-    esbuild({
-      exclude: [],
-      sourceMap: minify,
-      target,
-      loaders: {
-        '.vue': 'ts',
-      },
-      define: {
-        'process.env.NODE_ENV': '"production"',
-      },
-      treeShaking: true,
-      legalComments: 'eof',
-    }),
-    replace({
-      'process.env.NODE_ENV': '"production"',
-      preventAssignment: true,
-    }),
-  ]
-  if (minify) {
-    plugins.push(
-      minifyPlugin({
-        target,
-        sourceMap: true,
-      })
-    )
-  }
-
-  const bundle = await rollup({
+  const { rolldown } = await import('rolldown')
+  const bundle = await rolldown({
     input: path.resolve(epRoot, 'index.ts'),
-    plugins,
+    plugins: [ElementAiAlias(), ...(await vuePlugins())],
+    platform: 'neutral',
+    resolve: {
+      extensions: ['.mjs', '.js', '.json', '.ts'],
+      mainFields: ['module', 'main'],
+    },
+    transform: { target, define: { 'process.env.NODE_ENV': '"production"' } },
     external: await generateExternal({ full: true }),
     treeshake: true,
     onwarn(warning, warn) {
+      if (warning.code === 'UNRESOLVED_IMPORT') throw new Error(warning.message)
       if (warning.code === 'CIRCULAR_DEPENDENCY') {
         if (warning.message.includes('node_modules')) {
           return
@@ -95,7 +46,41 @@ async function buildFullEntry(minify: boolean) {
       warn(warning)
     },
   })
-  await writeBundles(bundle, [
+  // Normalize external star re-exports to ESM namespace imports first.
+  // A direct UMD build currently emits require('vue') inside the browser
+  // factory for vue-demi's `export * from 'vue'`.
+  const normalizedId = path.resolve(
+    epOutput,
+    'dist/index.full.intermediate.mjs'
+  )
+  const { output } = await bundle.generate({
+    format: 'esm',
+    file: normalizedId,
+    codeSplitting: false,
+    sourcemap: minify,
+  })
+  await bundle.close()
+  const entry = output.find((item) => item.type === 'chunk' && item.isEntry)
+  if (!entry || entry.type !== 'chunk')
+    throw new Error('Missing full bundle entry')
+  const normalized = await rolldown({
+    input: normalizedId,
+    external: await generateExternal({ full: true }),
+    transform: { target },
+    treeshake: false,
+    plugins: [
+      {
+        name: 'normalized-full-entry',
+        resolveId(id) {
+          if (id === normalizedId) return id
+        },
+        load(id) {
+          if (id === normalizedId) return { code: entry.code, map: entry.map }
+        },
+      },
+    ],
+  })
+  await writeBundles(normalized, [
     {
       format: 'umd',
       file: path.resolve(
@@ -109,8 +94,9 @@ async function buildFullEntry(minify: boolean) {
         vue: 'Vue',
       },
       sourcemap: minify,
+      minify,
       banner,
-      inlineDynamicImports: true,
+      codeSplitting: false,
     },
     {
       format: 'esm',
@@ -120,8 +106,9 @@ async function buildFullEntry(minify: boolean) {
         formatBundleFilename('index.full', minify, 'mjs')
       ),
       sourcemap: minify,
+      minify,
       banner,
-      inlineDynamicImports: true,
+      codeSplitting: false,
     },
   ])
 }
@@ -136,15 +123,10 @@ async function buildFullLocale(minify: boolean) {
       const filename = path.basename(file, '.ts')
       const name = upperFirst(camelCase(filename))
 
-      const bundle = await rollup({
+      const { rolldown } = await import('rolldown')
+      const bundle = await rolldown({
         input: file,
-        plugins: [
-          esbuild({
-            minify,
-            sourceMap: minify,
-            target,
-          }),
-        ],
+        transform: { target },
       })
       await writeBundles(bundle, [
         {
@@ -157,6 +139,7 @@ async function buildFullLocale(minify: boolean) {
           exports: 'default',
           name: `${PKG_CAMELCASE_LOCAL_NAME}${name}`,
           sourcemap: minify,
+          minify,
           banner,
         },
         {
@@ -167,6 +150,7 @@ async function buildFullLocale(minify: boolean) {
             formatBundleFilename(filename, minify, 'mjs')
           ),
           sourcemap: minify,
+          minify,
           banner,
         },
       ])

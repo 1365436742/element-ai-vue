@@ -1,0 +1,7 @@
+{
+  "extends": "./tsconfig.web.json",
+  "compilerOptions": {
+    "resolvePackageJsonExports": false,
+    "resolvePackageJsonImports": false
+  }
+}

@@ -1,6 +1,6 @@
 import { PKG_NAME, PKG_PREFIX } from '@element-ai-vue/build-constants'
 
-import type { Plugin } from 'rollup'
+import type { Plugin } from 'rolldown'
 
 export function ElementAiAlias(): Plugin {
   const themeChalk = 'theme-chalk'

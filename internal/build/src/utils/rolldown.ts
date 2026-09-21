@@ -1,6 +1,6 @@
 import { epPackage, getPackageDependencies } from '@element-ai-vue/build-utils'
 
-import type { OutputOptions, RollupBuild } from 'rollup'
+import type { OutputOptions, RolldownBuild } from 'rolldown'
 
 export const generateExternal = async (options: { full: boolean }) => {
   const { dependencies, peerDependencies } = getPackageDependencies(epPackage)
@@ -17,8 +17,17 @@ export const generateExternal = async (options: { full: boolean }) => {
   }
 }
 
-export function writeBundles(bundle: RollupBuild, options: OutputOptions[]) {
-  return Promise.all(options.map((option) => bundle.write(option)))
+export async function writeBundles(
+  bundle: RolldownBuild,
+  options: OutputOptions[]
+) {
+  try {
+    // Rolldown runs plugin hooks for each output; do not share plugin state
+    // between concurrent writes on the same build.
+    for (const option of options) await bundle.write(option)
+  } finally {
+    await bundle.close()
+  }
 }
 
 export function formatBundleFilename(

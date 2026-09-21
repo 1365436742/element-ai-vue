@@ -6,9 +6,7 @@ import { buildOutput } from '@element-ai-vue/build-utils'
 import { pathRewriter, run } from '../utils'
 
 export const generateTypesDefinitions = async () => {
-  await run(
-    'npx vue-tsc -p tsconfig.web.json --declaration --emitDeclarationOnly --declarationDir dist/types'
-  )
+  await run('pnpm --filter @element-ai-vue/vue-types emit')
   const typesDir = path.join(buildOutput, 'types', 'packages')
   const filePaths = await glob(`**/*.d.ts`, {
     cwd: typesDir,

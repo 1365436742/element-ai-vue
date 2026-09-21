@@ -18,9 +18,9 @@
     }
   },
   "scripts": {
-    "build": "unbuild",
+    "build": "tsdown --config build.config.ts",
     "dev": "pnpm run stub",
-    "stub": "unbuild --stub"
+    "stub": "tsdown --config build.config.ts"
   },
   "dependencies": {
     "@pnpm/find-workspace-packages": "^4.0.16",
@@ -28,6 +28,6 @@
     "consola": "^2.15.3"
   },
   "devDependencies": {
-    "unbuild": "^2.0.0"
+    "tsdown": "~0.23.0"
   }
 }

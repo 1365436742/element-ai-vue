@@ -3,7 +3,7 @@ import { Transform } from 'stream'
 import chalk from 'chalk'
 import { dest, parallel, series, src } from 'gulp'
 import gulpSass from 'gulp-sass'
-import dartSass from 'sass'
+import * as dartSass from 'sass'
 import autoprefixer from 'gulp-autoprefixer'
 import rename from 'gulp-rename'
 import consola from 'consola'
@@ -57,7 +57,7 @@ function compressWithCssnano() {
           )} KB -> ${chalk.green(result.css.length / 1000)} KB`
         )
         callback(null, file)
-      })
+      }, callback)
     },
   })
 }
@@ -101,7 +101,7 @@ function buildDarkCssVars() {
  * copy from packages/theme-chalk/dist to dist/element-plus/theme-chalk
  */
 export function copyThemeChalkBundle() {
-  return src(`${distFolder}/**`).pipe(dest(distBundle))
+  return src(`${distFolder}/**`, { encoding: false }).pipe(dest(distBundle))
 }
 
 /**
@@ -109,7 +109,7 @@ export function copyThemeChalkBundle() {
  */
 
 export function copyThemeChalkSource() {
-  return src(path.resolve(__dirname, 'src/**')).pipe(
+  return src(path.resolve(__dirname, 'src/**'), { encoding: false }).pipe(
     dest(path.resolve(distBundle, 'src'))
   )
 }
@@ -118,9 +118,9 @@ export function copyThemeChalkSource() {
  * copy font files (woff2, woff, ttf) to dist folder
  */
 export function copyFontFiles() {
-  return src(path.resolve(__dirname, 'src/font/*.{woff2,woff,ttf}')).pipe(
-    dest(path.resolve(epOutput, 'dist'))
-  )
+  return src(path.resolve(__dirname, 'src/font/*.{woff2,woff,ttf}'), {
+    encoding: false,
+  }).pipe(dest(path.resolve(epOutput, 'dist')))
 }
 
 export const build: TaskFunction = parallel(

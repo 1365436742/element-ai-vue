@@ -10,7 +10,7 @@
   ],
   "scripts": {
     "clean": "rimraf dist",
-    "build": "gulp --require tsx/dist/loader.cjs"
+    "build": "gulp --preload tsx/dist/loader.cjs"
   },
   "license": "MIT",
   "main": "index.css",

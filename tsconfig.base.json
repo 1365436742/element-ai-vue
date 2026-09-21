@@ -3,9 +3,8 @@
     "outDir": "dist",
     "target": "es2018",
     "module": "esnext",
-    "baseUrl": ".",
     "sourceMap": false,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "allowJs": true,
     "strict": true,
     "noUnusedLocals": true,
@@ -16,16 +15,16 @@
     "rootDir": ".",
     "types": [],
     "paths": {
-      "@element-ai-vue/components": ["packages/components"],
-      "@element-ai-vue/components/*": ["packages/components/*"],
-      "@element-ai-vue/utils": ["packages/utils"],
-      "@element-ai-vue/utils/*": ["packages/utils/*"],
-      "@element-ai-vue/hooks": ["packages/hooks"],
-      "@element-ai-vue/directives": ["packages/directives"],
-      "@element-ai-vue/constants": ["packages/constants"],
-      "@element-ai-vue/locale": ["packages/locale"],
-      "@element-ai-vue/locale/*": ["packages/locale/*"],
-      "element-ai-vue": ["packages/element-ai-vue"]
+      "@element-ai-vue/components": ["./packages/components"],
+      "@element-ai-vue/components/*": ["./packages/components/*"],
+      "@element-ai-vue/utils": ["./packages/utils"],
+      "@element-ai-vue/utils/*": ["./packages/utils/*"],
+      "@element-ai-vue/hooks": ["./packages/hooks"],
+      "@element-ai-vue/directives": ["./packages/directives"],
+      "@element-ai-vue/constants": ["./packages/constants"],
+      "@element-ai-vue/locale": ["./packages/locale"],
+      "@element-ai-vue/locale/*": ["./packages/locale/*"],
+      "element-ai-vue": ["./packages/element-ai-vue"]
     }
   }
 }

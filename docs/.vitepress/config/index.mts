@@ -8,6 +8,7 @@ import { demoblockPlugin, demoblockVitePlugin } from 'vitepress-theme-demoblock'
 import path from 'path'
 import { enNav, zhNav } from './nav'
 import { enSearch, zhSearch } from './search'
+import '../../../internal/vue-types/compiler'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -59,7 +60,7 @@ export default defineConfig({
         ),
         'element-ai-vue': path.resolve(
           __dirname,
-          '../../../packages/element-ai-vue'
+          '../../../packages/element-ai-vue/index.ts'
         ),
       },
     },

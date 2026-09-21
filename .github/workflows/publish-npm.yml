@@ -3,7 +3,7 @@ name: Publish element-ai-vue packages to NPM
 on:
   push:
     branches:
-      - main
+      - main-publish-v1
   workflow_dispatch:
     inputs:
       resume:
@@ -30,36 +30,14 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v7
         with:
-          node-version: '20'
+          node-version: '24'
           registry-url: https://registry.npmjs.org/
-
-      # npm 10.8.2 的 npx 在 pnpm 子脚本设置的 prefix 下查找全局包时，
-      # 会因 internal/build/lib 不存在而报 ENOENT；10.9.4 已处理该情况。
-      - name: Fix npx global package lookup
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: |
-          npm install --global npm@10.9.4 --no-audit --no-fund
-          npm --version
-          npx --version
 
       - name: Install pnpm
         uses: pnpm/action-setup@v6 # 使用 package.json 的 packageManager 版本
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-
-      # vue-tsc 的 TypeScript peer 范围会装入不提供 lib/tsc 的 TypeScript 7。
-      # 每次用 npx 获取最新 vue-tsc，搭配项目使用的 TypeScript 5；仅在 CI 临时安装。
-      - name: Prepare latest vue-tsc with compatible TypeScript
-        run: |
-          compiler_dir="$(mktemp -d "$RUNNER_TEMP/vue-tsc.XXXXXX")"
-          cd "$compiler_dir"
-          printf '{"private":true}\n' > package.json
-          compiler_bin="$(npx --yes --prefer-online --package=vue-tsc@latest --package=typescript@5 -c 'command -v vue-tsc')"
-          test -x "$compiler_bin"
-          ln -sf "$compiler_bin" "$GITHUB_WORKSPACE/node_modules/.bin/vue-tsc"
-          "$GITHUB_WORKSPACE/node_modules/.bin/vue-tsc" --version
 
       - name: Configure Git author
         run: |
@@ -72,8 +50,6 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           RESUME_RELEASE: ${{ inputs.resume || false }}
-          # 等同于本地 npx 提示安装时输入 y，继续使用原来的构建流程。
-          npm_config_yes: 'true'
         run: |
           if [ "$RESUME_RELEASE" = "true" ]; then
             npm run publish -- --resume --push

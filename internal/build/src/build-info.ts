@@ -2,7 +2,7 @@ import path from 'path'
 import { PKG_NAME } from '@element-ai-vue/build-constants'
 import { epOutput } from '@element-ai-vue/build-utils'
 
-import type { ModuleFormat } from 'rollup'
+import type { ModuleFormat } from 'rolldown'
 
 export const modules = ['esm', 'cjs'] as const
 export type Module = (typeof modules)[number]

@@ -1,51 +1,38 @@
 import path from 'path'
 import { series } from 'gulp'
-import { rollup } from 'rollup'
-import vue from '@vitejs/plugin-vue'
-import vueJsx from '@vitejs/plugin-vue-jsx'
-import VueMacros from 'unplugin-vue-macros/rollup'
-import { nodeResolve } from '@rollup/plugin-node-resolve'
-import commonjs from '@rollup/plugin-commonjs'
-import esbuild from 'rollup-plugin-esbuild'
+import { legacyVueHelper, legacyVueHelperId, vuePlugins } from '../plugins/vue'
 import glob from 'fast-glob'
 import { epRoot, excludeFiles, pkgRoot } from '@element-ai-vue/build-utils'
 import { generateExternal, withTaskName, writeBundles } from '../utils'
 import { ElementAiAlias } from '../plugins/element-ai-vue-alias'
 import { buildConfigEntries, target } from '../build-info'
+import legacyEntryNames from '../legacy-entry-names.json'
+import { preserveEmptySourceMaps } from '../plugins/sourcemaps'
 
 import type { TaskFunction } from 'gulp'
-import type { OutputOptions, Plugin } from 'rollup'
+import type { OutputOptions } from 'rolldown'
 
-const plugins: Plugin[] = [
-  ElementAiAlias(),
-  VueMacros({
-    setupComponent: false,
-    setupSFC: false,
-    plugins: {
-      vue: vue({
-        isProduction: true,
-        template: {
-          compilerOptions: {
-            hoistStatic: false,
-            cacheHandlers: false,
-          },
-        },
-      }),
-      vueJsx: vueJsx(),
-    },
-  }) as Plugin,
-  nodeResolve({
-    extensions: ['.mjs', '.js', '.json', '.ts'],
-  }),
-  commonjs(),
-  esbuild({
-    sourceMap: true,
-    target,
-    loaders: {
-      '.vue': 'ts',
-    },
-  }),
-]
+const moduleInputs = (files: string[]) => {
+  const sources = new Set(files)
+  const entries: Record<string, string> = {}
+  for (const file of files) {
+    const relative = path.relative(pkgRoot, file).split(path.sep).join('/')
+    const base = relative
+      .replace(/^element-ai-vue\//, '')
+      .replace(/\.(js|ts|vue)$/, '')
+    // New components keep index.ts at index and the sibling SFC at index2.
+    // Existing components retain the published assignments in the map.
+    const hasScriptSibling =
+      file.endsWith('.vue') &&
+      ['.ts', '.js'].some((ext) => sources.has(file.replace(/\.vue$/, ext)))
+    const name =
+      (legacyEntryNames as Record<string, string>)[relative] ??
+      `${base}${hasScriptSibling ? '2' : ''}`
+    if (entries[name]) throw new Error(`Duplicate output entry: ${name}`)
+    entries[name] = file
+  }
+  return entries
+}
 
 async function buildModulesComponents() {
   const input = excludeFiles(
@@ -62,12 +49,23 @@ async function buildModulesComponents() {
       }
     )
   )
-  const bundle = await rollup({
-    input,
-    plugins,
+  const { rolldown } = await import('rolldown')
+  const bundle = await rolldown({
+    input: {
+      ...moduleInputs(input),
+      '_virtual/plugin-vue_export-helper': legacyVueHelperId,
+    },
+    plugins: [ElementAiAlias(), legacyVueHelper(), ...(await vuePlugins())],
+    platform: 'neutral',
+    resolve: {
+      extensions: ['.mjs', '.js', '.json', '.ts'],
+      mainFields: ['module', 'main'],
+    },
+    transform: { target },
     external: await generateExternal({ full: false }),
     treeshake: false,
     onwarn(warning, warn) {
+      if (warning.code === 'UNRESOLVED_IMPORT') throw new Error(warning.message)
       if (warning.code === 'CIRCULAR_DEPENDENCY') {
         if (warning.message.includes('node_modules')) {
           return
@@ -87,6 +85,7 @@ async function buildModulesComponents() {
         preserveModules: true,
         preserveModulesRoot: epRoot,
         sourcemap: true,
+        plugins: [preserveEmptySourceMaps()],
         entryFileNames: `[name].${config.ext}`,
       }
     })
@@ -102,9 +101,16 @@ async function buildModulesStyles() {
     })
   )
 
-  const bundle = await rollup({
-    input,
-    plugins,
+  const { rolldown } = await import('rolldown')
+  const bundle = await rolldown({
+    input: moduleInputs(input),
+    plugins: [ElementAiAlias(), ...(await vuePlugins())],
+    platform: 'neutral',
+    resolve: {
+      extensions: ['.mjs', '.js', '.json', '.ts'],
+      mainFields: ['module', 'main'],
+    },
+    transform: { target },
     treeshake: false,
   })
 
@@ -113,11 +119,12 @@ async function buildModulesStyles() {
     buildConfigEntries.map(([module, config]): OutputOptions => {
       return {
         format: config.format,
-        dir: path.resolve(config.output.path, 'components'),
+        dir: config.output.path,
         exports: module === 'cjs' ? 'named' : undefined,
         preserveModules: true,
         preserveModulesRoot: epRoot,
         sourcemap: true,
+        plugins: [preserveEmptySourceMaps()],
         entryFileNames: `[name].${config.ext}`,
       }
     })

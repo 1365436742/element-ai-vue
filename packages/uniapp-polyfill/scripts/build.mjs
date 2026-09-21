@@ -1,10 +1,8 @@
 import { build } from 'esbuild'
 import { copyFile, cp, mkdir, readFile, rm, writeFile } from 'node:fs/promises'
 import { execFileSync } from 'node:child_process'
-import { createRequire } from 'node:module'
 import { fileURLToPath } from 'node:url'
 
-const require = createRequire(import.meta.url)
 const root = fileURLToPath(new URL('..', import.meta.url))
 process.chdir(root)
 await rm('dist', { recursive: true, force: true })
@@ -41,7 +39,13 @@ for (const [format, extension] of [
 
 execFileSync(
   process.execPath,
-  [require.resolve('typescript/bin/tsc'), '-p', 'tsconfig.json'],
+  [
+    fileURLToPath(
+      new URL('bin/tsc', import.meta.resolve('typescript/package.json'))
+    ),
+    '-p',
+    'tsconfig.json',
+  ],
   { stdio: 'inherit' }
 )
 await Promise.all(

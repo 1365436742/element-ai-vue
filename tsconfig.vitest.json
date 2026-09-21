@@ -3,14 +3,15 @@
   "compilerOptions": {
     "composite": true,
     "lib": ["ES2021", "DOM", "DOM.Iterable"],
-    "types": ["node", "jsdom", "unplugin-vue-macros/macros-global"],
+    "types": ["node", "jsdom", "vite/client"],
     "skipLibCheck": true
   },
   "include": [
-    "packages/utils/vue3.3.polyfill.ts",
     "packages",
     "vitest.setup.ts",
-    "typings/env.d.ts"
+    "vitest.config.mts",
+    "typings/env.d.ts",
+    "internal/vue-types/compiler.ts"
   ],
-  "exclude": ["node_modules", "dist", "**/*.md"]
+  "exclude": ["node_modules", "**/dist", "**/*.md", "packages/uniapp-polyfill"]
 }
