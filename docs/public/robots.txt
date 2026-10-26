@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://element-ai-vue.com/sitemap.xml

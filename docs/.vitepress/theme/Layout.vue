@@ -1,14 +1,13 @@
 <script setup lang="ts">
 import DefaultTheme from 'vitepress/theme'
-import { useData, useRouter } from 'vitepress'
-import { onMounted, watch, computed } from 'vue'
+import { useData } from 'vitepress'
+import { computed } from 'vue'
 import { ElAConfigProvider } from 'element-ai-vue'
 import en from '@element-ai-vue/locale/lang/en'
 import zhCn from '@element-ai-vue/locale/lang/zh-cn'
 
 const { Layout } = DefaultTheme
-const { page, lang, isDark } = useData()
-const router = useRouter()
+const { lang, isDark } = useData()
 
 const configProviderLocale = computed(() => {
   const localeMap = {
@@ -16,21 +15,6 @@ const configProviderLocale = computed(() => {
     'zh-CN': zhCn,
   }
   return localeMap[lang.value] || zhCn
-})
-
-onMounted(() => {
-  watch(
-    () => page.value.isNotFound,
-    (isNotFound) => {
-      if (isNotFound) {
-        // 避免在 /zh/ 路径下无限循环跳转
-        if (router.route.path !== '/zh/') {
-          router.go('/zh/')
-        }
-      }
-    },
-    { immediate: true }
-  )
 })
 </script>
 

@@ -1,4 +1,4 @@
-import { defineConfig } from 'vitepress'
+import { defineConfig, type HeadConfig } from 'vitepress'
 import { enSidebar, zhSidebar } from './sidebar'
 import {
   groupIconMdPlugin,
@@ -10,15 +10,93 @@ import { enNav, zhNav } from './nav'
 import { enSearch, zhSearch } from './search'
 import '../../../internal/vue-types/compiler'
 
+const hostname = 'https://element-ai-vue.com'
+const descriptions = {
+  zh: 'Element AI Vue（element-ai-vue）是基于 Vue 3 的开源 AI 聊天组件库，提供消息气泡、输入框、流式 Markdown、思考状态和文件上传组件，帮助构建 AI 智能助手与大模型对话界面。',
+  en: 'Element AI Vue (element-ai-vue) is an open-source Vue 3 AI chat UI library with message bubbles, prompt inputs, streaming Markdown, thinking states, and file uploads for chatbot applications.',
+}
+const pageUrl = (file: string) =>
+  `${hostname}/${file.replace(/(^|\/)index\.md$/, '$1').replace(/\.md$/, '')}`
+
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: 'element-ai-vue',
 
-  description: '企业级 AI 交互组件库',
+  description: descriptions.zh,
   lastUpdated: true,
   cleanUrls: true,
   sitemap: {
-    hostname: 'https://element-ai-vue.com',
+    hostname,
+    transformItems(items) {
+      // The root page redirects to /zh/; only list canonical documentation URLs.
+      const pages = items.filter((item) => /^(zh|en)\//.test(item.url))
+      const urls = new Set(pages.map((item) => item.url))
+      return pages.map((item) => {
+        const suffix = item.url.replace(/^(zh|en)\//, '')
+        return {
+          ...item,
+          links: [
+            { lang: 'zh-CN', url: `zh/${suffix}` },
+            { lang: 'en', url: `en/${suffix}` },
+          ].filter((link) => urls.has(link.url)),
+        }
+      })
+    },
+  },
+  transformHead({ pageData }) {
+    // VitePress generates its default 404 without running transformPageData.
+    if (pageData.isNotFound) {
+      return [['meta', { name: 'robots', content: 'noindex, follow' }]]
+    }
+  },
+  transformPageData(pageData, { siteConfig }) {
+    if (pageData.relativePath === '404.md') {
+      pageData.frontmatter.head = [
+        ...(pageData.frontmatter.head || []),
+        ['meta', { name: 'robots', content: 'noindex, follow' }],
+      ]
+      return
+    }
+
+    const file = pageData.relativePath
+    const isEnglish = file.startsWith('en/')
+    const isHome = /(^|\/)index\.md$/.test(file)
+    if (!pageData.description) {
+      pageData.description = isHome
+        ? descriptions[isEnglish ? 'en' : 'zh']
+        : isEnglish
+          ? `${pageData.title} documentation for Element AI Vue, the Vue 3 AI chat UI library. Learn usage and integration with examples.`
+          : `Element AI Vue 的${pageData.title}文档，介绍 Vue 3 AI 聊天组件库的使用与集成方法，并提供示例。`
+    }
+
+    const canonical = pageUrl(file === 'index.md' ? 'zh/index.md' : file)
+    const title = `${pageData.title} | element-ai-vue`
+    const head: HeadConfig[] = [
+      ['link', { rel: 'canonical', href: canonical }],
+      ['meta', { property: 'og:url', content: canonical }],
+      ['meta', { property: 'og:title', content: title }],
+      ['meta', { property: 'og:description', content: pageData.description }],
+      [
+        'meta',
+        { property: 'og:locale', content: isEnglish ? 'en_US' : 'zh_CN' },
+      ],
+      ['meta', { name: 'twitter:title', content: title }],
+      ['meta', { name: 'twitter:description', content: pageData.description }],
+    ]
+    const suffix = file.replace(/^(zh|en)\//, '')
+    for (const [locale, lang] of [
+      ['zh', 'zh-CN'],
+      ['en', 'en'],
+    ]) {
+      const alternate = `${locale}/${suffix}`
+      if (siteConfig.pages.includes(alternate)) {
+        head.push([
+          'link',
+          { rel: 'alternate', hreflang: lang, href: pageUrl(alternate) },
+        ])
+      }
+    }
+    pageData.frontmatter.head = [...(pageData.frontmatter.head || []), ...head]
   },
   markdown: {
     config(md) {
@@ -114,9 +192,6 @@ export default defineConfig({
       },
     ],
     ['meta', { property: 'og:type', content: 'website' }],
-    ['meta', { property: 'og:title', content: 'Element Ai Vue' }],
-    ['meta', { property: 'og:description', content: '企业级 AI 交互组件库' }],
-    ['meta', { property: 'og:url', content: 'https://element-ai-vue.com' }],
     [
       'meta',
       {
@@ -128,8 +203,6 @@ export default defineConfig({
     ['meta', { property: 'og:image:height', content: '630' }],
     ['meta', { property: 'og:site_name', content: 'Element Ai Vue' }],
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
-    ['meta', { name: 'twitter:title', content: 'Element Ai Vue' }],
-    ['meta', { name: 'twitter:description', content: '企业级 AI 交互组件库' }],
     [
       'meta',
       {
@@ -151,6 +224,7 @@ export default defineConfig({
     en: {
       label: 'English',
       lang: 'en-US',
+      description: descriptions.en,
       link: '/en/',
       themeConfig: {
         nav: enNav,

@@ -1,10 +1,12 @@
 ---
 # https://vitepress.dev/reference/default-theme-home-page
 layout: home
+title: Vue 3 AI Chat UI Components
 
 hero:
   name: 'element-ai-vue'
   text: 'Enterprise-level AI Interaction Component Library'
+  tagline: 'Build AI chat applications with Element AI Vue: Vue 3 message bubbles, prompt inputs, streaming Markdown, and thinking states.'
   image: '/logo.svg'
   actions:
     - theme: brand
