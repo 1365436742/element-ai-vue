@@ -38,7 +38,7 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-      
+
       - name: Configure Git author
         run: |
           git config user.name 'github-actions[bot]'
