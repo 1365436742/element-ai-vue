@@ -1,8 +1,12 @@
 import { writeFile } from 'fs/promises'
 import path from 'path'
 import consola from 'consola'
-import { epRoot } from '@element-ai-vue/build-utils'
 import pkg from '../packages/element-ai-vue/package.json' // need to be checked
+
+// NOTE: keep this script self-contained (do NOT import `@element-ai-vue/build-utils`
+// here), as it runs before `pnpm stub` in `postinstall`, when the internal packages'
+// `dist` output hasn't been generated yet.
+const epRoot = path.resolve(__dirname, '..', 'packages', 'element-ai-vue')
 
 function getVersion() {
   const tagVer = process.env.TAG_VERSION
