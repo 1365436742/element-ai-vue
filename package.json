@@ -25,7 +25,7 @@
     "prepare": "husky",
     "stub": "pnpm run -r stub",
     "gen:version": "tsx scripts/gen-version.ts",
-    "postinstall": "pnpm stub && pnpm gen:version && pnpm run -C internal/metadata dev",
+    "postinstall": "pnpm gen:version && pnpm stub && pnpm run -C internal/metadata dev",
     "test:build": "node scripts/check-build-compat.mjs",
     "typecheck": "pnpm typecheck:node && pnpm typecheck:web && pnpm typecheck:test && pnpm --filter element-ai-vue-uniapp-polyfill typecheck",
     "typecheck:node": "tsc -p tsconfig.node.json --noEmit",
