@@ -1,14 +1,14 @@
 import { defineConfig, type HeadConfig } from 'vitepress'
-import { enSidebar, zhSidebar } from './sidebar'
+import { enSidebar, zhSidebar } from './sidebar.ts'
 import {
   groupIconMdPlugin,
   groupIconVitePlugin,
 } from 'vitepress-plugin-group-icons'
 import { demoblockPlugin, demoblockVitePlugin } from 'vitepress-theme-demoblock'
 import path from 'path'
-import { enNav, zhNav } from './nav'
-import { enSearch, zhSearch } from './search'
-import '../../../internal/vue-types/compiler'
+import { enNav, zhNav } from './nav.ts'
+import { enSearch, zhSearch } from './search.ts'
+import '../../../internal/vue-types/compiler.ts'
 
 const hostname = 'https://element-ai-vue.com'
 const descriptions = {
@@ -109,35 +109,35 @@ export default defineConfig({
     resolve: {
       alias: {
         '@element-ai-vue/components': path.resolve(
-          __dirname,
+          import.meta.dirname,
           '../../../packages/components'
         ),
         '@element-ai-vue/utils': path.resolve(
-          __dirname,
+          import.meta.dirname,
           '../../../packages/utils'
         ),
         '@element-ai-vue/hooks': path.resolve(
-          __dirname,
+          import.meta.dirname,
           '../../../packages/hooks'
         ),
         '@element-ai-vue/directives': path.resolve(
-          __dirname,
+          import.meta.dirname,
           '../../../packages/directives'
         ),
         '@element-ai-vue/constants': path.resolve(
-          __dirname,
+          import.meta.dirname,
           '../../../packages/constants'
         ),
         '@element-ai-vue/locale': path.resolve(
-          __dirname,
+          import.meta.dirname,
           '../../../packages/locale'
         ),
         '@element-ai-vue/theme-chalk': path.resolve(
-          __dirname,
+          import.meta.dirname,
           '../../../packages/theme-chalk'
         ),
         'element-ai-vue': path.resolve(
-          __dirname,
+          import.meta.dirname,
           '../../../packages/element-ai-vue/index.ts'
         ),
       },

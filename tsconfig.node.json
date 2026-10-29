@@ -2,6 +2,7 @@
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
     "composite": true,
+    "rewriteRelativeImportExtensions": true,
     "lib": ["ESNext"],
     "types": ["node"],
     "skipLibCheck": true

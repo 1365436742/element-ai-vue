@@ -1,6 +1,7 @@
 {
   "name": "@element-ai-vue/vue-types",
   "private": true,
+  "type": "module",
   "scripts": {
     "typecheck": "vue-tsc -p ../../tsconfig.web.json --noEmit",
     "typecheck:test": "vue-tsc -p ../../tsconfig.vitest.json --noEmit",
