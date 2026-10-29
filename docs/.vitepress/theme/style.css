@@ -141,6 +141,8 @@
   background: radial-gradient(circle, #6366f180, #8b5cf600 70%);
 }
 
-.vp-doc p, .vp-doc img, .vp-doc summary{
+.vp-doc p,
+.vp-doc img,
+.vp-doc summary {
   margin: 0 !important;
 }
