@@ -30,7 +30,10 @@
     "typecheck": "pnpm typecheck:node && pnpm typecheck:web && pnpm typecheck:test && pnpm --filter element-ai-vue-uniapp-polyfill typecheck",
     "typecheck:node": "tsc -p tsconfig.node.json --noEmit",
     "typecheck:web": "pnpm --filter @element-ai-vue/vue-types typecheck",
-    "typecheck:test": "pnpm --filter @element-ai-vue/vue-types typecheck:test"
+    "typecheck:test": "pnpm --filter @element-ai-vue/vue-types typecheck:test",
+    "build:ppt-editor": "pnpm --filter element-ai-vue-ppt build",
+    "test:ppt-editor": "pnpm --filter element-ai-vue-ppt test",
+    "dev:ppt-editor": "pnpm --filter element-ai-vue-ppt dev"
   },
   "lint-staged": {
     "*.{js,ts,vue,json}": [
@@ -105,7 +108,8 @@
     "vitepress": "2.0.0-alpha.20",
     "vitepress-plugin-group-icons": "^1.7.6",
     "vitepress-theme-demoblock": "^3.1.3",
-    "vitest": "5.0.1"
+    "vitest": "5.0.1",
+    "element-ai-vue-ppt": "workspace:*"
   },
   "engines": {
     "node": "^22.18.0 || ^24.11.0 || >=26.0.0"

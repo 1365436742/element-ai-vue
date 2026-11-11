@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Paperplane · PPT Editor</title>
+    <style>
+      body {
+        margin: 0;
+        background: #f1f3ed;
+        font-family: 'Avenir Next', 'PingFang SC', sans-serif;
+        color: #263b32;
+      }
+      #app {
+        padding: 28px;
+        max-width: 1600px;
+        margin: auto;
+      }
+      .demo-heading {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 22px;
+      }
+      .demo-heading h1 {
+        font-size: 18px;
+        font-weight: 500;
+        letter-spacing: -0.04em;
+        margin: 0;
+      }
+      .demo-heading h1 span {
+        font-family: Georgia, serif;
+        font-style: italic;
+        font-size: 24px;
+        margin-right: 10px;
+      }
+      .demo-heading p {
+        font-size: 10px;
+        color: #8d9788;
+        letter-spacing: 0.08em;
+      }
+      .demo-actions {
+        display: flex;
+        gap: 8px;
+      }
+      .demo-actions button {
+        border: 1px solid #d7ded1;
+        background: transparent;
+        padding: 8px 12px;
+        border-radius: 6px;
+        font: inherit;
+        font-size: 11px;
+        cursor: pointer;
+      }
+      .demo-caption {
+        font-size: 10px;
+        color: #9aa393;
+        display: flex;
+        justify-content: space-between;
+        margin-top: 14px;
+        letter-spacing: 0.03em;
+      }
+      @media (max-width: 760px) {
+        #app {
+          padding: 0;
+        }
+        .demo-heading {
+          display: none;
+        }
+        .demo-caption {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/main.ts"></script>
+  </body>
+</html>

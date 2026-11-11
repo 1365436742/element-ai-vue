@@ -1,0 +1,103 @@
+{
+  "name": "element-ai-vue-ppt",
+  "version": "0.1.0",
+  "description": "Independent Vue presentation editor with an OOXML document core",
+  "type": "module",
+  "license": "MIT",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./core": {
+      "import": {
+        "types": "./dist/core/index.d.ts",
+        "default": "./dist/core.js"
+      },
+      "require": {
+        "types": "./dist/core/index.d.cts",
+        "default": "./dist/core.cjs"
+      }
+    },
+    "./stream": {
+      "import": {
+        "types": "./dist/stream/index.d.ts",
+        "default": "./dist/stream.js"
+      },
+      "require": {
+        "types": "./dist/stream/index.d.cts",
+        "default": "./dist/stream.cjs"
+      }
+    },
+    "./collaboration": {
+      "import": {
+        "types": "./dist/collaboration/index.d.ts",
+        "default": "./dist/collaboration.js"
+      },
+      "require": {
+        "types": "./dist/collaboration/index.d.cts",
+        "default": "./dist/collaboration.cjs"
+      }
+    },
+    "./server": {
+      "import": {
+        "types": "./dist/server/index.d.ts",
+        "default": "./dist/server.js"
+      },
+      "require": {
+        "types": "./dist/server/index.d.cts",
+        "default": "./dist/server.cjs"
+      }
+    },
+    "./style.css": "./dist/style.css",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "STATUS.md",
+    "SAMPLE-ACCEPTANCE.md",
+    "examples"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "node --import tsx --test tests/*.test.ts",
+    "dev": "vite demo --host 127.0.0.1",
+    "prepack": "pnpm build"
+  },
+  "peerDependencies": {
+    "vue": "^3.4.0"
+  },
+  "dependencies": {
+    "fflate": "^0.8.2",
+    "@xmldom/xmldom": "^0.8.11",
+    "yjs": "^13.6.27",
+    "ws": "^8.18.3",
+    "@types/ws": "^8.18.1"
+  },
+  "devDependencies": {
+    "esbuild": "^0.27.1",
+    "typescript": "~7.0.2",
+    "vue": "catalog:"
+  },
+  "engines": {
+    "node": ">=22.18.0"
+  }
+}

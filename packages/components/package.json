@@ -17,7 +17,8 @@
     "@element-ai-vue/utils": "workspace:^",
     "@vueuse/core": "catalog:",
     "csstype": "catalog:",
-    "lodash-unified": "catalog:"
+    "lodash-unified": "catalog:",
+    "element-ai-vue-ppt": "workspace:^"
   },
   "devDependencies": {
     "@vue/test-utils": "catalog:",

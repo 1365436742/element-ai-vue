@@ -13,5 +13,11 @@
     "typings/env.d.ts",
     "internal/vue-types/compiler.ts"
   ],
-  "exclude": ["node_modules", "**/dist", "**/*.md", "packages/uniapp-polyfill"]
+  "exclude": [
+    "node_modules",
+    "**/dist",
+    "**/*.md",
+    "packages/uniapp-polyfill",
+    "packages/ppt-editor"
+  ]
 }

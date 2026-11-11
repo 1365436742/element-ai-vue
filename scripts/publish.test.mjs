@@ -102,9 +102,9 @@ if (args[0] === 'whoami') {
   }
 } else if (args[0] === 'run' && args[1] === 'gen:version') {
   writeFileSync('packages/element-ai-vue/version.ts', "export const version = '" + process.env.TAG_VERSION + "'\\n")
-} else if (args[0] === 'run' && args[1] === 'build') {
+} else if (args[0] === 'run' && ['build', 'build:ppt-editor'].includes(args[1])) {
   if (process.env.FAIL_BUILD) process.exit(1)
-  for (const file of ['packages/element-ai-vue/package.json', 'packages/uniapp-polyfill/package.json']) {
+  for (const file of args[1] === 'build:ppt-editor' ? ['packages/ppt-editor/package.json'] : ['packages/element-ai-vue/package.json', 'packages/uniapp-polyfill/package.json']) {
     const pkg = manifest(file)
     const target = path.join('dist', pkg.name)
     mkdirSync(target, { recursive: true })
@@ -117,7 +117,7 @@ if (args[0] === 'whoami') {
   }
 } else if (args[0] === 'publish') {
   const pkg = manifest('package.json')
-  const file = pkg.name === 'element-ai-vue' ? 'packages/element-ai-vue/package.json' : 'packages/uniapp-polyfill/package.json'
+  const file = pkg.name === 'element-ai-vue-ppt' ? 'packages/ppt-editor/package.json' : pkg.name === 'element-ai-vue' ? 'packages/element-ai-vue/package.json' : 'packages/uniapp-polyfill/package.json'
   if (JSON.parse(git('show', 'HEAD:' + file)).version !== pkg.version) process.exit(90)
   if (process.env.EXPECT_PUSH && !git('ls-remote', 'origin', 'refs/heads/main-publish-v1').startsWith(git('rev-parse', 'HEAD'))) process.exit(91)
   if (process.env.FAIL_PUBLISH === pkg.name) process.exit(1)
@@ -283,4 +283,49 @@ test('拒绝将已有暂存改动或未跟踪文件混入版本提交', (t) => {
   assert.equal(f.git('diff', '--cached', '--name-only'), 'unrelated.txt')
   assert.equal(f.git('rev-parse', 'HEAD'), f.initial)
   assert.equal(f.events().length, 0)
+})
+
+test('PPT 包独立发布不修改主库版本，resume 不重复发布', (t) => {
+  const f = fixture(t)
+  f.write(
+    'packages/ppt-editor/package.json',
+    JSON.stringify({ name: 'element-ai-vue-ppt', version: '0.1.0' })
+  )
+  f.git('add', '.')
+  f.git('commit', '--quiet', '-m', 'add ppt fixture')
+  assertSuccess(f.run(['--package=element-ai-vue-ppt']))
+  assert.equal(f.json('packages/ppt-editor/package.json').version, '0.1.1')
+  assert.equal(f.json(manifests[0]).version, '0.1.7')
+  assert.equal(f.json(manifests[2]).version, '0.1.7')
+  assert.deepEqual(
+    published(f).map((event) => path.relative(f.root, event.cwd)),
+    ['dist/element-ai-vue-ppt']
+  )
+  assertSuccess(
+    f.run(['--package=element-ai-vue-ppt', '--resume'], {
+      PUBLISHED: 'element-ai-vue-ppt',
+    })
+  )
+  assert.equal(published(f).length, 1)
+})
+
+test('主库发布前阻止未发布的 PPT 依赖', (t) => {
+  const f = fixture(t)
+  f.write(
+    'packages/ppt-editor/package.json',
+    JSON.stringify({ name: 'element-ai-vue-ppt', version: '0.1.0' })
+  )
+  f.write(
+    manifests[0],
+    JSON.stringify({
+      ...f.json(manifests[0]),
+      dependencies: { 'element-ai-vue-ppt': 'workspace:^' },
+    })
+  )
+  f.git('add', '.')
+  f.git('commit', '--quiet', '-m', 'add dependency fixture')
+  const result = f.run()
+  assert.notEqual(result.status, 0)
+  assert.equal(published(f).length, 0)
+  assert.equal(f.json(manifests[0]).version, '0.1.7')
 })

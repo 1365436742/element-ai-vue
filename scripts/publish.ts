@@ -20,7 +20,10 @@ const packages = [
 ]
 const metadataManifest = 'internal/metadata/package.json'
 const generatedVersion = 'packages/element-ai-vue/version.ts'
-const releaseFiles = [...packages.map((pkg) => pkg.manifest), metadataManifest]
+const pptPackage = {
+  name: 'element-ai-vue-ppt',
+  manifest: 'packages/ppt-editor/package.json',
+}
 
 const readManifest = (file: string) =>
   JSON.parse(readFileSync(path.resolve(root, file), 'utf8'))
@@ -66,9 +69,22 @@ function isPublished(name: string, version: string) {
 
 async function main() {
   const args = process.argv.slice(2)
-  if (args.some((arg) => !['--resume', '--push'].includes(arg))) {
-    throw new Error('用法：npm run publish -- [--resume] [--push]')
+  if (
+    args.some(
+      (arg) =>
+        !['--resume', '--push', '--package=element-ai-vue-ppt'].includes(arg)
+    )
+  ) {
+    throw new Error(
+      '用法：npm run publish -- [--resume] [--push] [--package=element-ai-vue-ppt]'
+    )
   }
+  const standalonePpt = args.includes('--package=element-ai-vue-ppt')
+  const selectedPackages = standalonePpt ? [pptPackage] : packages
+  const releaseFiles = [
+    ...selectedPackages.map((pkg) => pkg.manifest),
+    ...(standalonePpt ? [] : [metadataManifest]),
+  ]
   const resume = args.includes('--resume')
   const push = args.includes('--push')
 
@@ -86,7 +102,17 @@ async function main() {
   // 使用本机 npm 登录信息或 CI 的 NODE_AUTH_TOKEN，不再强制交互登录。
   run('npm', ['whoami', '--registry', registry])
 
-  const releases = packages.map((pkg) => {
+  if (
+    !standalonePpt &&
+    readManifest(packages[0].manifest).dependencies?.['element-ai-vue-ppt']
+  ) {
+    const ppt = readManifest(pptPackage.manifest)
+    if (!isPublished(ppt.name, ppt.version))
+      throw new Error(
+        '先独立发布 PPT 核心包，再发布依赖它的主库：npm run publish -- --package=element-ai-vue-ppt'
+      )
+  }
+  const releases = selectedPackages.map((pkg) => {
     const manifest = readManifest(pkg.manifest)
     if (manifest.name !== pkg.name)
       throw new Error(`包名不匹配：${pkg.manifest}`)
@@ -103,12 +129,14 @@ async function main() {
   })
   const mainVersion = releases[0].version
   const originals = new Map(
-    [...releaseFiles, generatedVersion].map((file) => [
-      file,
-      existsSync(path.resolve(root, file))
-        ? readFileSync(path.resolve(root, file))
-        : undefined,
-    ])
+    [...releaseFiles, ...(standalonePpt ? [] : [generatedVersion])].map(
+      (file) => [
+        file,
+        existsSync(path.resolve(root, file))
+          ? readFileSync(path.resolve(root, file))
+          : undefined,
+      ]
+    )
   )
   let committed = false
 
@@ -124,19 +152,25 @@ async function main() {
           ) + '\n'
         )
       }
-      writeFileSync(
-        path.resolve(root, metadataManifest),
-        JSON.stringify(
-          { ...readManifest(metadataManifest), version: mainVersion },
-          null,
-          2
-        ) + '\n'
-      )
+      if (!standalonePpt)
+        writeFileSync(
+          path.resolve(root, metadataManifest),
+          JSON.stringify(
+            { ...readManifest(metadataManifest), version: mainVersion },
+            null,
+            2
+          ) + '\n'
+        )
     }
 
     const buildEnv = { ...process.env, TAG_VERSION: mainVersion }
-    run('npm', ['run', 'gen:version'], root, buildEnv)
-    run('npm', ['run', 'build'], root, buildEnv)
+    if (!standalonePpt) run('npm', ['run', 'gen:version'], root, buildEnv)
+    run(
+      'npm',
+      ['run', standalonePpt ? 'build:ppt-editor' : 'build'],
+      root,
+      buildEnv
+    )
 
     for (const release of releases) {
       const directory = path.resolve(root, 'dist', release.name)
@@ -196,7 +230,9 @@ async function main() {
       }
     }
     if (failed.length) throw new Error(`以下包发布失败：${failed.join(', ')}`)
-    consola.success('两个 npm 包均已发布。')
+    consola.success(
+      `${releases.map((release) => release.name).join('、')} 已发布。`
+    )
   } catch (error) {
     if (!committed && !resume) {
       for (const [file, content] of originals) {
@@ -207,7 +243,7 @@ async function main() {
       consola.error('版本提交前失败，已恢复原版本文件。')
     } else {
       consola.error(
-        `版本记录已保留。修复错误后执行：npm run publish -- --resume${push ? ' --push' : ''}`
+        `版本记录已保留。修复错误后执行：npm run publish -- --resume${standalonePpt ? ' --package=element-ai-vue-ppt' : ''}${push ? ' --push' : ''}`
       )
     }
     throw error

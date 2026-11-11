@@ -111,7 +111,8 @@
     "shiki": "^3.19.0",
     "unified": "^11.0.5",
     "unist-util-visit": "^5.0.0",
-    "uuid": "^13.0.0"
+    "uuid": "^13.0.0",
+    "element-ai-vue-ppt": "workspace:^"
   },
   "devDependencies": {
     "@types/node": "*",

@@ -41,6 +41,7 @@ async function buildModulesComponents() {
         '**/*.{js,ts,vue}',
         '!**/style/(index|css).{js,ts,vue}',
         '!uniapp-polyfill/**',
+        '!ppt-editor/**',
       ],
       {
         cwd: pkgRoot,
@@ -94,7 +95,7 @@ async function buildModulesComponents() {
 
 async function buildModulesStyles() {
   const input = excludeFiles(
-    await glob('**/style/(index|css).{js,ts,vue}', {
+    await glob(['**/style/(index|css).{js,ts,vue}', '!ppt-editor/**'], {
       cwd: pkgRoot,
       absolute: true,
       onlyFiles: true,
@@ -112,6 +113,7 @@ async function buildModulesStyles() {
     },
     transform: { target },
     treeshake: false,
+    external: await generateExternal({ full: false }),
   })
 
   await writeBundles(

@@ -1,5 +1,5 @@
 import path from 'path'
-import { copyFile, mkdir } from 'fs/promises'
+import { copyFile, mkdir, readFile, writeFile } from 'fs/promises'
 import { copy } from 'fs-extra'
 import { parallel, series } from 'gulp'
 import {
@@ -15,7 +15,20 @@ import type { Module } from './src'
 
 export const copyFiles = () =>
   Promise.all([
-    copyFile(epPackage, path.join(epOutput, 'package.json')),
+    (async () => {
+      const manifest = JSON.parse(await readFile(epPackage, 'utf8'))
+      const ppt = JSON.parse(
+        await readFile(
+          path.join(projRoot, 'packages/ppt-editor/package.json'),
+          'utf8'
+        )
+      )
+      manifest.dependencies['element-ai-vue-ppt'] = `^${ppt.version}`
+      await writeFile(
+        path.join(epOutput, 'package.json'),
+        JSON.stringify(manifest, null, 2) + '\n'
+      )
+    })(),
     copyFile(
       path.resolve(projRoot, 'README.md'),
       path.resolve(epOutput, 'README.md')
@@ -42,6 +55,13 @@ export const copyTypesDefinitions: TaskFunction = (done) => {
 
 export const copyFullStyle = async () => {
   await mkdir(path.resolve(epOutput, 'dist'), { recursive: true })
+  const themePath = path.resolve(epOutput, 'theme-chalk/index.css')
+  const theme = await readFile(themePath, 'utf8')
+  const ppt = await readFile(
+    path.resolve(projRoot, 'packages/ppt-editor/dist/style.css'),
+    'utf8'
+  )
+  await writeFile(themePath, `${theme}\n${ppt}`)
   await copyFile(
     path.resolve(epOutput, 'theme-chalk/index.css'),
     path.resolve(epOutput, 'dist/index.css')
@@ -51,6 +71,9 @@ export const copyFullStyle = async () => {
 export default series(
   withTaskName('clean', () => run('pnpm run clean')),
   withTaskName('createOutput', () => mkdir(epOutput, { recursive: true })),
+  withTaskName('buildPptEditor', () =>
+    run('pnpm --filter element-ai-vue-ppt build')
+  ),
   parallel(
     runTask('buildModules'),
     runTask('buildFullBundle'),

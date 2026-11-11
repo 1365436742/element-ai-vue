@@ -93,6 +93,7 @@ function umd(file, mode) {
     btoa,
     structuredClone,
     performance,
+    crypto: globalThis.crypto,
   }
   if (mode === 'commonjs') {
     context.exports = {}
@@ -181,9 +182,18 @@ async function browserInteraction(file) {
 }
 
 const manifest = json(path.join(output, 'package.json'))
-assert.deepEqual(
-  manifest,
-  json(path.join(root, 'packages/element-ai-vue/package.json'))
+const sourceManifest = json(
+  path.join(root, 'packages/element-ai-vue/package.json')
+)
+const pptManifest = json(path.join(root, 'packages/ppt-editor/package.json'))
+assert.equal(sourceManifest.dependencies[pptManifest.name], 'workspace:^')
+sourceManifest.dependencies[pptManifest.name] = `^${pptManifest.version}`
+assert.deepEqual(manifest, sourceManifest)
+assert.ok(
+  Object.values(manifest.dependencies).every(
+    (range) => !range.startsWith('workspace:')
+  ),
+  'Published dependencies must use installable versions'
 )
 for (const key of ['main', 'module', 'types', 'style', 'unpkg', 'jsdelivr'])
   assert.ok(

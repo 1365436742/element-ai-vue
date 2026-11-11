@@ -8,5 +8,11 @@
     "skipLibCheck": true
   },
   "include": ["packages", "typings/env.d.ts", "docs"],
-  "exclude": ["node_modules", "**/dist", "**/*.md", "packages/uniapp-polyfill"]
+  "exclude": [
+    "node_modules",
+    "**/dist",
+    "**/*.md",
+    "packages/uniapp-polyfill",
+    "packages/ppt-editor"
+  ]
 }
