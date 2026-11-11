@@ -53,7 +53,11 @@ execFileSync('pnpm', ['exec', 'tsc', '-p', 'tsconfig.json'], {
 })
 await copyFile('src/style.css', 'dist/style.css')
 // The bundled preset geometry definitions retain their upstream Apache license.
-for (const file of ['LICENSE-APACHE-2.0.txt', 'NOTICE-APACHE-POI.txt', 'NOTICE.md'])
+for (const file of [
+  'LICENSE-APACHE-2.0.txt',
+  'NOTICE-APACHE-POI.txt',
+  'NOTICE.md',
+])
   await copyFile(`src/drawing/${file}`, `dist/${file}`)
 // CommonJS consumers resolve a matching declaration module kind.
 async function cjsTypes(dir) {
@@ -85,7 +89,12 @@ const publishRoot = new URL(
 )
 await mkdir(publishRoot, { recursive: true })
 await cp('dist', new URL('dist/', publishRoot), { recursive: true })
-for (const file of ['README.md', 'LICENSE', 'STATUS.md', 'SAMPLE-ACCEPTANCE.md'])
+for (const file of [
+  'README.md',
+  'LICENSE',
+  'STATUS.md',
+  'SAMPLE-ACCEPTANCE.md',
+])
   if (await exists(file)) await copyFile(file, new URL(file, publishRoot))
 await cp('examples', new URL('examples/', publishRoot), { recursive: true })
 const manifest = JSON.parse(await readFile('package.json', 'utf8'))
